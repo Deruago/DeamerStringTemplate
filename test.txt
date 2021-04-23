@@ -1,0 +1,26 @@
+HALLO This is a string-template for the language DST.
+
+example usage (think away the \):
+you can use {{}} to specify variables.
+
+
+E.g.
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+class {{class_name}}
+{
+private:
+public:
+	{{class_name}}() = default;
+	virtual ~{{class_name}}() = default;
+
+public:
+};
+
+
+#endif // {{header_guard}}
+
+In the example above, class_name was used to specify the name,
+of the c++ class described above.
