@@ -20,7 +20,7 @@ DST::type::ir::Variable::Variable(const std::vector<VariableReference>& vector)
 void DST::type::ir::Variable::SetValue(const std::vector<VariableReference>& cs)
 {
 	std::vector<Variable*> new_variables;
-	for (auto& reference : cs)
+	for (const auto& reference : cs)
 	{
 		if (reference.NewlyCreated())
 		{
@@ -29,6 +29,14 @@ void DST::type::ir::Variable::SetValue(const std::vector<VariableReference>& cs)
 
 		new_variables.push_back(reference.GetVariable());
 	}
-
+	
 	values = new_variables;
+}
+
+void DST::type::ir::Variable::Add(const std::vector<VariableReference>& variables)
+{
+	for (auto variable : variables)
+	{
+		values.push_back(variable.GetVariable());
+	}
 }

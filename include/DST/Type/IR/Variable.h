@@ -102,6 +102,7 @@ namespace DST::type::ir
 		}
 
 		void SetValue(const std::vector<VariableReference>& cs);
+		void Add(const std::vector<VariableReference>& variables);
 	};
 }
 

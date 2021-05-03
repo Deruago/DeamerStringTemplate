@@ -16,6 +16,10 @@ namespace DST::type::ir
 			: variable(new Variable(value)), new_created(true)
 		{
 		}
+		VariableReference(const char* value)
+			: variable(new Variable(std::string(value))), new_created(true)
+		{
+		}
 
 		VariableReference(const Variable& value) : variable(new Variable(value)), new_created(true)
 		{

@@ -13,7 +13,13 @@ namespace DST::type::ir
 	private:
 		std::map<std::string, VariableDefinition*> variables;
 	public:
-		Construction() = default;
+		Construction()
+		{
+			CreateVariableDefinition("left_angle_bracket", "", { "<" });
+			CreateVariableDefinition("right_angle_bracket", "", { ">" });
+		}
+
+		
 		~Construction()
 		{
 			for (auto& [key, variable] : variables)
@@ -23,19 +29,40 @@ namespace DST::type::ir
 			}
 		}
 	public:
+		bool IsScopeReserved(const std::string& scope)
+		{
+			if (scope == ".Upper" ||
+				scope == ".Lower" ||
+				scope == ".Name" ||
+				scope == ".Pascal" ||
+				scope == ".camel" ||
+				scope == ".snake")
+			{
+				return true;
+			}
+
+			return false;
+		}
+		
 		void CreateVariableDefinition(const std::string& text, const std::string& scope, const std::vector<VariableReference>& references)
 		{
 			const auto result = variables.find(text);
 			if (result == variables.end())
 			{
 				auto* newVar = new VariableDefinition("");
-				newVar->SetValueOfScope(scope, references);
+				if (!IsScopeReserved(scope))
+				{
+					newVar->SetValueOfScope(scope, references);				
+				}
 				
 				variables[text] = newVar;
 			}
 			else
 			{
-				GetVariableDefinition(text, scope)->SetValue(references);
+				if (!IsScopeReserved(scope))
+				{
+					GetVariableDefinition(text, scope)->SetValue(references);
+				}
 			}
 		}
 
@@ -52,7 +79,7 @@ namespace DST::type::ir
 
 		}
 
-		std::string Output(const std::vector<std::tuple<std::string, std::string, std::string>>& mapping)
+		std::string Output(const std::vector<std::tuple<std::string, std::string, std::string>>& mapping = {})
 		{
 			for (const auto& [varname, scope, value] : mapping)
 			{
@@ -61,6 +88,19 @@ namespace DST::type::ir
 			}
 			
 			return GetVariableDefinition("file", ".content")->GetValue();
+		}
+
+		void SetVariable(const std::string& variableName, const std::string& scope, const std::vector<VariableReference>& value)
+		{
+			CreateVariableDefinition(variableName, scope, value);
+		}
+
+		void ExpandVariableField(const std::string& variableName)
+		{
+			const auto currentValue = GetVariableDefinition(variableName, "")->GetValue();
+			const auto currentSeparator = GetVariableDefinition(variableName, ".Variable_Field_Separator")->GetValue();
+			
+			GetVariableDefinition(variableName, ".Variable_Field")->Add({ currentValue, currentSeparator });
 		}
 	};
 }

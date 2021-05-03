@@ -21,6 +21,13 @@ namespace DST::type::ir
 			SetValueOfScope("", {});
 			
 			SetValueOfScope(".Default", {GetScope("")});
+
+			SetValueOfScope(".Variable_Field", { GetScope("") });
+			SetValueOfScope(".Variable_Field_Separator", { "\n" });
+			SetValueOfScope(".Function_Field", { GetScope("") });
+			SetValueOfScope(".Function_Field_Separator", { "\n" });
+
+			
 			SetValueOfScope(".Name", {GetScope("")});
 
 			SetValueOfScope(".Upper", {GetScope("")});
