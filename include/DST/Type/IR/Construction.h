@@ -17,6 +17,12 @@ namespace DST::type::ir
 		{
 			CreateVariableDefinition("left_angle_bracket", "", { "<" });
 			CreateVariableDefinition("right_angle_bracket", "", { ">" });
+
+			CreateVariableDefinition("left_bracket", "", { "{" });
+			CreateVariableDefinition("right_bracket", "", { "}" });
+			
+			CreateVariableDefinition("left_curly_bracket", "", { "(" });
+			CreateVariableDefinition("right_curly_bracket", "", { ")" });
 		}
 
 		
