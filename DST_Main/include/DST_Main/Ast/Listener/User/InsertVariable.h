@@ -33,7 +33,7 @@ namespace DST_Main::ast::listener::user
 		{
 		}
 		InsertVariable(DST::type::ir::Construction* construction_)
-			: construction(construction_), variable("file"), scope(".content")
+			: construction(construction_), variable("file"), scope(".Content")
 		{
 			construction->CreateVariableDefinition(variable, scope, {});
 		}
@@ -64,7 +64,7 @@ namespace DST_Main::ast::listener::user
 		{
 			if (!current_varname.empty())
 			{
-				reference.push_back(
+				reference.emplace_back(
 					construction->GetVariableDefinition(current_varname, current_scope));
 
 				current_varname = "";
@@ -95,7 +95,7 @@ namespace DST_Main::ast::listener::user
 
 		void Listen(const DST_Main::ast::node::other_symbols* node) const override
 		{
-			reference.push_back(node->GetNodes()[0]->GetValue());
+			reference.emplace_back(node->GetNodes()[0]->GetValue());
 		}
 
 		void End() const

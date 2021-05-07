@@ -13,6 +13,7 @@ namespace DST::type::ir
 	class Variable
 	{
 	protected:
+		std::string parent;
 		std::string scope;
 		
 		std::vector<std::string> values_string{};
@@ -45,8 +46,9 @@ namespace DST::type::ir
 		}
 
 		Variable(const std::vector<VariableReference>& vector);
-		Variable(const std::string& scope_, const std::string& value_)
+		Variable(const std::string& scope_, const std::string& value_, const std::string& parent_ = "")
 		{
+			parent = parent_;
 			scope = scope_;
 			values_string.push_back(value_);
 		}
@@ -103,6 +105,32 @@ namespace DST::type::ir
 
 		void SetValue(const std::vector<VariableReference>& cs);
 		void Add(const std::vector<VariableReference>& variables);
+
+		std::vector<std::string> GetStringValues() const
+		{
+			return values_string;
+		}
+		
+		std::vector<Variable*> GetValues() const
+		{
+			return values;
+		}
+
+		std::string GetParent()
+		{
+			return parent;
+		}
+
+		std::string GetScope()
+		{
+			return scope;
+		}
+
+		void Clear()
+		{
+			values.clear();
+			values_string.clear();
+		}
 	};
 }
 

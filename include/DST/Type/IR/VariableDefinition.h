@@ -34,11 +34,16 @@ namespace DST::type::ir
 			SetValueOfScope(".Lower", {GetScope("")});
 			
 			SetValueOfScope(".Pascal", {GetScope("")});
-			SetValueOfScope(".camel", {GetScope("")});
-			SetValueOfScope(".snake", {GetScope("")});
+			SetValueOfScope(".Camel", {GetScope("")});
+			SetValueOfScope(".Snake", {GetScope("")});
 		}
 
-		VariableDefinition(std::string values_) : Variable(std::move(values_))
+		std::map<std::string, Variable*> GetScopes() const
+		{
+			return variables;
+		}
+
+		VariableDefinition(std::string values_, std::string varname_ = "") : Variable(std::move(values_), "", varname_)
 		{
 			StandardScopes();
 		}
@@ -92,7 +97,7 @@ namespace DST::type::ir
 
 		void AddScope(const std::string& scope)
 		{
-			variables[scope] = new Variable(scope, "");
+			variables[scope] = new Variable(scope, "", parent);
 		}
 
 		void SetValueOfScope(const std::string& scope, const std::vector<VariableReference>& value)

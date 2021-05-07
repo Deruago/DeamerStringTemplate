@@ -1,0 +1,115 @@
+{{header_guard}} = <DST_TEST_{{class_name.Upper}}_H>
+{{namespace}} = <DST::user>
+{{class_name}} = <Generator>
+
+{{enum_scope_type}} = <::{{namespace}}::{{class_name}}::ScopeType>
+{{enum_scope_enumeration}} = <{{scope}}_,>
+{{enum_scope}} =
+<enum class ScopeType
+{
+Unknown,
+
+// Default
+Default_,
+Upper_,
+Lower_,
+Variable_Field_,
+Variable_Field_Separator_,
+Function_Field_,
+Function_Field_Separator_,
+
+{{enum_scope_enumeration.Variable_Field}}
+};
+>
+
+{{enum_type}} = <::{{namespace}}::{{class_name}}::Type>
+{{enum}} =
+<enum class Type
+{
+Unknown,
+Scope,
+
+// User defined types
+{{enumeration.Variable_Field}}
+
+};
+>
+{{enumeration}} = <{{member}}_,>
+{{convert_enum_to_name}} =
+<static constexpr const char* ConvertEnumToName({{enum_type}} enumerationValue)
+{
+	switch(enumerationValue)
+	{
+	{{convert_enum_to_name_case.Variable_Field}}
+	}
+
+	return "";
+}
+>
+
+{{convert_enum_to_name_case}} = 
+<case {{enum_type}}::{{member}}_:
+{
+	return "{{member}}";
+}
+>
+
+{{member_type}} = <Variable_{{member}}>
+{{member_declaration}} = <{{member_type}}* {{member}} = new {{member_type}}();>
+{{member_initialization}} = <*{{member}} = {{member_type}}(this, std::vector<VariableBase*{{right_angle_bracket}}({ {{member_fields}} }));>
+{{delete_member}} = <delete {{member}};>
+{{register_member}} = <variables_.emplace_back({{member}}_);>
+
+{{scope_assignment}} = <*{{scope}}_ = *variable.{{scope}}_;>
+{{scope_field}} = <VariableBase* {{scope}}_ = GenerateVariable("");>
+{{scope_initialize}} = 
+<*static_cast<VariableBase*{{right_angle_bracket}}({{scope}}_) = VariableBase(std::vector<VariableBase*{{right_angle_bracket}}({ {{scope_arguments}} }));
+{{scope}}_-{{right_angle_bracket}}type = {{enum_type}}::Scope;
+>
+
+{{scope_function}} = <
+VariableBase* {{scope}}() const
+{
+	return {{scope}}_;
+}>
+
+{{member_class_declaration}} =
+<
+struct {{member_type}} : public VariableScopes
+{
+
+static constexpr auto name = "{{member}}";
+
+{{scope_field.Variable_Field}}
+
+{{member_type}}() : VariableScopes()
+{
+	type = {{enum_type}}::{{member}};
+}
+
+virtual ~{{member_type}}() override = default;
+
+{{member_type}}({{class_name}}* {{class_name.Lower}}_, const std::vector<VariableBase*{{right_angle_bracket}}& variables) : VariableScopes(variables)
+{
+type = {{enum_type}}::{{member}};
+{{scope_initialize.Variable_Field}}
+}
+
+{{scope_function.Variable_Field}}
+
+{{member_type}}& operator=(const {{member_type}}& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	{{scope_assignment.Variable_Field}}
+
+	return *this;
+}
+
+};>

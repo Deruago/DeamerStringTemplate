@@ -55,13 +55,14 @@ namespace DST::type::ir
 			const auto result = variables.find(text);
 			if (result == variables.end())
 			{
-				auto* newVar = new VariableDefinition("");
+				auto* newVar = new VariableDefinition("", text);
 				if (!IsScopeReserved(scope))
 				{
 					newVar->SetValueOfScope(scope, references);				
 				}
 				
 				variables[text] = newVar;
+				ClearVariableField(text);
 			}
 			else
 			{
@@ -89,11 +90,11 @@ namespace DST::type::ir
 		{
 			for (const auto& [varname, scope, value] : mapping)
 			{
-				auto* newVar = new Variable(value);
+				auto* newVar = new Variable(value, "", varname);
 				CreateVariableDefinition(varname, scope, {newVar});
 			}
 			
-			return GetVariableDefinition("file", ".content")->GetValue();
+			return GetVariableDefinition("file", ".Content")->GetValue();
 		}
 
 		void SetVariable(const std::string& variableName, const std::string& scope, const std::vector<VariableReference>& value)
@@ -107,6 +108,16 @@ namespace DST::type::ir
 			const auto currentSeparator = GetVariableDefinition(variableName, ".Variable_Field_Separator")->GetValue();
 			
 			GetVariableDefinition(variableName, ".Variable_Field")->Add({ currentValue, currentSeparator });
+		}
+
+		std::map<std::string, VariableDefinition*> GetVariableDefinitions()
+		{
+			return variables;
+		}
+
+		void ClearVariableField(const std::string& variableName)
+		{
+			GetVariableDefinition(variableName, ".Variable_Field")->Clear();
 		}
 	};
 }
