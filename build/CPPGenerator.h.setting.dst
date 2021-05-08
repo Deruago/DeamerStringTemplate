@@ -2,7 +2,6 @@
 {{file.file_name}} = <ConstructionGenerator>
 {{file.namespace}} = <DST::user>
 {{file.extension}} = <h>
-
 {{file.class_postfix}} = <Template>
 
 {{header_guard}} = <DST_{{class_name.Upper}}_{{file.extension}}>

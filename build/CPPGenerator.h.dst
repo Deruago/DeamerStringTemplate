@@ -328,8 +328,6 @@ namespace {{namespace}}
 			{
 				delete variable;
 			}
-
-			variables_to_delete.clear();
 		}
 
 	public:

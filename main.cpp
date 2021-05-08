@@ -1,51 +1,59 @@
-#include "DST/Type/IR/Construction.h"
-#include "DST_Main/Ast/Listener/User/InsertVariable.h"
-#include "DST_Setting/Ast/Listener/User/InsertVariable.h"
-#include "DST_Setting/Bison/Parser.h"
+#include "DST/Type/Generation/CPP/Generator.h"
 #include <sstream>
 #include <fstream>
 #include <string>
 #include <iostream>
 
-std::string ReadInFile(const std::string& file)
+enum class Type
 {
-	const std::ifstream inputFile(file);
+	RT,
+	CT,
+};
 
-	std::ostringstream sstr;
-	sstr << inputFile.rdbuf();
-
-	std::string input = sstr.str();
-
-	return input;
-}
-
-int main()
+int main(int argc, char* argv[])
 {
-	DST::type::ir::Construction construction;
-
-	const auto template_file = ReadInFile("./template.txt");
-	const auto setting_file = ReadInFile("./setting.txt");
-
-	const auto main_parser = DST_Main::parser::Parser();
-	const auto main_listener = DST_Main::ast::listener::user::InsertVariable(&construction);
-
-	const auto setting_parser = DST_Setting::parser::Parser();
-	const auto setting_listener = DST_Setting::ast::listener::user::InsertVariable(&construction);
-
-	auto* main_tree = main_parser.Parse(template_file);
-	main_listener.Dispatch(main_tree->GetStartNode());
-	main_listener.End();
-	auto* setting_tree = setting_parser.Parse(setting_file);
-	setting_listener.Dispatch(setting_tree->GetStartNode());
-
-
-	const std::string class_name = "VariableName";
-	const std::string language_name = "Dst";
+	if (argc < 2)
+	{
+		std::cout << "Not enough arguments\n";
+		return -1;
+	}
 	
-	const auto output = construction.Output({
-		{"class_name", "", class_name},
-		{"language_name", "", language_name}
-	});
+	DST::type::generation::cpp::Generator generator;
 
-	std::cout << output << std::endl;
+	std::string templateFile;
+	std::string settingFile;
+	
+	for (int i = 1; i < argc; i++)
+	{
+		if (i == 1)
+		{
+			templateFile = argv[i];
+		}
+		else if (i == 2)
+		{
+			settingFile = argv[i];
+		}
+	}
+
+	// RT has the benefit to be immediately capable of creating the full file.
+	// But RT is incapable of generating a file to generate it.
+	// CT is possible but you need to rerun the CT variant to get the complete CT variant.
+	const auto type = Type::CT;
+	std::string fileContent;
+	
+	if (type == Type::RT)
+	{
+		fileContent = generator.GetCPPClassRepresentationOfConstructionRT(templateFile, settingFile);	
+	}
+	else
+	{
+		fileContent = generator.GetCPPClassRepresentationOfConstructionCT(templateFile, settingFile);
+	}
+
+	std::ofstream file;
+	file.open("./" + generator.GetFileName());
+	file << fileContent << "\n";
+	file.close();
+
+	return 0;
 }
