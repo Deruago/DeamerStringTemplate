@@ -28,5 +28,7 @@ endfunction()
 add_subdirectory(extern)
 add_subdirectory(lib)
 
-add_executable(DST_executable "main.cpp")
-target_link_libraries(DST_executable DST_static_library)
+add_executable(DST "main.cpp")
+target_link_libraries(DST DST_static_library)
+
+install(TARGETS DST)

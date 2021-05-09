@@ -5,8 +5,10 @@
 
 {{file.class_postfix}} = <Template>
 
-{{header_guard}} = <DST_{{class_name.Upper}}_{{file.extension}}>
 {{namespace}} = <{{file.namespace}}>
+{{namespace_upper}} = <{{namespace.Upper}}>
+
+{{header_guard}} = <{{namespace_upper.Underscore}}_{{class_name.Upper}}_{{file.extension}}>
 {{class_name}} = <{{file.file_name}}{{file.class_postfix}}>
 
 {{enum_scope_type}} = <::{{namespace}}::{{class_name}}::ScopeType>
@@ -20,6 +22,13 @@ Unknown,
 Default_,
 Upper_,
 Lower_,
+
+Snake_,
+Slash_,
+BackSlash_,
+Colon_,
+DoubleColon_,
+
 Variable_Field_,
 Variable_Field_Separator_,
 Function_Field_,

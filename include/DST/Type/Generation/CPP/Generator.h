@@ -186,19 +186,30 @@ namespace DST::type::generation::cpp
 		bool IsScopeReserved(std::string scope)
 		{
 			scope = ReworkScope(scope);
-			if (scope == "" ||
-				scope == "Upper" ||
-				scope == "This" ||
-				scope == "Name" ||
-				scope == "Lower" ||
-				scope == "Default" ||
-				scope == "Pascal" ||
-				scope == "Snake" ||
-				scope == "Camel" ||
-				scope == "Variable_Field" ||
-				scope == "Variable_Field_Separator" ||
-				scope == "Function_Field" ||
-				scope == "Function_Field_Separator")
+			std::string loweredString;
+			for (const auto character : scope)
+			{
+				loweredString += std::tolower(character);
+			}
+			
+			if (loweredString == "" ||
+				loweredString == "upper" ||
+				loweredString == "this" ||
+				loweredString == "name" ||
+				loweredString == "lower" ||
+				loweredString == "default" ||
+				loweredString == "pascal" ||
+				loweredString == "snake" ||
+				loweredString == "camel" ||
+				loweredString == "underscore" ||
+				loweredString == "slash" ||
+				loweredString == "backslash" ||
+				loweredString == "colon" ||
+				loweredString == "doublecolon" ||
+				loweredString == "variable_field" ||
+				loweredString == "variable_field_separator" ||
+				loweredString == "function_field" ||
+				loweredString == "function_field_separator")
 			{
 				return true;
 			}
@@ -242,7 +253,7 @@ namespace DST::type::generation::cpp
 						}
 						else
 						{
-							scope_arguments += "GenerateVariable(" + cppgen->GetVariableDefinition("class_name", ".Lower")->GetValue() + "_->" + content->GetParent() + "_->" + ReworkScope(content->GetScope()) + "())";
+							scope_arguments += "GenerateVariable(" + generator.class_name_->Lower()->GetValue() + "_->" + content->GetParent() + "_->" + ReworkScope(content->GetScope()) + "())";
 						}
 						scope_arguments += ", ";
 					}
@@ -518,8 +529,6 @@ namespace DST::type::generation::cpp
 			generator.file_->Extension()->Set(ourExtension);
 
 			generator.class_name_->Set(generator.class_name_);
-			generator.class_name_->upper_->Set(generator.class_name_->Upper());
-			generator.class_name_->lower_->Set(generator.class_name_->Lower());
 
 			ExpandDeleteMemberField(cppgen);
 			ExpandEnumField(cppgen);

@@ -1,5 +1,5 @@
-#ifndef DST_CONSTRUCTIONGENERATORTEMPLATE_h
-#define DST_CONSTRUCTIONGENERATORTEMPLATE_h
+#ifndef DST_USER_CONSTRUCTIONGENERATORTEMPLATE_h
+#define DST_USER_CONSTRUCTIONGENERATORTEMPLATE_h
 
 #include <variant>
 #include <vector>
@@ -47,6 +47,7 @@ namespace DST::user
 			member_initialization_,
 			member_type_,
 			namespace_,
+			namespace_upper_,
 			register_member_,
 			right_angle_bracket_,
 			right_bracket_,
@@ -70,6 +71,13 @@ namespace DST::user
 			Default_,
 			Upper_,
 			Lower_,
+
+			Snake_,
+			Slash_,
+			BackSlash_,
+			Colon_,
+			DoubleColon_,
+
 			Variable_Field_,
 			Variable_Field_Separator_,
 			Function_Field_,
@@ -198,6 +206,11 @@ namespace DST::user
 				return "namespace";
 			}
 
+			case ::DST::user::ConstructionGeneratorTemplate::Type::namespace_upper_:
+			{
+				return "namespace_upper";
+			}
+
 			case ::DST::user::ConstructionGeneratorTemplate::Type::register_member_:
 			{
 				return "register_member";
@@ -295,7 +308,7 @@ namespace DST::user
 				return this;
 			}
 
-			std::string GetValue()
+			virtual std::string GetValue()
 			{
 				if (isString)
 				{
@@ -457,12 +470,199 @@ namespace DST::user
 			}
 		};
 
+		struct Variable_ReservedScope_Upper : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Upper(VariableBase* base_)
+				: VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Upper_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string upperVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					upperVariant += std::toupper(character);
+				}
+
+				return upperVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Lower : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Lower(VariableBase* base_)
+				: VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Lower_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string lowerVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					lowerVariant += std::tolower(character);
+				}
+
+				return lowerVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Snake : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Snake(VariableBase* base_)
+				: VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Snake_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string snakeVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						snakeVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						snakeVariant += '_';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!snakeVariant.empty() && lastWasNonAlpha)
+				{
+					snakeVariant.pop_back();
+				}
+
+				return snakeVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Slash : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Slash(VariableBase* base_)
+				: VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Slash_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string slashVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						slashVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						slashVariant += '/';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!slashVariant.empty() && lastWasNonAlpha)
+				{
+					slashVariant.pop_back();
+				}
+
+				return slashVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_DoubleColon : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_DoubleColon(VariableBase* base_)
+				: VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::DoubleColon_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string doubleColonVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						doubleColonVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						doubleColonVariant += "::";
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!doubleColonVariant.empty() && lastWasNonAlpha)
+				{
+					doubleColonVariant.pop_back();
+					doubleColonVariant.pop_back();
+				}
+
+				return doubleColonVariant;
+			}
+		};
+
 		struct VariableScopes : public VariableBase
 		{
 			// Default scopes
 			VariableBase* default_ = new VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Default_, true);
-			VariableBase* upper_ = new VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Upper_, true);
-			VariableBase* lower_ = new VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Lower_, true);
+			VariableBase* upper_ = new Variable_ReservedScope_Upper(this);
+			VariableBase* lower_ = new Variable_ReservedScope_Lower(this);
+
+			VariableBase* snake_ = new Variable_ReservedScope_Snake(this);
+			VariableBase* slash_ = new Variable_ReservedScope_Slash(this);
+			VariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);
+
 			VariableBase* variable_field_ = new VariableScope(::DST::user::ConstructionGeneratorTemplate::ScopeType::Variable_Field_, true);
 			VariableBase* variable_field_separator_ = new VariableScope("\n", ::DST::user::ConstructionGeneratorTemplate::ScopeType::Variable_Field_Separator_, true);
 
@@ -485,32 +685,32 @@ namespace DST::user
 			}
 			VariableBase* Upper()
 			{
-				std::string upperVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					upperVariant += std::toupper(character);
-				}
-
-				*upper_ = upperVariant;
-
 				return upper_;
 			}
 
 			VariableBase* Lower()
 			{
-				std::string lowerVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					lowerVariant += std::tolower(character);
-				}
-
-				*lower_ = lowerVariant;
-
 				return lower_;
+			}
+
+			VariableBase* Underscore()
+			{
+				return snake_;
+			}
+
+			VariableBase* Snake()
+			{
+				return snake_;
+			}
+
+			VariableBase* Slash()
+			{
+				return slash_;
+			}
+
+			VariableBase* DoubleColon()
+			{
+				return double_colon_;
 			}
 
 			VariableBase* Variable_Field()
@@ -985,7 +1185,7 @@ namespace DST::user
 			Variable_file_(ConstructionGeneratorTemplate* constructiongeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
 			{
 				type = ::DST::user::ConstructionGeneratorTemplate::Type::file_;
-				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(constructiongeneratortemplate_->header_guard_->This()), GenerateVariable("\n#define "), GenerateVariable(constructiongeneratortemplate_->header_guard_->This()), GenerateVariable("\n\n#include <variant>\n#include <vector>\n#include <string>\n\nnamespace "), GenerateVariable(constructiongeneratortemplate_->namespace_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class "), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief Generates code for \""), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("\"\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("details This is generated by DST"), GenerateVariable("."), GenerateVariable("\n\t *\tFor more information visit: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/DeamerStringTemplate\n\t */\n\tclass "), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_->This()), GenerateVariable("\n\n\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_scope_->This()), GenerateVariable("\n\n\t\t"), GenerateVariable(constructiongeneratortemplate_->convert_enum_to_name_->This()), GenerateVariable("\n\n\t\t"), GenerateVariable(constructiongeneratortemplate_->convert_enum_scope_to_name_->This()), GenerateVariable("\n\tpublic:\n\t\tstruct VariableBase\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t// The value is either a string\n\t\t\t// or a vector of variables"), GenerateVariable("."), GenerateVariable("\n\t\t\tstd::variant<std::string, std::vector<VariableBase*>> value;\n\t\t\tbool isString = true;\n\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable(" type = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Unknown;\n\n\t\t\tVariableBase() : VariableBase(std::vector<VariableBase*>())\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tvirtual ~VariableBase() = default;\n\n\t\t\tVariableBase(const char* text)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tisString = true;\n\t\t\t\tvalue = text;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase(const std::string& text)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tisString = true;\n\t\t\t\tvalue = text;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase(std::vector<VariableBase*> variables)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tisString = false;\n\t\t\t\tvalue = variables;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase* This()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn this;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tstd::string GetValue()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tif (isString)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\treturn std::get<std::string>(value);\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t\telse\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tstd::string output;\n\t\t\t\t\tauto& variables = std::get<std::vector<VariableBase*>>(value);\n\t\t\t\t\tfor (auto* variable : variables)\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\t\toutput += variable->GetValue();\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t\t\treturn output;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tstd::string GetName()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn ConvertEnumToName(type);\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& operator=(const std::string& variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn Set(variable);\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& operator=(VariableBase* variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn Set(variable);\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& operator+=(VariableBase* variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn Add(variable);\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& operator+=(const std::string& variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn Add(variable);\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& Set(const std::string& variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tvalue = variable;\n\t\t\t\tisString = true;\n\n\t\t\t\treturn *this;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& Set(VariableBase* variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tif (variable == this)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\treturn *this;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t\tvalue = variable->value;\n\t\t\t\tisString = variable->isString;\n\n\t\t\t\treturn *this;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& Add(const std::string& variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tif (isString)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tauto& text = std::get<std::string>(value);\n\t\t\t\t\ttext += variable;\n\t\t\t\t\tvalue = text;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t\telse\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tauto& vector = std::get<std::vector<VariableBase*>>(value);\n\t\t\t\t\tvector"), GenerateVariable("."), GenerateVariable("push_back(new VariableBase(variable));\n\t\t\t\t\tvalue = vector;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t\treturn *this;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase& Add(VariableBase* variable)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tif (variable == this)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\treturn *this;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t\tif (isString)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\t// convert current -> variablebase\n\t\t\t\t\t// then create a vector"), GenerateVariable("."), GenerateVariable("\n\t\t\t\t\tauto& currentValue = std::get<std::string>(value);\n\t\t\t\t\tauto* currentValueAsVariableBase = new VariableBase(currentValue);\n\t\t\t\t\tvalue = std::vector<VariableBase*>("), GenerateVariable("{"), GenerateVariable(" currentValueAsVariableBase, variable "), GenerateVariable("}"), GenerateVariable(");\n\n\t\t\t\t\tisString = false;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t\telse\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tauto& vector = std::get<std::vector<VariableBase*>>(value);\n\t\t\t\t\tvector"), GenerateVariable("."), GenerateVariable("push_back(variable);\n\t\t\t\t\tvalue = vector;\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t\treturn *this;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tvoid Clear()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tif (isString)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tvalue = \"\";\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t\telse\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tvalue = std::vector<VariableBase*>();\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tvoid* operator new(size_t size)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tvoid* newVariable = ::operator new(size);\n\t\t\t\tvariables_to_delete"), GenerateVariable("."), GenerateVariable("emplace_back(static_cast<VariableBase*>(newVariable));\n\n\t\t\t\treturn newVariable;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable(";\n\n\t\tstatic VariableBase* GenerateVariable(VariableBase* variable)\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\treturn variable;\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\n\t\tstatic VariableBase* GenerateVariable(const std::string& variable)\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\treturn new VariableBase(variable);\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\tstruct VariableScope : public VariableBase\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type = "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Unknown;\n\t\t\tbool isReserved = false;\n\n\t\t\tVariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type_, bool isReserved_ = false) : VariableBase(), scope_type(scope_type_), isReserved(isReserved_)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\ttype = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Scope;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableScope(const char* text, "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type_, bool isReserved_ = false) : VariableBase(text), scope_type(scope_type_), isReserved(isReserved_)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\ttype = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Scope;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableScope(std::vector<VariableBase*> variable, "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type_, bool isReserved_ = false) : VariableBase(variable), scope_type(scope_type_), isReserved(isReserved_)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\ttype = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Scope;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable(";\n\n\t\tstruct VariableScopes : public VariableBase\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t// Default scopes\n\t\t\tVariableBase* default_ = new VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Default_, true);\n\t\t\tVariableBase* upper_ = new VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Upper_, true);\n\t\t\tVariableBase* lower_ = new VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Lower_, true);\n\t\t\tVariableBase* variable_field_ = new VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Variable_Field_, true);\n\t\t\tVariableBase* variable_field_separator_ = new VariableScope(\""), GenerateVariable("\\"), GenerateVariable("n\", "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Variable_Field_Separator_, true);\n\n\t\t\t// Ctor\n\t\t\tVariableScopes() : VariableBase() "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableScopes(const char* text) : VariableBase(text) "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableScopes(const std::string& text) : VariableBase(text) "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables) "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t// Dtor\n\t\t\tvirtual ~VariableScopes() override = default;\n\n\t\t\t// Calls\n\t\t\tVariableBase* Default()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn default_;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t\tVariableBase* Upper()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tstd::string upperVariant;\n\t\t\t\tstd::string currentValue = GetValue();\n\n\t\t\t\tfor (const auto character : currentValue)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tupperVariant += std::toupper(character);\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t\t*upper_ = upperVariant;\n\n\t\t\t\treturn upper_;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase* Lower()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tstd::string lowerVariant;\n\t\t\t\tstd::string currentValue = GetValue();\n\n\t\t\t\tfor (const auto character : currentValue)\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t\tlowerVariant += std::tolower(character);\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\t\t*lower_ = lowerVariant;\n\n\t\t\t\treturn lower_;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase* Variable_Field()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn variable_field_;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tVariableBase* Variable_Field_Separator()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\treturn variable_field_separator_;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t\tvoid ExpandVariableField()\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\t// currentvalue + separator\n\t\t\t\tconst auto currentValue = GetValue() + Variable_Field_Separator()->GetValue();\n\t\t\t\t*Variable_Field() += currentValue;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable(";\n\n\tpublic:\n\t\t"), GenerateVariable(constructiongeneratortemplate_->member_class_declaration_->Variable_Field()), GenerateVariable("\n\n\tpublic:\n\t\tstatic std::vector<VariableBase*> variables_to_delete;\n\n\tpublic:\n\t\tstd::vector<VariableBase*> variables_;\n\n\tpublic:\n\t\t// Members that one can directly access"), GenerateVariable("."), GenerateVariable("\n\t\t// e"), GenerateVariable("."), GenerateVariable("g"), GenerateVariable("."), GenerateVariable(" "), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("."), GenerateVariable("member = \"auto-generated\";\n\t\t"), GenerateVariable(constructiongeneratortemplate_->member_declaration_->Variable_Field()), GenerateVariable("\n\n\tpublic:\n\t\t"), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("()\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->member_initialization_->Variable_Field()), GenerateVariable("\n\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->register_member_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\tvirtual ~"), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("()\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\tfor(auto* variable : variables_to_delete)\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t\tdelete variable;\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\tpublic:\n\t\t// Default DST functions\n\n\t\t/*!\t"), GenerateVariable("\\"), GenerateVariable("fn GetOutput\n\t\t *\n\t\t *\t"), GenerateVariable("\\"), GenerateVariable("brief returns the output with the given the current state"), GenerateVariable("."), GenerateVariable("\n\t\t */\n\t\tstd::string GetOutput()\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\treturn file_->Content()->GetValue();\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\t/*!\t"), GenerateVariable("\\"), GenerateVariable("fn GetVariables\n\t\t *\n\t\t *\t"), GenerateVariable("\\"), GenerateVariable("brief Returns all top level variables known in this template"), GenerateVariable("."), GenerateVariable("\n\t\t */\n\t\tstd::vector<VariableBase*> GetVariables()\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\treturn variables_;\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\tpublic:\n\t"), GenerateVariable("}"), GenerateVariable(";\n\t\n\tstd::vector<"), GenerateVariable(constructiongeneratortemplate_->namespace_->This()), GenerateVariable("::"), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("::VariableBase*> "), GenerateVariable(constructiongeneratortemplate_->namespace_->This()), GenerateVariable("::"), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("::variables_to_delete;\n\n"), GenerateVariable("}"), GenerateVariable("\n\n#endif // "), GenerateVariable(constructiongeneratortemplate_->header_guard_->This()) }));
+				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(constructiongeneratortemplate_->header_guard_->This()), GenerateVariable("\r\n#define "), GenerateVariable(constructiongeneratortemplate_->header_guard_->This()), GenerateVariable("\r\n\r\n#include <variant>\r\n#include <vector>\r\n#include <string>\r\n\r\nnamespace "), GenerateVariable(constructiongeneratortemplate_->namespace_->This()), GenerateVariable("\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\r\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class "), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("\r\n\t *\r\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief Generates code for \""), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("\"\r\n\t *\r\n\t *\t"), GenerateVariable("\\"), GenerateVariable("details This is generated by DST"), GenerateVariable("."), GenerateVariable("\r\n\t *\tFor more information visit: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/DeamerStringTemplate\r\n\t */\r\n\tclass "), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("\r\n\t"), GenerateVariable("{"), GenerateVariable("\r\n\tpublic:\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_->This()), GenerateVariable("\r\n\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_scope_->This()), GenerateVariable("\r\n\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->convert_enum_to_name_->This()), GenerateVariable("\r\n\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->convert_enum_scope_to_name_->This()), GenerateVariable("\r\n\tpublic:\r\n\t\tstruct VariableBase\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t// The value is either a string\r\n\t\t\t// or a vector of variables"), GenerateVariable("."), GenerateVariable("\r\n\t\t\tstd::variant<std::string, std::vector<VariableBase*>> value;\r\n\t\t\tbool isString = true;\r\n\r\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable(" type = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Unknown;\r\n\r\n\t\t\tVariableBase() : VariableBase(std::vector<VariableBase*>())\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tvirtual ~VariableBase() = default;\r\n\r\n\t\t\tVariableBase(const char* text)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tisString = true;\r\n\t\t\t\tvalue = text;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase(const std::string& text)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tisString = true;\r\n\t\t\t\tvalue = text;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase(std::vector<VariableBase*> variables)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tisString = false;\r\n\t\t\t\tvalue = variables;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* This()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn this;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tvirtual std::string GetValue()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tif (isString)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\treturn std::get<std::string>(value);\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\telse\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tstd::string output;\r\n\t\t\t\t\tauto& variables = std::get<std::vector<VariableBase*>>(value);\r\n\t\t\t\t\tfor (auto* variable : variables)\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\toutput += variable->GetValue();\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\treturn output;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tstd::string GetName()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn ConvertEnumToName(type);\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& operator=(const std::string& variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn Set(variable);\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& operator=(VariableBase* variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn Set(variable);\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& operator+=(VariableBase* variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn Add(variable);\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& operator+=(const std::string& variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn Add(variable);\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& Set(const std::string& variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tvalue = variable;\r\n\t\t\t\tisString = true;\r\n\r\n\t\t\t\treturn *this;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& Set(VariableBase* variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tif (variable == this)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\treturn *this;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\tvalue = variable->value;\r\n\t\t\t\tisString = variable->isString;\r\n\r\n\t\t\t\treturn *this;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& Add(const std::string& variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tif (isString)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tauto& text = std::get<std::string>(value);\r\n\t\t\t\t\ttext += variable;\r\n\t\t\t\t\tvalue = text;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\telse\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tauto& vector = std::get<std::vector<VariableBase*>>(value);\r\n\t\t\t\t\tvector"), GenerateVariable("."), GenerateVariable("push_back(new VariableBase(variable));\r\n\t\t\t\t\tvalue = vector;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn *this;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase& Add(VariableBase* variable)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tif (variable == this)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\treturn *this;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\tif (isString)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t// convert current -> variablebase\r\n\t\t\t\t\t// then create a vector"), GenerateVariable("."), GenerateVariable("\r\n\t\t\t\t\tauto& currentValue = std::get<std::string>(value);\r\n\t\t\t\t\tauto* currentValueAsVariableBase = new VariableBase(currentValue);\r\n\t\t\t\t\tvalue = std::vector<VariableBase*>("), GenerateVariable("{"), GenerateVariable(" currentValueAsVariableBase, variable "), GenerateVariable("}"), GenerateVariable(");\r\n\r\n\t\t\t\t\tisString = false;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\telse\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tauto& vector = std::get<std::vector<VariableBase*>>(value);\r\n\t\t\t\t\tvector"), GenerateVariable("."), GenerateVariable("push_back(variable);\r\n\t\t\t\t\tvalue = vector;\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn *this;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tvoid Clear()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tif (isString)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tvalue = \"\";\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\telse\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tvalue = std::vector<VariableBase*>();\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tvoid* operator new(size_t size)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tvoid* newVariable = ::operator new(size);\r\n\t\t\t\tvariables_to_delete"), GenerateVariable("."), GenerateVariable("emplace_back(static_cast<VariableBase*>(newVariable));\r\n\r\n\t\t\t\treturn newVariable;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\r\n\t\tstatic VariableBase* GenerateVariable(VariableBase* variable)\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\treturn variable;\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\r\n\t\tstatic VariableBase* GenerateVariable(const std::string& variable)\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\treturn new VariableBase(variable);\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\tstruct VariableScope : public VariableBase\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type = "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Unknown;\r\n\t\t\tbool isReserved = false;\r\n\r\n\t\t\tVariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type_, bool isReserved_ = false) : VariableBase(), scope_type(scope_type_), isReserved(isReserved_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\ttype = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Scope;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableScope(const char* text, "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type_, bool isReserved_ = false) : VariableBase(text), scope_type(scope_type_), isReserved(isReserved_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\ttype = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Scope;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableScope(std::vector<VariableBase*> variable, "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable(" scope_type_, bool isReserved_ = false) : VariableBase(variable), scope_type(scope_type_), isReserved(isReserved_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\ttype = "), GenerateVariable(constructiongeneratortemplate_->enum_type_->This()), GenerateVariable("::Scope;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\t\t\r\n\t\tstruct Variable_ReservedScope_Upper : public VariableScope\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\tVariableBase* base;\r\n\t\t\tVariable_ReservedScope_Upper(VariableBase* base_)\r\n\t\t\t: VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Upper_, true),\r\n\t\t\t  base(base_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\r\n\t\t\tvirtual std::string GetValue() override\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tstd::string upperVariant;\r\n\t\t\t\tstd::string currentValue = base->GetValue();\r\n\r\n\t\t\t\tfor (const auto character : currentValue)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tupperVariant += std::toupper(character);\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn upperVariant;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\t\t\r\n\t\tstruct Variable_ReservedScope_Lower : public VariableScope\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\tVariableBase* base;\r\n\t\t\tVariable_ReservedScope_Lower(VariableBase* base_)\r\n\t\t\t: VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Lower_, true),\r\n\t\t\t  base(base_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\r\n\t\t\tvirtual std::string GetValue() override\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tstd::string lowerVariant;\r\n\t\t\t\tstd::string currentValue = base->GetValue();\r\n\r\n\t\t\t\tfor (const auto character : currentValue)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tlowerVariant += std::tolower(character);\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn lowerVariant;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\t\t\r\n\t\tstruct Variable_ReservedScope_Snake : public VariableScope\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\tVariableBase* base;\r\n\t\t\tVariable_ReservedScope_Snake(VariableBase* base_)\r\n\t\t\t: VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Snake_, true),\r\n\t\t\t  base(base_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\r\n\t\t\tvirtual std::string GetValue() override\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tstd::string snakeVariant;\r\n\t\t\t\tstd::string currentValue = base->GetValue();\r\n\t\t\t\t\r\n\t\t\t\tbool lastWasNonAlpha = true;\r\n\t\t\t\tfor (const auto character : currentValue)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tif (std::isalpha(character))\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\tsnakeVariant += character;\r\n\t\t\t\t\t\tlastWasNonAlpha = false;\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\telse\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\tif (lastWasNonAlpha)\r\n\t\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\t\tcontinue;\r\n\t\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\tsnakeVariant += '_';\r\n\t\t\t\t\t\tlastWasNonAlpha = true;\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\r\n\t\t\t\t// If it contains text\r\n\t\t\t\t// remove the tail\r\n\t\t\t\tif (!snakeVariant"), GenerateVariable("."), GenerateVariable("empty() && lastWasNonAlpha)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tsnakeVariant"), GenerateVariable("."), GenerateVariable("pop_back();\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn snakeVariant;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\t\t\r\n\t\tstruct Variable_ReservedScope_Slash : public VariableScope\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\tVariableBase* base;\r\n\t\t\tVariable_ReservedScope_Slash(VariableBase* base_)\r\n\t\t\t: VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Slash_, true),\r\n\t\t\t  base(base_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\r\n\t\t\tvirtual std::string GetValue() override\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tstd::string slashVariant;\r\n\t\t\t\tstd::string currentValue = base->GetValue();\r\n\t\t\t\t\r\n\t\t\t\tbool lastWasNonAlpha = true;\r\n\t\t\t\tfor (const auto character : currentValue)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tif (std::isalpha(character))\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\tslashVariant += character;\r\n\t\t\t\t\t\tlastWasNonAlpha = false;\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\telse\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\tif (lastWasNonAlpha)\r\n\t\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\t\tcontinue;\r\n\t\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\tslashVariant += '/';\r\n\t\t\t\t\t\tlastWasNonAlpha = true;\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\r\n\t\t\t\t// If it contains text\r\n\t\t\t\t// remove the tail\r\n\t\t\t\tif (!slashVariant"), GenerateVariable("."), GenerateVariable("empty() && lastWasNonAlpha)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tslashVariant"), GenerateVariable("."), GenerateVariable("pop_back();\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn slashVariant;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\t\t\r\n\t\tstruct Variable_ReservedScope_DoubleColon : public VariableScope\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\tVariableBase* base;\r\n\t\t\tVariable_ReservedScope_DoubleColon(VariableBase* base_)\r\n\t\t\t: VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::DoubleColon_, true),\r\n\t\t\t  base(base_)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\r\n\t\t\tvirtual std::string GetValue() override\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tstd::string doubleColonVariant;\r\n\t\t\t\tstd::string currentValue = base->GetValue();\r\n\t\t\t\t\r\n\t\t\t\tbool lastWasNonAlpha = true;\r\n\t\t\t\tfor (const auto character : currentValue)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tif (std::isalpha(character))\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\tdoubleColonVariant += character;\r\n\t\t\t\t\t\tlastWasNonAlpha = false;\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\telse\r\n\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\tif (lastWasNonAlpha)\r\n\t\t\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\t\t\tcontinue;\r\n\t\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\tdoubleColonVariant += \"::\";\r\n\t\t\t\t\t\tlastWasNonAlpha = true;\r\n\t\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\t\t\r\n\t\t\t\t// If it contains text\r\n\t\t\t\t// remove the tail\r\n\t\t\t\tif (!doubleColonVariant"), GenerateVariable("."), GenerateVariable("empty() && lastWasNonAlpha)\r\n\t\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t\tdoubleColonVariant"), GenerateVariable("."), GenerateVariable("pop_back();\r\n\t\t\t\t\tdoubleColonVariant"), GenerateVariable("."), GenerateVariable("pop_back();\r\n\t\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t\treturn doubleColonVariant;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\r\n\t\tstruct VariableScopes : public VariableBase\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t// Default scopes\r\n\t\t\tVariableBase* default_ = new VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Default_, true);\r\n\t\t\tVariableBase* upper_ = new Variable_ReservedScope_Upper(this);\r\n\t\t\tVariableBase* lower_ = new Variable_ReservedScope_Lower(this);\r\n\t\t\t\r\n\t\t\tVariableBase* snake_ = new Variable_ReservedScope_Snake(this);\r\n\t\t\tVariableBase* slash_ = new Variable_ReservedScope_Slash(this);\r\n\t\t\tVariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);\r\n\t\t\t\r\n\t\t\tVariableBase* variable_field_ = new VariableScope("), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Variable_Field_, true);\r\n\t\t\tVariableBase* variable_field_separator_ = new VariableScope(\""), GenerateVariable("\\"), GenerateVariable("n\", "), GenerateVariable(constructiongeneratortemplate_->enum_scope_type_->This()), GenerateVariable("::Variable_Field_Separator_, true);\r\n\r\n\t\t\t// Ctor\r\n\t\t\tVariableScopes() : VariableBase() "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableScopes(const char* text) : VariableBase(text) "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableScopes(const std::string& text) : VariableBase(text) "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables) "), GenerateVariable("{"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\t// Dtor\r\n\t\t\tvirtual ~VariableScopes() override = default;\r\n\r\n\t\t\t// Calls\r\n\t\t\tVariableBase* Default()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn default_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t\tVariableBase* Upper()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn upper_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* Lower()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn lower_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* Underscore()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn snake_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* Snake()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn snake_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* Slash()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn slash_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* DoubleColon()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn double_colon_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* Variable_Field()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn variable_field_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tVariableBase* Variable_Field_Separator()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\treturn variable_field_separator_;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tvoid ExpandVariableField()\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\t// currentvalue + separator\r\n\t\t\t\tconst auto currentValue = GetValue() + Variable_Field_Separator()->GetValue();\r\n\t\t\t\t*Variable_Field() += currentValue;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable(";\r\n\r\n\tpublic:\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->member_class_declaration_->Variable_Field()), GenerateVariable("\r\n\r\n\tpublic:\r\n\t\tinline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();\r\n\r\n\tpublic:\r\n\t\tstd::vector<VariableBase*> variables_;\r\n\r\n\tpublic:\r\n\t\t// Members that one can directly access"), GenerateVariable("."), GenerateVariable("\r\n\t\t// e"), GenerateVariable("."), GenerateVariable("g"), GenerateVariable("."), GenerateVariable(" "), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("."), GenerateVariable("member = \"auto-generated\";\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->member_declaration_->Variable_Field()), GenerateVariable("\r\n\r\n\tpublic:\r\n\t\t"), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("()\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->member_initialization_->Variable_Field()), GenerateVariable("\r\n\r\n\t\t\t"), GenerateVariable(constructiongeneratortemplate_->register_member_->Variable_Field()), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\tvirtual ~"), GenerateVariable(constructiongeneratortemplate_->class_name_->This()), GenerateVariable("()\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\tfor(auto* variable : variables_to_delete)\r\n\t\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t\tdelete variable;\r\n\t\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t\tvariables_to_delete"), GenerateVariable("."), GenerateVariable("clear();\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\tpublic:\r\n\t\t// Default DST functions\r\n\r\n\t\t/*!\t"), GenerateVariable("\\"), GenerateVariable("fn GetOutput\r\n\t\t *\r\n\t\t *\t"), GenerateVariable("\\"), GenerateVariable("brief returns the output with the given the current state"), GenerateVariable("."), GenerateVariable("\r\n\t\t */\r\n\t\tstd::string GetOutput()\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\treturn file_->Content()->GetValue();\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\t/*!\t"), GenerateVariable("\\"), GenerateVariable("fn GetVariables\r\n\t\t *\r\n\t\t *\t"), GenerateVariable("\\"), GenerateVariable("brief Returns all top level variables known in this template"), GenerateVariable("."), GenerateVariable("\r\n\t\t */\r\n\t\tstd::vector<VariableBase*> GetVariables()\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\treturn variables_;\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\tpublic:\r\n\t"), GenerateVariable("}"), GenerateVariable(";\r\n"), GenerateVariable("}"), GenerateVariable("\r\n\r\n#endif // "), GenerateVariable(constructiongeneratortemplate_->header_guard_->This()) }));
 				Content_->type = ::DST::user::ConstructionGeneratorTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("Template") }));
@@ -1490,6 +1690,45 @@ namespace DST::user
 
 		};
 
+		struct Variable_namespace_upper_ : public VariableScopes
+		{
+
+			static constexpr auto name = "namespace_upper_";
+
+
+
+			Variable_namespace_upper_() : VariableScopes()
+			{
+				type = ::DST::user::ConstructionGeneratorTemplate::Type::namespace_upper_;
+			}
+
+			virtual ~Variable_namespace_upper_() override = default;
+
+			Variable_namespace_upper_(ConstructionGeneratorTemplate* constructiongeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::user::ConstructionGeneratorTemplate::Type::namespace_upper_;
+
+			}
+
+
+
+			Variable_namespace_upper_& operator=(const Variable_namespace_upper_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
+
 		struct Variable_register_member_ : public VariableScopes
 		{
 
@@ -1882,7 +2121,7 @@ namespace DST::user
 
 
 	public:
-		static std::vector<VariableBase*> variables_to_delete;
+		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
 
 	public:
 		std::vector<VariableBase*> variables_;
@@ -1913,6 +2152,7 @@ namespace DST::user
 		Variable_member_initialization_* member_initialization_ = new Variable_member_initialization_();
 		Variable_member_type_* member_type_ = new Variable_member_type_();
 		Variable_namespace_* namespace_ = new Variable_namespace_();
+		Variable_namespace_upper_* namespace_upper_ = new Variable_namespace_upper_();
 		Variable_register_member_* register_member_ = new Variable_register_member_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
@@ -1930,27 +2170,28 @@ namespace DST::user
 		{
 			*class_name_ = Variable_class_name_(this, std::vector<VariableBase*>({ GenerateVariable(file_->File_name()), GenerateVariable(file_->Class_postfix()) }));
 			*convert_enum_scope_to_name_ = Variable_convert_enum_scope_to_name_(this, std::vector<VariableBase*>({  }));
-			*convert_enum_to_name_ = Variable_convert_enum_to_name_(this, std::vector<VariableBase*>({ GenerateVariable("static constexpr const char* ConvertEnumToName("), GenerateVariable(enum_type_->This()), GenerateVariable(" enumerationValue)\n"), GenerateVariable("{"), GenerateVariable("\n\tswitch(enumerationValue)\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable(convert_enum_to_name_case_->Variable_Field()), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable("\n\n\treturn \"\";\n"), GenerateVariable("}"), GenerateVariable("\n") }));
-			*convert_enum_to_name_case_ = Variable_convert_enum_to_name_case_(this, std::vector<VariableBase*>({ GenerateVariable("case "), GenerateVariable(enum_type_->This()), GenerateVariable("::"), GenerateVariable(member_->This()), GenerateVariable("_:\n"), GenerateVariable("{"), GenerateVariable("\n\treturn \""), GenerateVariable(member_->This()), GenerateVariable("\";\n"), GenerateVariable("}"), GenerateVariable("\n") }));
+			*convert_enum_to_name_ = Variable_convert_enum_to_name_(this, std::vector<VariableBase*>({ GenerateVariable("static constexpr const char* ConvertEnumToName("), GenerateVariable(enum_type_->This()), GenerateVariable(" enumerationValue)\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\tswitch(enumerationValue)\r\n\t"), GenerateVariable("{"), GenerateVariable("\r\n\t"), GenerateVariable(convert_enum_to_name_case_->Variable_Field()), GenerateVariable("\r\n\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\treturn \"\";\r\n"), GenerateVariable("}"), GenerateVariable("\r\n") }));
+			*convert_enum_to_name_case_ = Variable_convert_enum_to_name_case_(this, std::vector<VariableBase*>({ GenerateVariable("case "), GenerateVariable(enum_type_->This()), GenerateVariable("::"), GenerateVariable(member_->This()), GenerateVariable("_:\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\treturn \""), GenerateVariable(member_->This()), GenerateVariable("\";\r\n"), GenerateVariable("}"), GenerateVariable("\r\n") }));
 			*delete_member_ = Variable_delete_member_(this, std::vector<VariableBase*>({ GenerateVariable("delete "), GenerateVariable(member_->This()), GenerateVariable(";") }));
-			*enum_ = Variable_enum_(this, std::vector<VariableBase*>({ GenerateVariable("enum class Type\n"), GenerateVariable("{"), GenerateVariable("\nUnknown,\nScope,\n\n// User defined types\n"), GenerateVariable(enumeration_->Variable_Field()), GenerateVariable("\n\n"), GenerateVariable("}"), GenerateVariable(";\n") }));
-			*enum_scope_ = Variable_enum_scope_(this, std::vector<VariableBase*>({ GenerateVariable("enum class ScopeType\n"), GenerateVariable("{"), GenerateVariable("\nUnknown,\n\n// Default\nDefault_,\nUpper_,\nLower_,\nVariable_Field_,\nVariable_Field_Separator_,\nFunction_Field_,\nFunction_Field_Separator_,\n\n"), GenerateVariable(enum_scope_enumeration_->Variable_Field()), GenerateVariable("\n"), GenerateVariable("}"), GenerateVariable(";\n") }));
+			*enum_ = Variable_enum_(this, std::vector<VariableBase*>({ GenerateVariable("enum class Type\r\n"), GenerateVariable("{"), GenerateVariable("\r\nUnknown,\r\nScope,\r\n\r\n// User defined types\r\n"), GenerateVariable(enumeration_->Variable_Field()), GenerateVariable("\r\n\r\n"), GenerateVariable("}"), GenerateVariable(";\r\n") }));
+			*enum_scope_ = Variable_enum_scope_(this, std::vector<VariableBase*>({ GenerateVariable("enum class ScopeType\r\n"), GenerateVariable("{"), GenerateVariable("\r\nUnknown,\r\n\r\n// Default\r\nDefault_,\r\nUpper_,\r\nLower_,\r\n\r\nSnake_,\r\nSlash_,\r\nBackSlash_,\r\nColon_,\r\nDoubleColon_,\r\n\r\nVariable_Field_,\r\nVariable_Field_Separator_,\r\nFunction_Field_,\r\nFunction_Field_Separator_,\r\n\r\n"), GenerateVariable(enum_scope_enumeration_->Variable_Field()), GenerateVariable("\r\n"), GenerateVariable("}"), GenerateVariable(";\r\n") }));
 			*enum_scope_enumeration_ = Variable_enum_scope_enumeration_(this, std::vector<VariableBase*>({ GenerateVariable(scope_->This()), GenerateVariable("_,") }));
 			*enum_scope_type_ = Variable_enum_scope_type_(this, std::vector<VariableBase*>({ GenerateVariable("::"), GenerateVariable(namespace_->This()), GenerateVariable("::"), GenerateVariable(class_name_->This()), GenerateVariable("::ScopeType") }));
 			*enum_type_ = Variable_enum_type_(this, std::vector<VariableBase*>({ GenerateVariable("::"), GenerateVariable(namespace_->This()), GenerateVariable("::"), GenerateVariable(class_name_->This()), GenerateVariable("::Type") }));
 			*enumeration_ = Variable_enumeration_(this, std::vector<VariableBase*>({ GenerateVariable(member_->This()), GenerateVariable("_,") }));
 			*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-			*header_guard_ = Variable_header_guard_(this, std::vector<VariableBase*>({ GenerateVariable("DST_"), GenerateVariable(class_name_->Upper()), GenerateVariable("_"), GenerateVariable(file_->Extension()) }));
+			*header_guard_ = Variable_header_guard_(this, std::vector<VariableBase*>({ GenerateVariable(namespace_upper_->Underscore()), GenerateVariable("_"), GenerateVariable(class_name_->Upper()), GenerateVariable("_"), GenerateVariable(file_->Extension()) }));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
 			*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
 			*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
 			*member_ = Variable_member_(this, std::vector<VariableBase*>({  }));
-			*member_class_declaration_ = Variable_member_class_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\nstruct "), GenerateVariable(member_type_->This()), GenerateVariable(" : public VariableScopes\n"), GenerateVariable("{"), GenerateVariable("\n\nstatic constexpr auto name = \""), GenerateVariable(member_->This()), GenerateVariable("\";\n\n"), GenerateVariable(scope_field_->Variable_Field()), GenerateVariable("\n\n"), GenerateVariable(member_type_->This()), GenerateVariable("() : VariableScopes()\n"), GenerateVariable("{"), GenerateVariable("\n\ttype = "), GenerateVariable(enum_type_->This()), GenerateVariable("::"), GenerateVariable(member_->This()), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n\nvirtual ~"), GenerateVariable(member_type_->This()), GenerateVariable("() override = default;\n\n"), GenerateVariable(member_type_->This()), GenerateVariable("("), GenerateVariable(class_name_->This()), GenerateVariable("* "), GenerateVariable(class_name_->Lower()), GenerateVariable("_, const std::vector<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("& variables) : VariableScopes(variables)\n"), GenerateVariable("{"), GenerateVariable("\ntype = "), GenerateVariable(enum_type_->This()), GenerateVariable("::"), GenerateVariable(member_->This()), GenerateVariable(";\n"), GenerateVariable(scope_initialize_->Variable_Field()), GenerateVariable("\n"), GenerateVariable("}"), GenerateVariable("\n\n"), GenerateVariable(scope_function_->Variable_Field()), GenerateVariable("\n\n"), GenerateVariable(member_type_->This()), GenerateVariable("& operator=(const "), GenerateVariable(member_type_->This()), GenerateVariable("& variable)\n"), GenerateVariable("{"), GenerateVariable("\n\tif (&variable == this)\n\t"), GenerateVariable("{"), GenerateVariable("\n\t\treturn *this;\n\t"), GenerateVariable("}"), GenerateVariable("\n\n\tvalue = variable"), GenerateVariable("."), GenerateVariable("value;\n\tisString = variable"), GenerateVariable("."), GenerateVariable("isString;\n\n\t"), GenerateVariable(scope_assignment_->Variable_Field()), GenerateVariable("\n\n\treturn *this;\n"), GenerateVariable("}"), GenerateVariable("\n\n"), GenerateVariable("}"), GenerateVariable(";") }));
+			*member_class_declaration_ = Variable_member_class_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\r\nstruct "), GenerateVariable(member_type_->This()), GenerateVariable(" : public VariableScopes\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\r\nstatic constexpr auto name = \""), GenerateVariable(member_->This()), GenerateVariable("\";\r\n\r\n"), GenerateVariable(scope_field_->Variable_Field()), GenerateVariable("\r\n\r\n"), GenerateVariable(member_type_->This()), GenerateVariable("() : VariableScopes()\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\ttype = "), GenerateVariable(enum_type_->This()), GenerateVariable("::"), GenerateVariable(member_->This()), GenerateVariable(";\r\n"), GenerateVariable("}"), GenerateVariable("\r\n\r\nvirtual ~"), GenerateVariable(member_type_->This()), GenerateVariable("() override = default;\r\n\r\n"), GenerateVariable(member_type_->This()), GenerateVariable("("), GenerateVariable(class_name_->This()), GenerateVariable("* "), GenerateVariable(class_name_->Lower()), GenerateVariable("_, const std::vector<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("& variables) : VariableScopes(variables)\r\n"), GenerateVariable("{"), GenerateVariable("\r\ntype = "), GenerateVariable(enum_type_->This()), GenerateVariable("::"), GenerateVariable(member_->This()), GenerateVariable(";\r\n"), GenerateVariable(scope_initialize_->Variable_Field()), GenerateVariable("\r\n"), GenerateVariable("}"), GenerateVariable("\r\n\r\n"), GenerateVariable(scope_function_->Variable_Field()), GenerateVariable("\r\n\r\n"), GenerateVariable(member_type_->This()), GenerateVariable("& operator=(const "), GenerateVariable(member_type_->This()), GenerateVariable("& variable)\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\tif (&variable == this)\r\n\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\treturn *this;\r\n\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\tvalue = variable"), GenerateVariable("."), GenerateVariable("value;\r\n\tisString = variable"), GenerateVariable("."), GenerateVariable("isString;\r\n\r\n\t"), GenerateVariable(scope_assignment_->Variable_Field()), GenerateVariable("\r\n\r\n\treturn *this;\r\n"), GenerateVariable("}"), GenerateVariable("\r\n\r\n"), GenerateVariable("}"), GenerateVariable(";") }));
 			*member_declaration_ = Variable_member_declaration_(this, std::vector<VariableBase*>({ GenerateVariable(member_type_->This()), GenerateVariable("* "), GenerateVariable(member_->This()), GenerateVariable(" = new "), GenerateVariable(member_type_->This()), GenerateVariable("();") }));
 			*member_fields_ = Variable_member_fields_(this, std::vector<VariableBase*>({  }));
 			*member_initialization_ = Variable_member_initialization_(this, std::vector<VariableBase*>({ GenerateVariable("*"), GenerateVariable(member_->This()), GenerateVariable(" = "), GenerateVariable(member_type_->This()), GenerateVariable("(this, std::vector<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("("), GenerateVariable("{"), GenerateVariable(" "), GenerateVariable(member_fields_->This()), GenerateVariable(" "), GenerateVariable("}"), GenerateVariable("));") }));
 			*member_type_ = Variable_member_type_(this, std::vector<VariableBase*>({ GenerateVariable("Variable_"), GenerateVariable(member_->This()) }));
 			*namespace_ = Variable_namespace_(this, std::vector<VariableBase*>({ GenerateVariable(file_->Namespace()) }));
+			*namespace_upper_ = Variable_namespace_upper_(this, std::vector<VariableBase*>({ GenerateVariable(namespace_->Upper()) }));
 			*register_member_ = Variable_register_member_(this, std::vector<VariableBase*>({ GenerateVariable("variables_"), GenerateVariable("."), GenerateVariable("emplace_back("), GenerateVariable(member_->This()), GenerateVariable("_);") }));
 			*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
 			*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
@@ -1959,8 +2200,8 @@ namespace DST::user
 			*scope_arguments_ = Variable_scope_arguments_(this, std::vector<VariableBase*>({  }));
 			*scope_assignment_ = Variable_scope_assignment_(this, std::vector<VariableBase*>({ GenerateVariable("*"), GenerateVariable(scope_->This()), GenerateVariable("_ = *variable"), GenerateVariable("."), GenerateVariable(scope_->This()), GenerateVariable("_;") }));
 			*scope_field_ = Variable_scope_field_(this, std::vector<VariableBase*>({ GenerateVariable("VariableBase* "), GenerateVariable(scope_->This()), GenerateVariable("_ = GenerateVariable(\"\");") }));
-			*scope_function_ = Variable_scope_function_(this, std::vector<VariableBase*>({ GenerateVariable("\nVariableBase* "), GenerateVariable(scope_->This()), GenerateVariable("() const\n"), GenerateVariable("{"), GenerateVariable("\n\treturn "), GenerateVariable(scope_->This()), GenerateVariable("_;\n"), GenerateVariable("}") }));
-			*scope_initialize_ = Variable_scope_initialize_(this, std::vector<VariableBase*>({ GenerateVariable("*static_cast<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("("), GenerateVariable(scope_->This()), GenerateVariable("_) = VariableBase(std::vector<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("("), GenerateVariable("{"), GenerateVariable(" "), GenerateVariable(scope_arguments_->This()), GenerateVariable(" "), GenerateVariable("}"), GenerateVariable("));\n"), GenerateVariable(scope_->This()), GenerateVariable("_-"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("type = "), GenerateVariable(enum_type_->This()), GenerateVariable("::Scope;\n") }));
+			*scope_function_ = Variable_scope_function_(this, std::vector<VariableBase*>({ GenerateVariable("\r\nVariableBase* "), GenerateVariable(scope_->This()), GenerateVariable("() const\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\treturn "), GenerateVariable(scope_->This()), GenerateVariable("_;\r\n"), GenerateVariable("}") }));
+			*scope_initialize_ = Variable_scope_initialize_(this, std::vector<VariableBase*>({ GenerateVariable("*static_cast<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("("), GenerateVariable(scope_->This()), GenerateVariable("_) = VariableBase(std::vector<VariableBase*"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("("), GenerateVariable("{"), GenerateVariable(" "), GenerateVariable(scope_arguments_->This()), GenerateVariable(" "), GenerateVariable("}"), GenerateVariable("));\r\n"), GenerateVariable(scope_->This()), GenerateVariable("_-"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("type = "), GenerateVariable(enum_type_->This()), GenerateVariable("::Scope;\r\n") }));
 
 
 			variables_.emplace_back(class_name_);
@@ -1986,6 +2227,7 @@ namespace DST::user
 			variables_.emplace_back(member_initialization_);
 			variables_.emplace_back(member_type_);
 			variables_.emplace_back(namespace_);
+			variables_.emplace_back(namespace_upper_);
 			variables_.emplace_back(register_member_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);
@@ -2005,6 +2247,8 @@ namespace DST::user
 			{
 				delete variable;
 			}
+
+			variables_to_delete.clear();
 		}
 
 	public:
@@ -2030,9 +2274,6 @@ namespace DST::user
 
 	public:
 	};
-
-	std::vector<DST::user::ConstructionGeneratorTemplate::VariableBase*> DST::user::ConstructionGeneratorTemplate::variables_to_delete;
-
 }
 
-#endif // DST_CONSTRUCTIONGENERATORTEMPLATE_h
+#endif // DST_USER_CONSTRUCTIONGENERATORTEMPLATE_h
