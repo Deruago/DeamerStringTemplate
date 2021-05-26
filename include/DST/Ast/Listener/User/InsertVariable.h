@@ -9,8 +9,8 @@ namespace DST::ast::listener::user
 	class InsertVariable : public Listener
 	{
 	private:
-		mutable std::map<std::string, std::string> variableReplacements;
-		mutable std::string output;
+		std::map<std::string, std::string> variableReplacements;
+		std::string output;
 	public:
 		InsertVariable(const std::map<std::string, std::string>& variableReplacements_)
 			: variableReplacements(variableReplacements_)
@@ -19,7 +19,7 @@ namespace DST::ast::listener::user
 		~InsertVariable() override = default;
 
 	public:
-		void Listen(const DST::ast::node::variable_insertion* node) const override
+		void Listen(const DST::ast::node::variable_insertion* node) override
 		{
 			const std::string variable_name = node->Get(DST::ast::Type::VARNAME)[0]->GetValue();
 			const std::string replacement = variableReplacements[variable_name];
@@ -27,7 +27,7 @@ namespace DST::ast::listener::user
 			output += replacement;
 		}
 
-		void Listen(const DST::ast::node::other_symbols* node) const override
+		void Listen(const DST::ast::node::other_symbols* node) override
 		{
 			output += node->GetNodes()[0]->GetValue();
 		}

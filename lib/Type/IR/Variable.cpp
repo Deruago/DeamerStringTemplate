@@ -38,5 +38,10 @@ void DST::type::ir::Variable::Add(const std::vector<VariableReference>& variable
 	for (auto variable : variables)
 	{
 		values.push_back(variable.GetVariable());
+
+		if (variable.NewlyCreated())
+		{
+			own_created_variables.push_back(variable.GetVariable());
+		}
 	}
 }

@@ -443,7 +443,11 @@ namespace DST::type::generation::cpp
 			ExpandMemberInitializationRT(cppgen);
 			ExpandMemberDeclarationRT(cppgen);
 
-			return cppgen->Output();
+			const auto output = cppgen->Output();
+
+			delete cppgen;
+			
+			return output;
 		}
 
 		std::string GetCPPClassRepresentationOfConstructionCT(std::string template_ = "", std::string setting_ = "")
@@ -541,6 +545,8 @@ namespace DST::type::generation::cpp
 			std::cout << generator.class_name_->GetValue() + "." + generator.file_->Extension()->GetValue() << "\n";
 			file_name = generator.class_name_->GetValue() + "." + generator.file_->Extension()->GetValue();
 
+			delete cppgen;
+			
 			return generator.GetOutput();
 		}
 

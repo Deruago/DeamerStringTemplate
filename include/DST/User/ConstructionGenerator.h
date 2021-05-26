@@ -21,25 +21,29 @@ namespace DST::user
 	public:
 		type::ir::Construction* GenerateConstructionFromText(const std::string& templateText, const std::string& settingText = "")
 		{
-			DST::type::ir::Construction* construction = new DST::type::ir::Construction();
+			auto* const construction = new DST::type::ir::Construction();
 
 			if (!templateText.empty())
 			{
 				const auto main_parser = DST_Main::parser::Parser();
-				const auto main_listener = DST_Main::ast::listener::user::InsertVariable(construction);
+				auto main_listener = DST_Main::ast::listener::user::InsertVariable(construction);
 
 				auto* main_tree = main_parser.Parse(templateText);
 				main_listener.Dispatch(main_tree->GetStartNode());
 				main_listener.End();
+
+				delete main_tree;
 			}
 
 			if (!settingText.empty())
 			{
 				const auto setting_parser = DST_Setting::parser::Parser();
-				const auto setting_listener = DST_Setting::ast::listener::user::InsertVariable(construction);
+				auto setting_listener = DST_Setting::ast::listener::user::InsertVariable(construction);
 
 				auto* setting_tree = setting_parser.Parse(settingText);
 				setting_listener.Dispatch(setting_tree->GetStartNode());
+
+				delete setting_tree;
 			}
 			
 			return construction;

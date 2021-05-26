@@ -25,7 +25,7 @@ namespace DST::type::ir
 		{
 		}
 
-		VariableReference(Variable* value) : variable(value)
+		VariableReference(Variable* value) : variable(value), new_created(false)
 		{
 		}
 

@@ -36,6 +36,10 @@ namespace DST::type::ir
 			SetValueOfScope(".Pascal", {GetScope("")});
 			SetValueOfScope(".Camel", {GetScope("")});
 			SetValueOfScope(".Snake", {GetScope("")});
+			
+			SetValueOfScope(".Slash", { GetScope("") });
+			SetValueOfScope(".DoubleColon", { GetScope("") });
+			SetValueOfScope(".Underscore", {GetScope("")});
 		}
 
 		std::map<std::string, Variable*> GetScopes() const
@@ -72,7 +76,7 @@ namespace DST::type::ir
 		{
 			for (auto [key, variable] : variables)
 			{
-				//delete variable;
+				delete variable;
 			}
 		}
 

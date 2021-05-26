@@ -12,8 +12,8 @@ namespace DST_Setting::ast::listener::user
 	{
 	private:
 		DST::type::ir::Construction* construction;
-		mutable std::string current_variable;
-		mutable std::string current_scope;
+		std::string current_variable;
+		std::string current_scope;
 	public:
 		InsertVariable(DST::type::ir::Construction* construction_)
 			: construction(construction_)
@@ -23,23 +23,23 @@ namespace DST_Setting::ast::listener::user
 		~InsertVariable() override = default;
 
 	public:
-		void Listen(const DST_Setting::ast::node::stmt* node) const override
+		void Listen(const DST_Setting::ast::node::stmt* node) override
 		{
 			current_variable = "";
 			current_scope = "";
 		}
 		
-		void Listen(const DST_Setting::ast::node::variable_declaration* node) const override
+		void Listen(const DST_Setting::ast::node::variable_declaration* node) override
 		{
 			current_variable = node->Get(DST_Setting::ast::Type::VARNAME)[0]->GetValue();
 		}
 
-		void Listen(const DST_Setting::ast::node::scope* node) const override
+		void Listen(const DST_Setting::ast::node::scope* node) override
 		{
 			current_scope += "." + node->Get(Type::VARNAME)[0]->GetValue();
 		}
 		
-		void Listen(const DST_Setting::ast::node::USER_INPUT* node) const override
+		void Listen(const DST_Setting::ast::node::USER_INPUT* node) override
 		{
 			const auto DST_Main_parser = DST_Main::parser::Parser();
 			auto value = node->GetValue();
@@ -48,12 +48,14 @@ namespace DST_Setting::ast::listener::user
 
 			auto* tree = DST_Main_parser.Parse(value);
 
-			const auto listener = DST_Main::ast::listener::user::InsertVariable(construction, current_variable, current_scope);
+			auto listener = DST_Main::ast::listener::user::InsertVariable(construction, current_variable, current_scope);
 			listener.Dispatch(tree->GetStartNode());
 			listener.End();
+
+			delete tree;
 		}
 
-		void Listen(const DST_Setting::ast::node::dst_keyword* node) const override
+		void Listen(const DST_Setting::ast::node::dst_keyword* node) override
 		{
 			
 		}

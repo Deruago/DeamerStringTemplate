@@ -11,23 +11,16 @@ namespace DST_Main::ast::listener::user
 	class InsertVariable : public DST_Main::ast::listener::Listener
 	{
 	private:
-		/*mutable std::map<std::string, std::string> variableReplacements;
-		mutable std::string output;*/
-
 		DST::type::ir::Construction* construction;
-		mutable std::string variable;
-		mutable std::string scope;
+		std::string variable;
+		std::string scope;
 
-		mutable std::string current_varname = "";
-		mutable std::string current_scope = "";
+		std::string current_varname = "";
+		std::string current_scope = "";
 
-		mutable std::vector<DST::type::ir::VariableReference> reference;
+		std::vector<DST::type::ir::VariableReference> reference;
+		
 	public:
-		/*InsertVariable(const std::map<std::string, std::string>& variableReplacements_)
-			: variableReplacements(variableReplacements_)
-		{
-		}*/
-
 		InsertVariable(DST::type::ir::Construction* construction_, std::string variable_, std::string scope_ )
 			: construction(construction_), variable(std::move(variable_)), scope(std::move(scope_))
 		{
@@ -41,26 +34,7 @@ namespace DST_Main::ast::listener::user
 		~InsertVariable() override = default;
 
 	public:
-		/*void Listen(const DST_Main::ast::node::variable_insertion* node) const override
-		{
-			const std::string variable_name =
-				node->Get(DST_Main::ast::Type::VARNAME)[0]->GetValue();
-			const std::string replacement = variableReplacements[variable_name];
-			
-			output += replacement;
-		}
-
-		void Listen(const DST_Main::ast::node::other_symbols* node) const override
-		{
-			output += node->GetNodes()[0]->GetValue();
-		}
-
-		std::string GetOutput() const
-		{
-			return output;
-		}*/
-	public:
-		void UpdateReferences() const
+		void UpdateReferences()
 		{
 			if (!current_varname.empty())
 			{
@@ -72,12 +46,12 @@ namespace DST_Main::ast::listener::user
 			}
 		}
 
-		void Listen(const DST_Main::ast::node::stmt* node) const override
+		void Listen(const DST_Main::ast::node::stmt* node) override
 		{
 			UpdateReferences();
 		}
 		
-		void Listen(const DST_Main::ast::node::variable* node) const override
+		void Listen(const DST_Main::ast::node::variable* node) override
 		{
 			const std::string variable_name =
 				node->Get(DST_Main::ast::Type::VARNAME)[0]->GetValue();
@@ -85,7 +59,7 @@ namespace DST_Main::ast::listener::user
 			current_varname = variable_name;
 		}
 
-		void Listen(const DST_Main::ast::node::scope* node) const override
+		void Listen(const DST_Main::ast::node::scope* node) override
 		{
 			const std::string scope_name =
 				node->Get(DST_Main::ast::Type::VARNAME)[0]->GetValue();
@@ -93,12 +67,12 @@ namespace DST_Main::ast::listener::user
 			current_scope += "." + scope_name;
 		}
 
-		void Listen(const DST_Main::ast::node::other_symbols* node) const override
+		void Listen(const DST_Main::ast::node::other_symbols* node) override
 		{
 			reference.emplace_back(node->GetNodes()[0]->GetValue());
 		}
 
-		void End() const
+		void End()
 		{
 			UpdateReferences();
 			construction->CreateVariableDefinition(variable, scope, reference);

@@ -82,8 +82,6 @@ namespace DST::user
 			Variable_Field_Separator_,
 			Function_Field_,
 			Function_Field_Separator_,
-
-
 		};
 
 

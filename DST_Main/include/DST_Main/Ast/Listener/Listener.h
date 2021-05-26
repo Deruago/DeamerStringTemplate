@@ -32,7 +32,7 @@ namespace DST_Main { namespace ast { namespace listener {
 		Listener() = default;
 		~Listener() override = default;
 	public:
-		void Dispatch(const ::deamer::external::cpp::ast::Node* node) const override
+		void Dispatch(const ::deamer::external::cpp::ast::Node* node) override
 		{
 			const auto enumeratedValue = static_cast<DST_Main::ast::Type>(node->GetType());
 			switch(enumeratedValue)
@@ -132,60 +132,60 @@ namespace DST_Main { namespace ast { namespace listener {
 			}
 			}
 		}
-		virtual void Listen(const DST_Main::ast::node::DOT* node) const
+		virtual void Listen(const DST_Main::ast::node::DOT* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::LEFT_BRACKETS_ESCAPED* node) const
+		virtual void Listen(const DST_Main::ast::node::LEFT_BRACKETS_ESCAPED* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED* node) const
+		virtual void Listen(const DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::LEFT_BRACKETS* node) const
+		virtual void Listen(const DST_Main::ast::node::LEFT_BRACKETS* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::RIGHT_BRACKETS* node) const
+		virtual void Listen(const DST_Main::ast::node::RIGHT_BRACKETS* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::LEFT_BRACKET* node) const
+		virtual void Listen(const DST_Main::ast::node::LEFT_BRACKET* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::RIGHT_BRACKET* node) const
+		virtual void Listen(const DST_Main::ast::node::RIGHT_BRACKET* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::VARNAME* node) const
+		virtual void Listen(const DST_Main::ast::node::VARNAME* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::BACKSLASH* node) const
+		virtual void Listen(const DST_Main::ast::node::BACKSLASH* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::OTHER* node) const
+		virtual void Listen(const DST_Main::ast::node::OTHER* node)
 		{
 		}
 
-		virtual void Listen(const DST_Main::ast::node::program* node) const
+		virtual void Listen(const DST_Main::ast::node::program* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::stmts* node) const
+		virtual void Listen(const DST_Main::ast::node::stmts* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::stmt* node) const
+		virtual void Listen(const DST_Main::ast::node::stmt* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::variable_insertion* node) const
+		virtual void Listen(const DST_Main::ast::node::variable_insertion* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::other_symbols* node) const
+		virtual void Listen(const DST_Main::ast::node::other_symbols* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::variable* node) const
+		virtual void Listen(const DST_Main::ast::node::variable* node)
 		{
 		}
-		virtual void Listen(const DST_Main::ast::node::scope* node) const
+		virtual void Listen(const DST_Main::ast::node::scope* node)
 		{
 		}
 	private:
-		void DefaultAction(const ::deamer::external::cpp::ast::Node* node) const
+		void DefaultAction(const ::deamer::external::cpp::ast::Node* node)
 		{
 			for(const auto* child : node->GetNodes())
 			{

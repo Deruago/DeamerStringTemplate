@@ -11,13 +11,13 @@ namespace DST::ast::listener::user
 		Printer() = default;
 		~Printer() override = default;
 	public:
-		void Listen(const DST::ast::node::variable_insertion* node) const override
+		void Listen(const DST::ast::node::variable_insertion* node) override
 		{
 			std::cout	<< "Variable insertion point found!\n"
 						<< "\tVariable := " << node->Get(DST::ast::Type::VARNAME)[0]->GetValue() + "\n\n";
 		}
 
-		void Listen(const DST::ast::node::other_symbols* node) const override
+		void Listen(const DST::ast::node::other_symbols* node) override
 		{
 			std::cout	<< "Other symbol found!\n"
 						<< "\t" + node->GetNodes()[0]->GetValue() + "\n\n";

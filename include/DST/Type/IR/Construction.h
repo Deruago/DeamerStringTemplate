@@ -41,8 +41,11 @@ namespace DST::type::ir
 				scope == ".Lower" ||
 				scope == ".Name" ||
 				scope == ".Pascal" ||
-				scope == ".camel" ||
-				scope == ".snake")
+				scope == ".Camel" ||
+				scope == ".Snake" ||
+				scope == ".Slash" ||
+				scope == ".DoubleColon" ||
+				scope == ".Underscore")
 			{
 				return true;
 			}

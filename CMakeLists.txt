@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 3.18)
 
 project(DST)
 
-find_package(Deamer REQUIRED)
+find_package(Deamer_External REQUIRED)
 
 add_subdirectory(DST_Setting)
 add_subdirectory(DST_Main)
 
 add_library(DST_external_libraries STATIC "${DST_SOURCE_DIR}/lib/DST.cpp")
-target_link_libraries(DST_external_libraries PUBLIC Deamer DST_Main_static_library DST_Setting_static_library)
+target_link_libraries(DST_external_libraries PUBLIC Deamer_External DST_Main_static_library DST_Setting_static_library)
 target_include_directories(DST_external_libraries PUBLIC "${DST_SOURCE_DIR}/extern" "${DST_SOURCE_DIR}/include" "${DST_Setting_SOURCE_DIR}/include" "${DST_Main_SOURCE_DIR}/include")
 
 function(DST_add_external_library external_library_name source_files)

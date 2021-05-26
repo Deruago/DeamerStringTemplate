@@ -57,7 +57,7 @@ namespace DST::type::ir
 		{
 			for (auto* ownVariable : own_created_variables)
 			{
-				//delete ownVariable;
+				delete ownVariable;
 			}
 		}
 	public:

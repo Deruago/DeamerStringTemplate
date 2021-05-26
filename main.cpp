@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	{
 		fileContent = generator.GetCPPClassRepresentationOfConstructionCT(templateFile, settingFile);
 	}
-
+	
 	std::ofstream file;
 	file.open("./" + generator.GetFileName());
 	file << fileContent << "\n";

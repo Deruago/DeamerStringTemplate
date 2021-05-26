@@ -37,7 +37,7 @@ namespace DST_Setting { namespace ast { namespace listener {
 		Listener() = default;
 		~Listener() override = default;
 	public:
-		void Dispatch(const ::deamer::external::cpp::ast::Node* node) const override
+		void Dispatch(const ::deamer::external::cpp::ast::Node* node) override
 		{
 			const auto enumeratedValue = static_cast<DST_Setting::ast::Type>(node->GetType());
 			switch(enumeratedValue)
@@ -166,75 +166,75 @@ namespace DST_Setting { namespace ast { namespace listener {
 			}
 			}
 		}
-		virtual void Listen(const DST_Setting::ast::node::LEFT_BRACKETS* node) const
+		virtual void Listen(const DST_Setting::ast::node::LEFT_BRACKETS* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::RIGHT_BRACKETS* node) const
+		virtual void Listen(const DST_Setting::ast::node::RIGHT_BRACKETS* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::DOT* node) const
+		virtual void Listen(const DST_Setting::ast::node::DOT* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::ADD_ASSIGNMENT* node) const
+		virtual void Listen(const DST_Setting::ast::node::ADD_ASSIGNMENT* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::EQUAL* node) const
+		virtual void Listen(const DST_Setting::ast::node::EQUAL* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::INVALID* node) const
+		virtual void Listen(const DST_Setting::ast::node::INVALID* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::LEFT_SQUARE_BRACKET* node) const
+		virtual void Listen(const DST_Setting::ast::node::LEFT_SQUARE_BRACKET* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::RIGHT_SQUARE_BRACKET* node) const
+		virtual void Listen(const DST_Setting::ast::node::RIGHT_SQUARE_BRACKET* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::USER_INPUT* node) const
+		virtual void Listen(const DST_Setting::ast::node::USER_INPUT* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::VARNAME* node) const
+		virtual void Listen(const DST_Setting::ast::node::VARNAME* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::OTHER* node) const
+		virtual void Listen(const DST_Setting::ast::node::OTHER* node)
 		{
 		}
 
-		virtual void Listen(const DST_Setting::ast::node::program* node) const
+		virtual void Listen(const DST_Setting::ast::node::program* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::stmts* node) const
+		virtual void Listen(const DST_Setting::ast::node::stmts* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::stmt* node) const
+		virtual void Listen(const DST_Setting::ast::node::stmt* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::abstraction* node) const
+		virtual void Listen(const DST_Setting::ast::node::abstraction* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::special* node) const
+		virtual void Listen(const DST_Setting::ast::node::special* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::variable_declaration* node) const
+		virtual void Listen(const DST_Setting::ast::node::variable_declaration* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::main_assignment* node) const
+		virtual void Listen(const DST_Setting::ast::node::main_assignment* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::keyword_assignment* node) const
+		virtual void Listen(const DST_Setting::ast::node::keyword_assignment* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::scope* node) const
+		virtual void Listen(const DST_Setting::ast::node::scope* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::dst_keyword* node) const
+		virtual void Listen(const DST_Setting::ast::node::dst_keyword* node)
 		{
 		}
-		virtual void Listen(const DST_Setting::ast::node::user_keyword* node) const
+		virtual void Listen(const DST_Setting::ast::node::user_keyword* node)
 		{
 		}
 	private:
-		void DefaultAction(const ::deamer::external::cpp::ast::Node* node) const
+		void DefaultAction(const ::deamer::external::cpp::ast::Node* node)
 		{
 			for(const auto* child : node->GetNodes())
 			{
