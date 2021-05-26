@@ -77,23 +77,136 @@ namespace DST::type::ir
 			
 			return Specialize(output);
 		}
-		
+
+		void SpecializeDoubleColon(const std::string& output, std::string& specialized_output) const
+		{
+			bool lastWasNonAlpha = true;
+			for (const auto character : output)
+			{
+				if (std::isalpha(character))
+				{
+					specialized_output += character;
+					lastWasNonAlpha = false;
+				}
+				else
+				{
+					if (lastWasNonAlpha)
+					{
+						continue;
+					}
+
+					specialized_output += "::";
+					lastWasNonAlpha = true;
+				}
+			}
+
+			// If it contains text
+			// remove the tail
+			if (!specialized_output.empty() && lastWasNonAlpha)
+			{
+				specialized_output.pop_back();
+				specialized_output.pop_back();
+			}
+		}
+
+		void SpecializeUpper(const std::string& output, std::string& specialized_output) const
+		{
+			for (auto character : output)
+			{
+				specialized_output += ::toupper(character);
+			}
+		}
+
+		void SpecializeLower(const std::string& output, std::string& specialized_output) const
+		{
+			for (auto character : output)
+			{
+				specialized_output += ::tolower(character);
+			}
+		}
+
+		void SpecializeSlash(const std::string& output, std::string& specialized_output) const
+		{
+			bool lastWasNonAlpha = true;
+			for (const auto character : output)
+			{
+				if (std::isalpha(character))
+				{
+					specialized_output += character;
+					lastWasNonAlpha = false;
+				}
+				else
+				{
+					if (lastWasNonAlpha)
+					{
+						continue;
+					}
+
+					specialized_output += '/';
+					lastWasNonAlpha = true;
+				}
+			}
+
+			// If it contains text
+			// remove the tail
+			if (!specialized_output.empty() && lastWasNonAlpha)
+			{
+				specialized_output.pop_back();
+			}
+		}
+
+		void SpecializeSnake(const std::string& output, std::string& specialized_output) const
+		{
+			bool lastWasNonAlpha = true;
+			for (const auto character : output)
+			{
+				if (std::isalpha(character))
+				{
+					specialized_output += character;
+					lastWasNonAlpha = false;
+				}
+				else
+				{
+					if (lastWasNonAlpha)
+					{
+						continue;
+					}
+
+					specialized_output += '_';
+					lastWasNonAlpha = true;
+				}
+			}
+
+			// If it contains text
+			// remove the tail
+			if (!specialized_output.empty() && lastWasNonAlpha)
+			{
+				specialized_output.pop_back();
+			}
+		}
+
 		std::string Specialize(const std::string& output) const
 		{
 			std::string specialized_output;
 			if (scope == ".Lower")
 			{
-				for (auto character : output)
-				{
-					specialized_output += ::tolower(character);
-				}
+				SpecializeLower(output, specialized_output);
 			}
 			else if (scope == ".Upper")
 			{
-				for (auto character : output)
-				{
-					specialized_output += ::toupper(character);
-				}
+				SpecializeUpper(output, specialized_output);
+			}
+			else if (scope == ".DoubleColon")
+			{
+				SpecializeDoubleColon(output, specialized_output);
+			}
+			else if (scope == ".Slash")
+			{
+				SpecializeSlash(output, specialized_output);
+			}
+			else if (scope == ".Snake" || scope == ".Underscore")
+			{
+				SpecializeSnake(output, specialized_output);
 			}
 			else
 			{
