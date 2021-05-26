@@ -1,4 +1,24 @@
-# Deamer String Template (WIP)
+# Deamer String Template
+
+## Installing DST for Linux
+
+**Getting the source code**
+```bash
+git clone https://github.com/Deruago/DeamerStringTemplate
+cd DeamerStringTemplate
+```
+
+**Creating a build directory**
+```bash
+mkdir build
+cd build
+```
+
+**Building and installing DST**
+```bash
+cmake ..
+sudo cmake --build . --target install
+```
 
 ## Concept
 
@@ -20,8 +40,9 @@ namespace {{language_name}} { namespace ast { namespace {{ast_name}} {
     class {{ast_name}} : public {{language_name}} {{base_names}}
     {
     private:
+        Value* value;
     public:
-    	{{ast_name}}(Value* value) = default;
+    	{{ast_name}}(Value* value_);
     	~{{ast_name}}() override = default;
     
     public:
@@ -37,18 +58,12 @@ namespace {{language_name}} { namespace ast { namespace {{ast_name}} {
 This file is optional, it can be used to:
 
 - Make abstractions
-- Set default values
-- Set required operations
 - Specify common operations
 
 ```DST
-{{directory}} = {{language_name}}/Ast/Node/{{ast_name.PascalCase}}
-{{file_name}} = {{ast_name.PascalCase}}.h
+{{file.file_name}} = {{ast_name}}.h
 
 {{header_guard}} = {{language_name.Upper}}_AST_NODE_{{ast_name.Upper}}_H	/ abstraction
-
-{{language_name.Default}} = Language	/ default value assignment
-{{ast_name.Default}} = {{invalid}}		/ make sure this is always set
 ```
 
 **Parsing the template**:
@@ -56,28 +71,42 @@ This file is optional, it can be used to:
 This c++ code, uses DST to parse and implement the varies parameters.
 
 ```c++
-#include <DST/Parser/Parser.h>
-#include <DST/Type/Template.h>
+#include <DST/User/ConstructionGenerator.h>
 #include <string>
 
 int main()
 {
+    auto* const generator = user::ConstructionGenerator().GenerateConstructionFromPath(
+        "./template.dst",
+        "./template.setting.dst"
+    );
+    
     std::string lang_name = "Test";
     std::string ast_name = "TestNode";
     
-    auto parser = DST::parser::Parser();
-    DST::type::Template templateFile = parser.Parse("AstTemplate.cpp");
-    
-    templateFile.Write(
+    std::string output = generator->Output(
         {
-            {"language_name", lang_name},
-            {"ast_name", ast_name}
+            {"language_name", "", lang_name},
+            {"ast_name", "", ast_name}
         }
     );
+    
+    std::cout << output << std::endl;
+    
+    return 0;
 }
 ```
 
+## Using DST to generate a C++ file
 
+DST is also capable of generating C++ files, to implement the the code generation with.
 
+To generate such C++ file, first install the DST program using the "install" target of CMake.
 
+After this run DST as follows:
+```bash
+DST ./templatepath.dst ./template_settings_path.setting.dst
+```
+
+If everything was correctly executed you will see an header file. You can now use this header file for code generation.
 
