@@ -4,6 +4,10 @@
 #include <string>
 #include <iostream>
 
+/* Currently the main application of DST, is used for C++ generation.
+ * If you want to use the runtime variant, use the library instead.
+ */
+
 enum class Type
 {
 	RT,
@@ -34,10 +38,7 @@ int main(int argc, char* argv[])
 			settingFile = argv[i];
 		}
 	}
-
-	// RT has the benefit to be immediately capable of creating the full file.
-	// But RT is incapable of generating a file to generate it.
-	// CT is possible but you need to rerun the CT variant to get the complete CT variant.
+	
 	const auto type = Type::CT;
 	std::string fileContent;
 	
