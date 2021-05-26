@@ -93,8 +93,7 @@ namespace DST::type::ir
 		{
 			for (const auto& [varname, scope, value] : mapping)
 			{
-				auto* newVar = new Variable(value, "", varname);
-				CreateVariableDefinition(varname, scope, {newVar});
+				CreateVariableDefinition(varname, scope, { value });
 			}
 			
 			return GetVariableDefinition("file", ".Content")->GetValue();
