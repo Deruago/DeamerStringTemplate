@@ -16,7 +16,7 @@ function(DST_add_external_library external_library_name source_files)
 
 	add_library(${external_library_full_name} STATIC ${source_files})
 
-	target_link_libraries(${external_library_full_name} PUBLIC Deamer)
+	target_link_libraries(${external_library_full_name} PUBLIC Deamer_External)
 	target_include_directories(${external_library_full_name} PRIVATE "${DST_SOURCE_DIR}/extern" "${DST_SOURCE_DIR}/include")
 	target_compile_features(${external_library_full_name} PUBLIC cxx_std_17)
 	set_target_properties(${external_library_full_name} PROPERTIES LINKED_LANGUAGE CXX)
