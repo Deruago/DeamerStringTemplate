@@ -97,6 +97,10 @@ int main()
 }
 ```
 
+**Example repo**
+
+For more examples visit the [example repo](https://github.com/Deruago/DeamerExamples).
+
 ## Using DST to generate a C++ file
 
 DST is also capable of generating C++ files, to implement the the code generation with.
