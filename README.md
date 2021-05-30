@@ -1,8 +1,21 @@
 # Deamer String Template
 
-## Installing DST for Linux
+## Concept
+
+DST is a DSL to parse templates, you can use these templates to easily generate code. The DSL will be available via a library created using [Deamer](https://github.com/Deruago/theDeamerProject).
+
+Aside from using DST to parse at runtime, DST is also able to generate C++ classes to generate the specific files. This gives the user even more flexibility, when generating files.
+
+## Installing DST
+
+[DST](https://github.com/Deruago/DeamerStringTemplate) depends on the external library of [Deamer CC](https://github.com/Deruago/theDeamerProject), so it is required to install [Deamer External](https://github.com/Deruago/DeamerExternal). 
+
+Instructions on how to install Deamer External can be found here: https://github.com/Deruago/DeamerExternal.
+
+### Installing DST for Linux
 
 **Getting the source code**
+
 ```bash
 git clone https://github.com/Deruago/DeamerStringTemplate
 cd DeamerStringTemplate
@@ -19,12 +32,6 @@ cd build
 cmake ..
 sudo cmake --build . --target install
 ```
-
-## Concept
-
-DST is a DSL to parse templates, you can use these templates to easily generate code. The DSL will be available via a library created using [Deamer](https://github.com/Deruago/theDeamerProject).
-
-Aside from using DST to parse at runtime, DST is also able to generate C++ classes to generate the specific files. This gives the user even more flexibility, when generating files.
 
 ## Examples
 
