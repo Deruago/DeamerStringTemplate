@@ -14,6 +14,48 @@
 #include "DST_Setting/Ast/Node/RIGHT_SQUARE_BRACKET.h"
 #include "DST_Setting/Ast/Node/USER_INPUT.h"
 #include "DST_Setting/Ast/Node/VARNAME.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_5.h"
 #include "DST_Setting/Ast/Node/OTHER.h"
 
 #include "DST_Setting/Ast/Node/program.h"
@@ -27,6 +69,8 @@
 #include "DST_Setting/Ast/Node/scope.h"
 #include "DST_Setting/Ast/Node/dst_keyword.h"
 #include "DST_Setting/Ast/Node/user_keyword.h"
+#include "DST_Setting/Ast/Node/alternative_field_nt_1.h"
+#include "DST_Setting/Ast/Node/alternative_field_nt_2.h"
 
 namespace DST_Setting { namespace ast { namespace listener { 
 
@@ -90,6 +134,216 @@ namespace DST_Setting { namespace ast { namespace listener {
 			case DST_Setting::ast::Type::VARNAME:
 			{
 				Listen(static_cast<const DST_Setting::ast::node::VARNAME*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_1_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_1_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_1_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_1_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_1_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_1_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_1_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_1_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_1_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_1_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_1_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_1_5*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_5*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_5*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_5*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_5*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_5*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_0:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_0*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_1*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_2*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_3:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_3*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_4:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_4*>(node));
+				break;
+			}
+			case DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_5:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_5*>(node));
 				break;
 			}
 			case DST_Setting::ast::Type::OTHER:
@@ -164,6 +418,18 @@ namespace DST_Setting { namespace ast { namespace listener {
 				DefaultAction(node);
 				break;
 			}
+			case DST_Setting::ast::Type::alternative_field_nt_1:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::alternative_field_nt_1*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DST_Setting::ast::Type::alternative_field_nt_2:
+			{
+				Listen(static_cast<const DST_Setting::ast::node::alternative_field_nt_2*>(node));
+				DefaultAction(node);
+				break;
+			}
 			}
 		}
 		virtual void Listen(const DST_Setting::ast::node::LEFT_BRACKETS* node)
@@ -194,6 +460,132 @@ namespace DST_Setting { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DST_Setting::ast::node::VARNAME* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_1_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_1_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_1_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_1_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_1_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_1_5* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_0_5* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_1_5* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_2_5* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_3_5* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_4_5* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_0* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_2* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_3* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_4* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::ALTERNATE_FIELD_2_5_5* node)
 		{
 		}
 		virtual void Listen(const DST_Setting::ast::node::OTHER* node)
@@ -231,6 +623,12 @@ namespace DST_Setting { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DST_Setting::ast::node::user_keyword* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::alternative_field_nt_1* node)
+		{
+		}
+		virtual void Listen(const DST_Setting::ast::node::alternative_field_nt_2* node)
 		{
 		}
 	private:

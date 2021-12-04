@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -63,7 +63,49 @@ extern int DST_Settingdebug;
     LEFT_SQUARE_BRACKET = 264,     /* LEFT_SQUARE_BRACKET  */
     RIGHT_SQUARE_BRACKET = 265,    /* RIGHT_SQUARE_BRACKET  */
     USER_INPUT = 266,              /* USER_INPUT  */
-    VARNAME = 267                  /* VARNAME  */
+    VARNAME = 267,                 /* VARNAME  */
+    ALTERNATE_FIELD_1_0 = 268,     /* ALTERNATE_FIELD_1_0  */
+    ALTERNATE_FIELD_1_1 = 269,     /* ALTERNATE_FIELD_1_1  */
+    ALTERNATE_FIELD_1_2 = 270,     /* ALTERNATE_FIELD_1_2  */
+    ALTERNATE_FIELD_1_3 = 271,     /* ALTERNATE_FIELD_1_3  */
+    ALTERNATE_FIELD_1_4 = 272,     /* ALTERNATE_FIELD_1_4  */
+    ALTERNATE_FIELD_1_5 = 273,     /* ALTERNATE_FIELD_1_5  */
+    ALTERNATE_FIELD_2_0_0 = 274,   /* ALTERNATE_FIELD_2_0_0  */
+    ALTERNATE_FIELD_2_0_1 = 275,   /* ALTERNATE_FIELD_2_0_1  */
+    ALTERNATE_FIELD_2_0_2 = 276,   /* ALTERNATE_FIELD_2_0_2  */
+    ALTERNATE_FIELD_2_0_3 = 277,   /* ALTERNATE_FIELD_2_0_3  */
+    ALTERNATE_FIELD_2_0_4 = 278,   /* ALTERNATE_FIELD_2_0_4  */
+    ALTERNATE_FIELD_2_0_5 = 279,   /* ALTERNATE_FIELD_2_0_5  */
+    ALTERNATE_FIELD_2_1_0 = 280,   /* ALTERNATE_FIELD_2_1_0  */
+    ALTERNATE_FIELD_2_1_1 = 281,   /* ALTERNATE_FIELD_2_1_1  */
+    ALTERNATE_FIELD_2_1_2 = 282,   /* ALTERNATE_FIELD_2_1_2  */
+    ALTERNATE_FIELD_2_1_3 = 283,   /* ALTERNATE_FIELD_2_1_3  */
+    ALTERNATE_FIELD_2_1_4 = 284,   /* ALTERNATE_FIELD_2_1_4  */
+    ALTERNATE_FIELD_2_1_5 = 285,   /* ALTERNATE_FIELD_2_1_5  */
+    ALTERNATE_FIELD_2_2_0 = 286,   /* ALTERNATE_FIELD_2_2_0  */
+    ALTERNATE_FIELD_2_2_1 = 287,   /* ALTERNATE_FIELD_2_2_1  */
+    ALTERNATE_FIELD_2_2_2 = 288,   /* ALTERNATE_FIELD_2_2_2  */
+    ALTERNATE_FIELD_2_2_3 = 289,   /* ALTERNATE_FIELD_2_2_3  */
+    ALTERNATE_FIELD_2_2_4 = 290,   /* ALTERNATE_FIELD_2_2_4  */
+    ALTERNATE_FIELD_2_2_5 = 291,   /* ALTERNATE_FIELD_2_2_5  */
+    ALTERNATE_FIELD_2_3_0 = 292,   /* ALTERNATE_FIELD_2_3_0  */
+    ALTERNATE_FIELD_2_3_1 = 293,   /* ALTERNATE_FIELD_2_3_1  */
+    ALTERNATE_FIELD_2_3_2 = 294,   /* ALTERNATE_FIELD_2_3_2  */
+    ALTERNATE_FIELD_2_3_3 = 295,   /* ALTERNATE_FIELD_2_3_3  */
+    ALTERNATE_FIELD_2_3_4 = 296,   /* ALTERNATE_FIELD_2_3_4  */
+    ALTERNATE_FIELD_2_3_5 = 297,   /* ALTERNATE_FIELD_2_3_5  */
+    ALTERNATE_FIELD_2_4_0 = 298,   /* ALTERNATE_FIELD_2_4_0  */
+    ALTERNATE_FIELD_2_4_1 = 299,   /* ALTERNATE_FIELD_2_4_1  */
+    ALTERNATE_FIELD_2_4_2 = 300,   /* ALTERNATE_FIELD_2_4_2  */
+    ALTERNATE_FIELD_2_4_3 = 301,   /* ALTERNATE_FIELD_2_4_3  */
+    ALTERNATE_FIELD_2_4_4 = 302,   /* ALTERNATE_FIELD_2_4_4  */
+    ALTERNATE_FIELD_2_4_5 = 303,   /* ALTERNATE_FIELD_2_4_5  */
+    ALTERNATE_FIELD_2_5_0 = 304,   /* ALTERNATE_FIELD_2_5_0  */
+    ALTERNATE_FIELD_2_5_1 = 305,   /* ALTERNATE_FIELD_2_5_1  */
+    ALTERNATE_FIELD_2_5_2 = 306,   /* ALTERNATE_FIELD_2_5_2  */
+    ALTERNATE_FIELD_2_5_3 = 307,   /* ALTERNATE_FIELD_2_5_3  */
+    ALTERNATE_FIELD_2_5_4 = 308,   /* ALTERNATE_FIELD_2_5_4  */
+    ALTERNATE_FIELD_2_5_5 = 309    /* ALTERNATE_FIELD_2_5_5  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -72,7 +114,7 @@ extern int DST_Settingdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 75 "./DST_Setting_parser.y"
+#line 163 "./DST_Setting_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DST_Setting::ast::node::LEFT_BRACKETS* DST_Setting_LEFT_BRACKETS;
@@ -85,6 +127,48 @@ union YYSTYPE
 	::DST_Setting::ast::node::RIGHT_SQUARE_BRACKET* DST_Setting_RIGHT_SQUARE_BRACKET;
 	::DST_Setting::ast::node::USER_INPUT* DST_Setting_USER_INPUT;
 	::DST_Setting::ast::node::VARNAME* DST_Setting_VARNAME;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_1_0* DST_Setting_ALTERNATE_FIELD_1_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_1_1* DST_Setting_ALTERNATE_FIELD_1_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_1_2* DST_Setting_ALTERNATE_FIELD_1_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_1_3* DST_Setting_ALTERNATE_FIELD_1_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_1_4* DST_Setting_ALTERNATE_FIELD_1_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_1_5* DST_Setting_ALTERNATE_FIELD_1_5;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_0_0* DST_Setting_ALTERNATE_FIELD_2_0_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_0_1* DST_Setting_ALTERNATE_FIELD_2_0_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_0_2* DST_Setting_ALTERNATE_FIELD_2_0_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_0_3* DST_Setting_ALTERNATE_FIELD_2_0_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_0_4* DST_Setting_ALTERNATE_FIELD_2_0_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_0_5* DST_Setting_ALTERNATE_FIELD_2_0_5;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_1_0* DST_Setting_ALTERNATE_FIELD_2_1_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_1_1* DST_Setting_ALTERNATE_FIELD_2_1_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_1_2* DST_Setting_ALTERNATE_FIELD_2_1_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_1_3* DST_Setting_ALTERNATE_FIELD_2_1_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_1_4* DST_Setting_ALTERNATE_FIELD_2_1_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_1_5* DST_Setting_ALTERNATE_FIELD_2_1_5;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_2_0* DST_Setting_ALTERNATE_FIELD_2_2_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_2_1* DST_Setting_ALTERNATE_FIELD_2_2_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_2_2* DST_Setting_ALTERNATE_FIELD_2_2_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_2_3* DST_Setting_ALTERNATE_FIELD_2_2_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_2_4* DST_Setting_ALTERNATE_FIELD_2_2_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_2_5* DST_Setting_ALTERNATE_FIELD_2_2_5;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_3_0* DST_Setting_ALTERNATE_FIELD_2_3_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_3_1* DST_Setting_ALTERNATE_FIELD_2_3_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_3_2* DST_Setting_ALTERNATE_FIELD_2_3_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_3_3* DST_Setting_ALTERNATE_FIELD_2_3_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_3_4* DST_Setting_ALTERNATE_FIELD_2_3_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_3_5* DST_Setting_ALTERNATE_FIELD_2_3_5;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_4_0* DST_Setting_ALTERNATE_FIELD_2_4_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_4_1* DST_Setting_ALTERNATE_FIELD_2_4_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_4_2* DST_Setting_ALTERNATE_FIELD_2_4_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_4_3* DST_Setting_ALTERNATE_FIELD_2_4_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_4_4* DST_Setting_ALTERNATE_FIELD_2_4_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_4_5* DST_Setting_ALTERNATE_FIELD_2_4_5;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_5_0* DST_Setting_ALTERNATE_FIELD_2_5_0;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_5_1* DST_Setting_ALTERNATE_FIELD_2_5_1;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_5_2* DST_Setting_ALTERNATE_FIELD_2_5_2;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_5_3* DST_Setting_ALTERNATE_FIELD_2_5_3;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_5_4* DST_Setting_ALTERNATE_FIELD_2_5_4;
+	::DST_Setting::ast::node::ALTERNATE_FIELD_2_5_5* DST_Setting_ALTERNATE_FIELD_2_5_5;
 	::DST_Setting::ast::node::OTHER* DST_Setting_OTHER;
 	::DST_Setting::ast::node::program* DST_Setting_program;
 	::DST_Setting::ast::node::stmts* DST_Setting_stmts;
@@ -97,8 +181,10 @@ union YYSTYPE
 	::DST_Setting::ast::node::scope* DST_Setting_scope;
 	::DST_Setting::ast::node::dst_keyword* DST_Setting_dst_keyword;
 	::DST_Setting::ast::node::user_keyword* DST_Setting_user_keyword;
+	::DST_Setting::ast::node::alternative_field_nt_1* DST_Setting_alternative_field_nt_1;
+	::DST_Setting::ast::node::alternative_field_nt_2* DST_Setting_alternative_field_nt_2;
 
-#line 102 "DST_Setting_parser.tab.h"
+#line 188 "DST_Setting_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -109,6 +195,8 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE DST_Settinglval;
 
+
 int DST_Settingparse (void);
+
 
 #endif /* !YY_DST_SETTING_DST_SETTING_PARSER_TAB_H_INCLUDED  */

@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -46,10 +46,10 @@
    USER NAME SPACE" below.  */
 
 /* Identify Bison output, and Bison version.  */
-#define YYBISON 30705
+#define YYBISON 30802
 
 /* Bison version string.  */
-#define YYBISON_VERSION "3.7.5"
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -97,6 +97,48 @@
 #include "DST_Setting/Ast/Node/RIGHT_SQUARE_BRACKET.h"
 #include "DST_Setting/Ast/Node/USER_INPUT.h"
 #include "DST_Setting/Ast/Node/VARNAME.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_1_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_0_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_1_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_2_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_3_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_4_5.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_0.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_1.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_2.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_3.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_4.h"
+#include "DST_Setting/Ast/Node/ALTERNATE_FIELD_2_5_5.h"
 #include "DST_Setting/Ast/Node/OTHER.h"
 
 #include "DST_Setting/Ast/Node/program.h"
@@ -110,6 +152,8 @@
 #include "DST_Setting/Ast/Node/scope.h"
 #include "DST_Setting/Ast/Node/dst_keyword.h"
 #include "DST_Setting/Ast/Node/user_keyword.h"
+#include "DST_Setting/Ast/Node/alternative_field_nt_1.h"
+#include "DST_Setting/Ast/Node/alternative_field_nt_2.h"
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DST_Settingnerrs
@@ -123,7 +167,7 @@ void DST_Settingerror(const char* s);
 int DST_Settinglex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
-#line 127 "DST_Setting_parser.tab.c"
+#line 171 "DST_Setting_parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -164,18 +208,62 @@ enum yysymbol_kind_t
   YYSYMBOL_RIGHT_SQUARE_BRACKET = 10,      /* RIGHT_SQUARE_BRACKET  */
   YYSYMBOL_USER_INPUT = 11,                /* USER_INPUT  */
   YYSYMBOL_VARNAME = 12,                   /* VARNAME  */
-  YYSYMBOL_YYACCEPT = 13,                  /* $accept  */
-  YYSYMBOL_program = 14,                   /* program  */
-  YYSYMBOL_stmts = 15,                     /* stmts  */
-  YYSYMBOL_stmt = 16,                      /* stmt  */
-  YYSYMBOL_abstraction = 17,               /* abstraction  */
-  YYSYMBOL_special = 18,                   /* special  */
-  YYSYMBOL_variable_declaration = 19,      /* variable_declaration  */
-  YYSYMBOL_main_assignment = 20,           /* main_assignment  */
-  YYSYMBOL_keyword_assignment = 21,        /* keyword_assignment  */
-  YYSYMBOL_scope = 22,                     /* scope  */
-  YYSYMBOL_dst_keyword = 23,               /* dst_keyword  */
-  YYSYMBOL_user_keyword = 24               /* user_keyword  */
+  YYSYMBOL_ALTERNATE_FIELD_1_0 = 13,       /* ALTERNATE_FIELD_1_0  */
+  YYSYMBOL_ALTERNATE_FIELD_1_1 = 14,       /* ALTERNATE_FIELD_1_1  */
+  YYSYMBOL_ALTERNATE_FIELD_1_2 = 15,       /* ALTERNATE_FIELD_1_2  */
+  YYSYMBOL_ALTERNATE_FIELD_1_3 = 16,       /* ALTERNATE_FIELD_1_3  */
+  YYSYMBOL_ALTERNATE_FIELD_1_4 = 17,       /* ALTERNATE_FIELD_1_4  */
+  YYSYMBOL_ALTERNATE_FIELD_1_5 = 18,       /* ALTERNATE_FIELD_1_5  */
+  YYSYMBOL_ALTERNATE_FIELD_2_0_0 = 19,     /* ALTERNATE_FIELD_2_0_0  */
+  YYSYMBOL_ALTERNATE_FIELD_2_0_1 = 20,     /* ALTERNATE_FIELD_2_0_1  */
+  YYSYMBOL_ALTERNATE_FIELD_2_0_2 = 21,     /* ALTERNATE_FIELD_2_0_2  */
+  YYSYMBOL_ALTERNATE_FIELD_2_0_3 = 22,     /* ALTERNATE_FIELD_2_0_3  */
+  YYSYMBOL_ALTERNATE_FIELD_2_0_4 = 23,     /* ALTERNATE_FIELD_2_0_4  */
+  YYSYMBOL_ALTERNATE_FIELD_2_0_5 = 24,     /* ALTERNATE_FIELD_2_0_5  */
+  YYSYMBOL_ALTERNATE_FIELD_2_1_0 = 25,     /* ALTERNATE_FIELD_2_1_0  */
+  YYSYMBOL_ALTERNATE_FIELD_2_1_1 = 26,     /* ALTERNATE_FIELD_2_1_1  */
+  YYSYMBOL_ALTERNATE_FIELD_2_1_2 = 27,     /* ALTERNATE_FIELD_2_1_2  */
+  YYSYMBOL_ALTERNATE_FIELD_2_1_3 = 28,     /* ALTERNATE_FIELD_2_1_3  */
+  YYSYMBOL_ALTERNATE_FIELD_2_1_4 = 29,     /* ALTERNATE_FIELD_2_1_4  */
+  YYSYMBOL_ALTERNATE_FIELD_2_1_5 = 30,     /* ALTERNATE_FIELD_2_1_5  */
+  YYSYMBOL_ALTERNATE_FIELD_2_2_0 = 31,     /* ALTERNATE_FIELD_2_2_0  */
+  YYSYMBOL_ALTERNATE_FIELD_2_2_1 = 32,     /* ALTERNATE_FIELD_2_2_1  */
+  YYSYMBOL_ALTERNATE_FIELD_2_2_2 = 33,     /* ALTERNATE_FIELD_2_2_2  */
+  YYSYMBOL_ALTERNATE_FIELD_2_2_3 = 34,     /* ALTERNATE_FIELD_2_2_3  */
+  YYSYMBOL_ALTERNATE_FIELD_2_2_4 = 35,     /* ALTERNATE_FIELD_2_2_4  */
+  YYSYMBOL_ALTERNATE_FIELD_2_2_5 = 36,     /* ALTERNATE_FIELD_2_2_5  */
+  YYSYMBOL_ALTERNATE_FIELD_2_3_0 = 37,     /* ALTERNATE_FIELD_2_3_0  */
+  YYSYMBOL_ALTERNATE_FIELD_2_3_1 = 38,     /* ALTERNATE_FIELD_2_3_1  */
+  YYSYMBOL_ALTERNATE_FIELD_2_3_2 = 39,     /* ALTERNATE_FIELD_2_3_2  */
+  YYSYMBOL_ALTERNATE_FIELD_2_3_3 = 40,     /* ALTERNATE_FIELD_2_3_3  */
+  YYSYMBOL_ALTERNATE_FIELD_2_3_4 = 41,     /* ALTERNATE_FIELD_2_3_4  */
+  YYSYMBOL_ALTERNATE_FIELD_2_3_5 = 42,     /* ALTERNATE_FIELD_2_3_5  */
+  YYSYMBOL_ALTERNATE_FIELD_2_4_0 = 43,     /* ALTERNATE_FIELD_2_4_0  */
+  YYSYMBOL_ALTERNATE_FIELD_2_4_1 = 44,     /* ALTERNATE_FIELD_2_4_1  */
+  YYSYMBOL_ALTERNATE_FIELD_2_4_2 = 45,     /* ALTERNATE_FIELD_2_4_2  */
+  YYSYMBOL_ALTERNATE_FIELD_2_4_3 = 46,     /* ALTERNATE_FIELD_2_4_3  */
+  YYSYMBOL_ALTERNATE_FIELD_2_4_4 = 47,     /* ALTERNATE_FIELD_2_4_4  */
+  YYSYMBOL_ALTERNATE_FIELD_2_4_5 = 48,     /* ALTERNATE_FIELD_2_4_5  */
+  YYSYMBOL_ALTERNATE_FIELD_2_5_0 = 49,     /* ALTERNATE_FIELD_2_5_0  */
+  YYSYMBOL_ALTERNATE_FIELD_2_5_1 = 50,     /* ALTERNATE_FIELD_2_5_1  */
+  YYSYMBOL_ALTERNATE_FIELD_2_5_2 = 51,     /* ALTERNATE_FIELD_2_5_2  */
+  YYSYMBOL_ALTERNATE_FIELD_2_5_3 = 52,     /* ALTERNATE_FIELD_2_5_3  */
+  YYSYMBOL_ALTERNATE_FIELD_2_5_4 = 53,     /* ALTERNATE_FIELD_2_5_4  */
+  YYSYMBOL_ALTERNATE_FIELD_2_5_5 = 54,     /* ALTERNATE_FIELD_2_5_5  */
+  YYSYMBOL_YYACCEPT = 55,                  /* $accept  */
+  YYSYMBOL_program = 56,                   /* program  */
+  YYSYMBOL_stmts = 57,                     /* stmts  */
+  YYSYMBOL_stmt = 58,                      /* stmt  */
+  YYSYMBOL_abstraction = 59,               /* abstraction  */
+  YYSYMBOL_special = 60,                   /* special  */
+  YYSYMBOL_variable_declaration = 61,      /* variable_declaration  */
+  YYSYMBOL_main_assignment = 62,           /* main_assignment  */
+  YYSYMBOL_keyword_assignment = 63,        /* keyword_assignment  */
+  YYSYMBOL_scope = 64,                     /* scope  */
+  YYSYMBOL_dst_keyword = 65,               /* dst_keyword  */
+  YYSYMBOL_user_keyword = 66,              /* user_keyword  */
+  YYSYMBOL_alternative_field_nt_1 = 67,    /* alternative_field_nt_1  */
+  YYSYMBOL_alternative_field_nt_2 = 68     /* alternative_field_nt_2  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -333,12 +421,18 @@ typedef int yy_state_fast_t;
 # define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -497,19 +591,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  9
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   16
+#define YYLAST   57
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  13
+#define YYNTOKENS  55
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  12
+#define YYNNTS  14
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  17
+#define YYNRULES  61
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  27
+#define YYNSTATES  71
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   267
+#define YYMAXUTOK   309
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -549,15 +643,24 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+static const yytype_int16 yyrline[] =
 {
-       0,   104,   104,   112,   116,   123,   127,   134,   141,   148,
-     152,   159,   166,   170,   177,   181,   188,   195
+       0,   236,   236,   244,   248,   255,   259,   266,   273,   280,
+     284,   291,   295,   299,   306,   310,   317,   321,   328,   335,
+     342,   346,   350,   354,   358,   362,   369,   373,   377,   381,
+     385,   389,   393,   397,   401,   405,   409,   413,   417,   421,
+     425,   429,   433,   437,   441,   445,   449,   453,   457,   461,
+     465,   469,   473,   477,   481,   485,   489,   493,   497,   501,
+     505,   509
 };
 #endif
 
@@ -576,9 +679,29 @@ static const char *const yytname[] =
   "\"end of file\"", "error", "\"invalid token\"", "LEFT_BRACKETS",
   "RIGHT_BRACKETS", "DOT", "ADD_ASSIGNMENT", "EQUAL", "INVALID",
   "LEFT_SQUARE_BRACKET", "RIGHT_SQUARE_BRACKET", "USER_INPUT", "VARNAME",
-  "$accept", "program", "stmts", "stmt", "abstraction", "special",
-  "variable_declaration", "main_assignment", "keyword_assignment", "scope",
-  "dst_keyword", "user_keyword", YY_NULLPTR
+  "ALTERNATE_FIELD_1_0", "ALTERNATE_FIELD_1_1", "ALTERNATE_FIELD_1_2",
+  "ALTERNATE_FIELD_1_3", "ALTERNATE_FIELD_1_4", "ALTERNATE_FIELD_1_5",
+  "ALTERNATE_FIELD_2_0_0", "ALTERNATE_FIELD_2_0_1",
+  "ALTERNATE_FIELD_2_0_2", "ALTERNATE_FIELD_2_0_3",
+  "ALTERNATE_FIELD_2_0_4", "ALTERNATE_FIELD_2_0_5",
+  "ALTERNATE_FIELD_2_1_0", "ALTERNATE_FIELD_2_1_1",
+  "ALTERNATE_FIELD_2_1_2", "ALTERNATE_FIELD_2_1_3",
+  "ALTERNATE_FIELD_2_1_4", "ALTERNATE_FIELD_2_1_5",
+  "ALTERNATE_FIELD_2_2_0", "ALTERNATE_FIELD_2_2_1",
+  "ALTERNATE_FIELD_2_2_2", "ALTERNATE_FIELD_2_2_3",
+  "ALTERNATE_FIELD_2_2_4", "ALTERNATE_FIELD_2_2_5",
+  "ALTERNATE_FIELD_2_3_0", "ALTERNATE_FIELD_2_3_1",
+  "ALTERNATE_FIELD_2_3_2", "ALTERNATE_FIELD_2_3_3",
+  "ALTERNATE_FIELD_2_3_4", "ALTERNATE_FIELD_2_3_5",
+  "ALTERNATE_FIELD_2_4_0", "ALTERNATE_FIELD_2_4_1",
+  "ALTERNATE_FIELD_2_4_2", "ALTERNATE_FIELD_2_4_3",
+  "ALTERNATE_FIELD_2_4_4", "ALTERNATE_FIELD_2_4_5",
+  "ALTERNATE_FIELD_2_5_0", "ALTERNATE_FIELD_2_5_1",
+  "ALTERNATE_FIELD_2_5_2", "ALTERNATE_FIELD_2_5_3",
+  "ALTERNATE_FIELD_2_5_4", "ALTERNATE_FIELD_2_5_5", "$accept", "program",
+  "stmts", "stmt", "abstraction", "special", "variable_declaration",
+  "main_assignment", "keyword_assignment", "scope", "dst_keyword",
+  "user_keyword", "alternative_field_nt_1", "alternative_field_nt_2", YY_NULLPTR
 };
 
 static const char *
@@ -588,17 +711,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267
-};
-#endif
-
-#define YYPACT_NINF (-12)
+#define YYPACT_NINF (-10)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -608,75 +721,108 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,    -6,     7,   -12,    -1,   -12,   -12,     1,     0,   -12,
-     -12,    -8,   -12,    -3,     6,   -12,     2,   -12,   -12,   -12,
-     -12,   -12,     8,   -12,     5,   -12,   -12
+      -1,    37,     4,   -10,    -1,   -10,   -10,    44,    43,   -10,
+     -10,    -8,   -10,    38,    48,   -10,    41,   -10,   -10,   -10,
+     -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,
+     -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,
+     -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,
+     -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,
+     -10,   -10,   -10,   -10,   -10,   -10,    49,   -10,    45,   -10,
+     -10
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
        4,     0,     0,     2,     4,     5,     6,     0,     0,     1,
-       3,     0,    10,     0,     0,    16,     0,    11,     7,     8,
-      12,    13,    15,     9,     0,    14,    17
+       3,     0,    10,     0,     0,    18,     0,    11,    20,    21,
+      22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
+      42,    43,    44,    45,    46,    47,    48,    49,    50,    51,
+      52,    53,    54,    55,    56,    57,    58,    59,    60,    61,
+       7,     8,    14,    15,    12,    13,    17,     9,     0,    16,
+      19
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -12,   -12,    12,   -12,   -12,   -12,   -12,   -12,   -12,   -11,
-     -12,   -12
+     -10,   -10,    52,   -10,   -10,   -10,   -10,   -10,   -10,    -9,
+     -10,   -10,   -10,   -10
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,     4,     5,     6,     7,    18,    19,    14,
-      20,    21
+       0,     2,     3,     4,     5,     6,     7,    60,    61,    14,
+      62,    63,    64,    65
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      15,    16,     1,    17,    12,    13,     8,     9,    11,    22,
-      23,    25,     0,    13,    24,    26,    10
+      15,    16,     1,    17,     9,    18,    19,    20,    21,    22,
+      23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
+      43,    44,    45,    46,    47,    48,    49,    50,    51,    52,
+      53,    54,    55,    56,    57,    58,    59,    12,    13,     8,
+      66,    11,    67,    68,    13,    70,    10,    69
 };
 
 static const yytype_int8 yycheck[] =
 {
-       8,     9,     3,    11,     4,     5,    12,     0,     7,    12,
-       4,    22,    -1,     5,    12,    10,     4
+       8,     9,     3,    11,     0,    13,    14,    15,    16,    17,
+      18,    19,    20,    21,    22,    23,    24,    25,    26,    27,
+      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
+      48,    49,    50,    51,    52,    53,    54,     4,     5,    12,
+      12,     7,     4,    12,     5,    10,     4,    66
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    14,    15,    16,    17,    18,    19,    12,     0,
-      15,     7,     4,     5,    22,     8,     9,    11,    20,    21,
-      23,    24,    12,     4,    12,    22,    10
+       0,     3,    56,    57,    58,    59,    60,    61,    12,     0,
+      57,     7,     4,     5,    64,     8,     9,    11,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      62,    63,    65,    66,    67,    68,    12,     4,    12,    64,
+      10
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    13,    14,    15,    15,    16,    16,    17,    18,    19,
-      19,    20,    21,    21,    22,    22,    23,    24
+       0,    55,    56,    57,    57,    58,    58,    59,    60,    61,
+      61,    62,    62,    62,    63,    63,    64,    64,    65,    66,
+      67,    67,    67,    67,    67,    67,    68,    68,    68,    68,
+      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
+      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
+      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
+      68,    68
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     0,     1,     1,     3,     3,     4,
-       3,     1,     1,     1,     3,     2,     1,     3
+       3,     1,     1,     1,     1,     1,     3,     2,     1,     3,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1
 };
 
 
@@ -688,6 +834,7 @@ enum { YYENOMEM = -2 };
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -728,10 +875,7 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -758,10 +902,6 @@ yy_symbol_value_print (FILE *yyo,
   YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
@@ -946,6 +1086,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -971,7 +1112,7 @@ yysetstate:
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -999,7 +1140,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1010,7 +1151,7 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
@@ -1031,6 +1172,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1144,152 +1286,548 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: stmts  */
-#line 104 "./DST_Setting_parser.y"
+#line 236 "./DST_Setting_parser.y"
               {
 		auto* const newNode = new DST_Setting::ast::node::program({::DST_Setting::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_stmts) });
 		(yyval.DST_Setting_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1154 "DST_Setting_parser.tab.c"
+#line 1296 "DST_Setting_parser.tab.c"
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 112 "./DST_Setting_parser.y"
+#line 244 "./DST_Setting_parser.y"
                    {
 		auto* const newNode = new DST_Setting::ast::node::stmts({::DST_Setting::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DST_Setting_stmt), (yyvsp[0].DST_Setting_stmts) });
 		(yyval.DST_Setting_stmts) = newNode;
 	}
-#line 1163 "DST_Setting_parser.tab.c"
+#line 1305 "DST_Setting_parser.tab.c"
     break;
 
   case 4: /* stmts: %empty  */
-#line 116 "./DST_Setting_parser.y"
+#line 248 "./DST_Setting_parser.y"
           {
 		auto* const newNode = new DST_Setting::ast::node::stmts({::DST_Setting::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		(yyval.DST_Setting_stmts) = newNode;
 	}
-#line 1172 "DST_Setting_parser.tab.c"
+#line 1314 "DST_Setting_parser.tab.c"
     break;
 
   case 5: /* stmt: abstraction  */
-#line 123 "./DST_Setting_parser.y"
+#line 255 "./DST_Setting_parser.y"
                     {
 		auto* const newNode = new DST_Setting::ast::node::stmt({::DST_Setting::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_abstraction) });
 		(yyval.DST_Setting_stmt) = newNode;
 	}
-#line 1181 "DST_Setting_parser.tab.c"
+#line 1323 "DST_Setting_parser.tab.c"
     break;
 
   case 6: /* stmt: special  */
-#line 127 "./DST_Setting_parser.y"
+#line 259 "./DST_Setting_parser.y"
                   {
 		auto* const newNode = new DST_Setting::ast::node::stmt({::DST_Setting::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_special) });
 		(yyval.DST_Setting_stmt) = newNode;
 	}
-#line 1190 "DST_Setting_parser.tab.c"
+#line 1332 "DST_Setting_parser.tab.c"
     break;
 
   case 7: /* abstraction: variable_declaration EQUAL main_assignment  */
-#line 134 "./DST_Setting_parser.y"
+#line 266 "./DST_Setting_parser.y"
                                                    {
 		auto* const newNode = new DST_Setting::ast::node::abstraction({::DST_Setting::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DST_Setting_variable_declaration), new DST_Setting::ast::node::EQUAL({::DST_Setting::ast::Type::EQUAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DST_Setting_main_assignment) });
 		(yyval.DST_Setting_abstraction) = newNode;
 	}
-#line 1199 "DST_Setting_parser.tab.c"
+#line 1341 "DST_Setting_parser.tab.c"
     break;
 
   case 8: /* special: variable_declaration EQUAL keyword_assignment  */
-#line 141 "./DST_Setting_parser.y"
+#line 273 "./DST_Setting_parser.y"
                                                       {
 		auto* const newNode = new DST_Setting::ast::node::special({::DST_Setting::ast::Type::special, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DST_Setting_variable_declaration), new DST_Setting::ast::node::EQUAL({::DST_Setting::ast::Type::EQUAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DST_Setting_keyword_assignment) });
 		(yyval.DST_Setting_special) = newNode;
 	}
-#line 1208 "DST_Setting_parser.tab.c"
+#line 1350 "DST_Setting_parser.tab.c"
     break;
 
   case 9: /* variable_declaration: LEFT_BRACKETS VARNAME scope RIGHT_BRACKETS  */
-#line 148 "./DST_Setting_parser.y"
+#line 280 "./DST_Setting_parser.y"
                                                    {
 		auto* const newNode = new DST_Setting::ast::node::variable_declaration({::DST_Setting::ast::Type::variable_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::LEFT_BRACKETS({::DST_Setting::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-3].Terminal)}), new DST_Setting::ast::node::VARNAME({::DST_Setting::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), (yyvsp[-1].DST_Setting_scope), new DST_Setting::ast::node::RIGHT_BRACKETS({::DST_Setting::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Setting_variable_declaration) = newNode;
 	}
-#line 1217 "DST_Setting_parser.tab.c"
+#line 1359 "DST_Setting_parser.tab.c"
     break;
 
   case 10: /* variable_declaration: LEFT_BRACKETS VARNAME RIGHT_BRACKETS  */
-#line 152 "./DST_Setting_parser.y"
+#line 284 "./DST_Setting_parser.y"
                                                {
 		auto* const newNode = new DST_Setting::ast::node::variable_declaration({::DST_Setting::ast::Type::variable_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::LEFT_BRACKETS({::DST_Setting::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DST_Setting::ast::node::VARNAME({::DST_Setting::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DST_Setting::ast::node::RIGHT_BRACKETS({::DST_Setting::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Setting_variable_declaration) = newNode;
 	}
-#line 1226 "DST_Setting_parser.tab.c"
+#line 1368 "DST_Setting_parser.tab.c"
     break;
 
   case 11: /* main_assignment: USER_INPUT  */
-#line 159 "./DST_Setting_parser.y"
+#line 291 "./DST_Setting_parser.y"
                    {
 		auto* const newNode = new DST_Setting::ast::node::main_assignment({::DST_Setting::ast::Type::main_assignment, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::USER_INPUT({::DST_Setting::ast::Type::USER_INPUT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Setting_main_assignment) = newNode;
 	}
-#line 1235 "DST_Setting_parser.tab.c"
+#line 1377 "DST_Setting_parser.tab.c"
     break;
 
-  case 12: /* keyword_assignment: dst_keyword  */
-#line 166 "./DST_Setting_parser.y"
+  case 12: /* main_assignment: alternative_field_nt_1  */
+#line 295 "./DST_Setting_parser.y"
+                                 {
+		auto* const newNode = new DST_Setting::ast::node::main_assignment({::DST_Setting::ast::Type::main_assignment, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_alternative_field_nt_1) });
+		(yyval.DST_Setting_main_assignment) = newNode;
+	}
+#line 1386 "DST_Setting_parser.tab.c"
+    break;
+
+  case 13: /* main_assignment: alternative_field_nt_2  */
+#line 299 "./DST_Setting_parser.y"
+                                 {
+		auto* const newNode = new DST_Setting::ast::node::main_assignment({::DST_Setting::ast::Type::main_assignment, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_alternative_field_nt_2) });
+		(yyval.DST_Setting_main_assignment) = newNode;
+	}
+#line 1395 "DST_Setting_parser.tab.c"
+    break;
+
+  case 14: /* keyword_assignment: dst_keyword  */
+#line 306 "./DST_Setting_parser.y"
                     {
 		auto* const newNode = new DST_Setting::ast::node::keyword_assignment({::DST_Setting::ast::Type::keyword_assignment, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_dst_keyword) });
 		(yyval.DST_Setting_keyword_assignment) = newNode;
 	}
-#line 1244 "DST_Setting_parser.tab.c"
+#line 1404 "DST_Setting_parser.tab.c"
     break;
 
-  case 13: /* keyword_assignment: user_keyword  */
-#line 170 "./DST_Setting_parser.y"
+  case 15: /* keyword_assignment: user_keyword  */
+#line 310 "./DST_Setting_parser.y"
                        {
 		auto* const newNode = new DST_Setting::ast::node::keyword_assignment({::DST_Setting::ast::Type::keyword_assignment, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Setting_user_keyword) });
 		(yyval.DST_Setting_keyword_assignment) = newNode;
 	}
-#line 1253 "DST_Setting_parser.tab.c"
+#line 1413 "DST_Setting_parser.tab.c"
     break;
 
-  case 14: /* scope: DOT VARNAME scope  */
-#line 177 "./DST_Setting_parser.y"
+  case 16: /* scope: DOT VARNAME scope  */
+#line 317 "./DST_Setting_parser.y"
                           {
 		auto* const newNode = new DST_Setting::ast::node::scope({::DST_Setting::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::DOT({::DST_Setting::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DST_Setting::ast::node::VARNAME({::DST_Setting::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DST_Setting_scope) });
 		(yyval.DST_Setting_scope) = newNode;
 	}
-#line 1262 "DST_Setting_parser.tab.c"
+#line 1422 "DST_Setting_parser.tab.c"
     break;
 
-  case 15: /* scope: DOT VARNAME  */
-#line 181 "./DST_Setting_parser.y"
+  case 17: /* scope: DOT VARNAME  */
+#line 321 "./DST_Setting_parser.y"
                       {
 		auto* const newNode = new DST_Setting::ast::node::scope({::DST_Setting::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::DOT({::DST_Setting::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DST_Setting::ast::node::VARNAME({::DST_Setting::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Setting_scope) = newNode;
 	}
-#line 1271 "DST_Setting_parser.tab.c"
+#line 1431 "DST_Setting_parser.tab.c"
     break;
 
-  case 16: /* dst_keyword: INVALID  */
-#line 188 "./DST_Setting_parser.y"
+  case 18: /* dst_keyword: INVALID  */
+#line 328 "./DST_Setting_parser.y"
                 {
 		auto* const newNode = new DST_Setting::ast::node::dst_keyword({::DST_Setting::ast::Type::dst_keyword, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::INVALID({::DST_Setting::ast::Type::INVALID, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Setting_dst_keyword) = newNode;
 	}
-#line 1280 "DST_Setting_parser.tab.c"
+#line 1440 "DST_Setting_parser.tab.c"
     break;
 
-  case 17: /* user_keyword: LEFT_SQUARE_BRACKET VARNAME RIGHT_SQUARE_BRACKET  */
-#line 195 "./DST_Setting_parser.y"
+  case 19: /* user_keyword: LEFT_SQUARE_BRACKET VARNAME RIGHT_SQUARE_BRACKET  */
+#line 335 "./DST_Setting_parser.y"
                                                          {
 		auto* const newNode = new DST_Setting::ast::node::user_keyword({::DST_Setting::ast::Type::user_keyword, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::LEFT_SQUARE_BRACKET({::DST_Setting::ast::Type::LEFT_SQUARE_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DST_Setting::ast::node::VARNAME({::DST_Setting::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DST_Setting::ast::node::RIGHT_SQUARE_BRACKET({::DST_Setting::ast::Type::RIGHT_SQUARE_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Setting_user_keyword) = newNode;
 	}
-#line 1289 "DST_Setting_parser.tab.c"
+#line 1449 "DST_Setting_parser.tab.c"
+    break;
+
+  case 20: /* alternative_field_nt_1: ALTERNATE_FIELD_1_0  */
+#line 342 "./DST_Setting_parser.y"
+                            {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_1({::DST_Setting::ast::Type::alternative_field_nt_1, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_1_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_1_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_1) = newNode;
+	}
+#line 1458 "DST_Setting_parser.tab.c"
+    break;
+
+  case 21: /* alternative_field_nt_1: ALTERNATE_FIELD_1_1  */
+#line 346 "./DST_Setting_parser.y"
+                              {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_1({::DST_Setting::ast::Type::alternative_field_nt_1, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_1_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_1_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_1) = newNode;
+	}
+#line 1467 "DST_Setting_parser.tab.c"
+    break;
+
+  case 22: /* alternative_field_nt_1: ALTERNATE_FIELD_1_2  */
+#line 350 "./DST_Setting_parser.y"
+                              {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_1({::DST_Setting::ast::Type::alternative_field_nt_1, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_1_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_1_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_1) = newNode;
+	}
+#line 1476 "DST_Setting_parser.tab.c"
+    break;
+
+  case 23: /* alternative_field_nt_1: ALTERNATE_FIELD_1_3  */
+#line 354 "./DST_Setting_parser.y"
+                              {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_1({::DST_Setting::ast::Type::alternative_field_nt_1, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_1_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_1_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_1) = newNode;
+	}
+#line 1485 "DST_Setting_parser.tab.c"
+    break;
+
+  case 24: /* alternative_field_nt_1: ALTERNATE_FIELD_1_4  */
+#line 358 "./DST_Setting_parser.y"
+                              {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_1({::DST_Setting::ast::Type::alternative_field_nt_1, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_1_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_1_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_1) = newNode;
+	}
+#line 1494 "DST_Setting_parser.tab.c"
+    break;
+
+  case 25: /* alternative_field_nt_1: ALTERNATE_FIELD_1_5  */
+#line 362 "./DST_Setting_parser.y"
+                              {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_1({::DST_Setting::ast::Type::alternative_field_nt_1, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_1_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_1_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_1) = newNode;
+	}
+#line 1503 "DST_Setting_parser.tab.c"
+    break;
+
+  case 26: /* alternative_field_nt_2: ALTERNATE_FIELD_2_0_0  */
+#line 369 "./DST_Setting_parser.y"
+                              {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_0_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1512 "DST_Setting_parser.tab.c"
+    break;
+
+  case 27: /* alternative_field_nt_2: ALTERNATE_FIELD_2_0_1  */
+#line 373 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_0_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1521 "DST_Setting_parser.tab.c"
+    break;
+
+  case 28: /* alternative_field_nt_2: ALTERNATE_FIELD_2_0_2  */
+#line 377 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_0_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1530 "DST_Setting_parser.tab.c"
+    break;
+
+  case 29: /* alternative_field_nt_2: ALTERNATE_FIELD_2_0_3  */
+#line 381 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_0_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1539 "DST_Setting_parser.tab.c"
+    break;
+
+  case 30: /* alternative_field_nt_2: ALTERNATE_FIELD_2_0_4  */
+#line 385 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_0_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1548 "DST_Setting_parser.tab.c"
+    break;
+
+  case 31: /* alternative_field_nt_2: ALTERNATE_FIELD_2_0_5  */
+#line 389 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_0_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_0_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1557 "DST_Setting_parser.tab.c"
+    break;
+
+  case 32: /* alternative_field_nt_2: ALTERNATE_FIELD_2_1_0  */
+#line 393 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {6, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_1_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1566 "DST_Setting_parser.tab.c"
+    break;
+
+  case 33: /* alternative_field_nt_2: ALTERNATE_FIELD_2_1_1  */
+#line 397 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {7, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_1_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1575 "DST_Setting_parser.tab.c"
+    break;
+
+  case 34: /* alternative_field_nt_2: ALTERNATE_FIELD_2_1_2  */
+#line 401 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {8, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_1_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1584 "DST_Setting_parser.tab.c"
+    break;
+
+  case 35: /* alternative_field_nt_2: ALTERNATE_FIELD_2_1_3  */
+#line 405 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {9, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_1_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1593 "DST_Setting_parser.tab.c"
+    break;
+
+  case 36: /* alternative_field_nt_2: ALTERNATE_FIELD_2_1_4  */
+#line 409 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {10, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_1_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1602 "DST_Setting_parser.tab.c"
+    break;
+
+  case 37: /* alternative_field_nt_2: ALTERNATE_FIELD_2_1_5  */
+#line 413 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {11, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_1_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_1_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1611 "DST_Setting_parser.tab.c"
+    break;
+
+  case 38: /* alternative_field_nt_2: ALTERNATE_FIELD_2_2_0  */
+#line 417 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {12, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_2_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1620 "DST_Setting_parser.tab.c"
+    break;
+
+  case 39: /* alternative_field_nt_2: ALTERNATE_FIELD_2_2_1  */
+#line 421 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {13, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_2_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1629 "DST_Setting_parser.tab.c"
+    break;
+
+  case 40: /* alternative_field_nt_2: ALTERNATE_FIELD_2_2_2  */
+#line 425 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {14, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_2_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1638 "DST_Setting_parser.tab.c"
+    break;
+
+  case 41: /* alternative_field_nt_2: ALTERNATE_FIELD_2_2_3  */
+#line 429 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {15, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_2_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1647 "DST_Setting_parser.tab.c"
+    break;
+
+  case 42: /* alternative_field_nt_2: ALTERNATE_FIELD_2_2_4  */
+#line 433 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {16, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_2_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1656 "DST_Setting_parser.tab.c"
+    break;
+
+  case 43: /* alternative_field_nt_2: ALTERNATE_FIELD_2_2_5  */
+#line 437 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {17, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_2_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_2_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1665 "DST_Setting_parser.tab.c"
+    break;
+
+  case 44: /* alternative_field_nt_2: ALTERNATE_FIELD_2_3_0  */
+#line 441 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {18, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_3_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1674 "DST_Setting_parser.tab.c"
+    break;
+
+  case 45: /* alternative_field_nt_2: ALTERNATE_FIELD_2_3_1  */
+#line 445 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {19, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_3_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1683 "DST_Setting_parser.tab.c"
+    break;
+
+  case 46: /* alternative_field_nt_2: ALTERNATE_FIELD_2_3_2  */
+#line 449 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {20, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_3_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1692 "DST_Setting_parser.tab.c"
+    break;
+
+  case 47: /* alternative_field_nt_2: ALTERNATE_FIELD_2_3_3  */
+#line 453 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {21, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_3_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1701 "DST_Setting_parser.tab.c"
+    break;
+
+  case 48: /* alternative_field_nt_2: ALTERNATE_FIELD_2_3_4  */
+#line 457 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {22, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_3_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1710 "DST_Setting_parser.tab.c"
+    break;
+
+  case 49: /* alternative_field_nt_2: ALTERNATE_FIELD_2_3_5  */
+#line 461 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {23, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_3_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_3_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1719 "DST_Setting_parser.tab.c"
+    break;
+
+  case 50: /* alternative_field_nt_2: ALTERNATE_FIELD_2_4_0  */
+#line 465 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {24, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_4_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1728 "DST_Setting_parser.tab.c"
+    break;
+
+  case 51: /* alternative_field_nt_2: ALTERNATE_FIELD_2_4_1  */
+#line 469 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {25, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_4_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1737 "DST_Setting_parser.tab.c"
+    break;
+
+  case 52: /* alternative_field_nt_2: ALTERNATE_FIELD_2_4_2  */
+#line 473 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {26, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_4_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1746 "DST_Setting_parser.tab.c"
+    break;
+
+  case 53: /* alternative_field_nt_2: ALTERNATE_FIELD_2_4_3  */
+#line 477 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {27, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_4_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1755 "DST_Setting_parser.tab.c"
+    break;
+
+  case 54: /* alternative_field_nt_2: ALTERNATE_FIELD_2_4_4  */
+#line 481 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {28, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_4_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1764 "DST_Setting_parser.tab.c"
+    break;
+
+  case 55: /* alternative_field_nt_2: ALTERNATE_FIELD_2_4_5  */
+#line 485 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {29, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_4_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_4_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1773 "DST_Setting_parser.tab.c"
+    break;
+
+  case 56: /* alternative_field_nt_2: ALTERNATE_FIELD_2_5_0  */
+#line 489 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {30, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_5_0({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_0, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1782 "DST_Setting_parser.tab.c"
+    break;
+
+  case 57: /* alternative_field_nt_2: ALTERNATE_FIELD_2_5_1  */
+#line 493 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {31, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_5_1({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_1, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1791 "DST_Setting_parser.tab.c"
+    break;
+
+  case 58: /* alternative_field_nt_2: ALTERNATE_FIELD_2_5_2  */
+#line 497 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {32, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_5_2({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_2, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1800 "DST_Setting_parser.tab.c"
+    break;
+
+  case 59: /* alternative_field_nt_2: ALTERNATE_FIELD_2_5_3  */
+#line 501 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {33, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_5_3({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_3, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1809 "DST_Setting_parser.tab.c"
+    break;
+
+  case 60: /* alternative_field_nt_2: ALTERNATE_FIELD_2_5_4  */
+#line 505 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {34, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_5_4({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_4, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1818 "DST_Setting_parser.tab.c"
+    break;
+
+  case 61: /* alternative_field_nt_2: ALTERNATE_FIELD_2_5_5  */
+#line 509 "./DST_Setting_parser.y"
+                                {
+		auto* const newNode = new DST_Setting::ast::node::alternative_field_nt_2({::DST_Setting::ast::Type::alternative_field_nt_2, ::deamer::external::cpp::ast::NodeValue::nonterminal, {35, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Setting::ast::node::ALTERNATE_FIELD_2_5_5({::DST_Setting::ast::Type::ALTERNATE_FIELD_2_5_5, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DST_Setting_alternative_field_nt_2) = newNode;
+	}
+#line 1827 "DST_Setting_parser.tab.c"
     break;
 
 
-#line 1293 "DST_Setting_parser.tab.c"
+#line 1831 "DST_Setting_parser.tab.c"
 
       default: break;
     }
@@ -1371,6 +1909,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -1431,7 +1970,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -1439,24 +1978,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
-#endif
+  goto yyreturnlab;
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -1483,7 +2020,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 201 "./DST_Setting_parser.y"
+#line 515 "./DST_Setting_parser.y"
 
 
 void DST_Settingerror(const char* s)

@@ -35,6 +35,8 @@ void showError();
 extern int DST_Mainlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
@@ -55,16 +57,16 @@ OTHER	([^{}\\\.]*)
 
 %%
 
-{DOT}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (DOT);;}
-{LEFT_BRACKETS_ESCAPED}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKETS_ESCAPED);;}
-{RIGHT_BRACKETS_ESCAPED}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKETS_ESCAPED);;}
-{LEFT_BRACKETS}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKETS);;}
-{RIGHT_BRACKETS}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKETS);;}
-{LEFT_BRACKET}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKET);;}
-{RIGHT_BRACKET}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKET);;}
-{VARNAME}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (VARNAME);;}
-{BACKSLASH}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (BACKSLASH);;}
-{OTHER}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (OTHER);;}
+{DOT}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (DOT);;}
+{LEFT_BRACKETS_ESCAPED}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKETS_ESCAPED);;}
+{RIGHT_BRACKETS_ESCAPED}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKETS_ESCAPED);;}
+{LEFT_BRACKETS}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKETS);;}
+{RIGHT_BRACKETS}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKETS);;}
+{LEFT_BRACKET}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKET);;}
+{RIGHT_BRACKET}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKET);;}
+{VARNAME}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (VARNAME);;}
+{BACKSLASH}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (BACKSLASH);;}
+{OTHER}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (OTHER);;}
 
 %%
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
@@ -77,9 +79,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DST_Main::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

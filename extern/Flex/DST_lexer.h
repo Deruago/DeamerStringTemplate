@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 64 "./DST_lexer.l"
+#line 39 "./DST_lexer.l"
 
 
 #line 708 "./DST_lexer.h"

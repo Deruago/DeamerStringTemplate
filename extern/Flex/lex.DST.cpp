@@ -632,8 +632,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 10
-#define YY_END_OF_BUFFER 11
+#define YY_NUM_RULES 2
+#define YY_END_OF_BUFFER 3
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -641,10 +641,9 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[19] =
+static const flex_int16_t yy_accept[7] =
     {   0,
-        9,    9,   11,    9,    7,    8,    5,    6,    9,    7,
-        7,    0,    0,    3,    4,    1,    2,    0
+        0,    0,    3,    1,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -653,16 +652,16 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    1,    1,    1,
-        1,    1,    1,    1,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        1,    4,    1,    1,    2,    1,    3,    3,    3,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
 
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    5,    1,    6,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -679,43 +678,35 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[7] =
+static const YY_CHAR yy_meta[3] =
     {   0,
-        1,    1,    1,    2,    3,    4
+        1,    1
     } ;
 
-static const flex_int16_t yy_base[24] =
+static const flex_int16_t yy_base[7] =
     {   0,
-        0,    0,   18,    0,    6,    5,    0,    0,    0,   14,
-        0,    0,    0,   19,   19,   19,   19,   19,   15,   12,
-       10,   10,    8
+        0,    0,    5,    2,    0,    6
     } ;
 
-static const flex_int16_t yy_def[24] =
+static const flex_int16_t yy_def[7] =
     {   0,
-       18,    1,   18,   19,   18,   18,   20,   21,   19,    5,
-        5,   22,   23,   18,   18,   18,   18,    0,   18,   18,
-       18,   18,   18
+        6,    1,    6,    6,    4,    0
     } ;
 
-static const flex_int16_t yy_nxt[26] =
+static const flex_int16_t yy_nxt[9] =
     {   0,
-        4,    4,    5,    6,    7,    8,    9,   10,   11,   12,
-       13,   17,   16,   15,   14,    9,   10,   18,    3,   18,
-       18,   18,   18,   18,   18
+        4,    4,    5,    5,    6,    3,    6,    6
     } ;
 
-static const flex_int16_t yy_chk[26] =
+static const flex_int16_t yy_chk[9] =
     {   0,
-        1,    1,    1,    1,    1,    1,    5,    5,    5,    6,
-        6,   23,   22,   21,   20,   19,   10,    3,   18,   18,
-       18,   18,   18,   18,   18
+        1,    1,    4,    4,    3,    6,    6,    6
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[11] =
+static const flex_int32_t yy_rule_can_match_eol[3] =
     {   0,
-0, 0, 0, 0, 0, 0, 0, 0, 1, 0,     };
+1, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -742,33 +733,24 @@ char *yytext;
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
 #include "DST/Flex/Lexer.h"
 #include "DST/Ast/Enum/Type.h"
-#include "DST/Ast/Node/LEFT_BRACKETS_ESCAPED.h"
-#include "DST/Ast/Node/RIGHT_BRACKETS_ESCAPED.h"
-#include "DST/Ast/Node/LEFT_BRACKETS.h"
-#include "DST/Ast/Node/RIGHT_BRACKETS.h"
-#include "DST/Ast/Node/LEFT_BRACKET.h"
-#include "DST/Ast/Node/RIGHT_BRACKET.h"
-#include "DST/Ast/Node/VARNAME.h"
-#include "DST/Ast/Node/BACKSLASH.h"
-#include "DST/Ast/Node/OTHER.h"
+#include "DST/Ast/Node/ANY.h"
 
 #include "DST/Ast/Node/program.h"
-#include "DST/Ast/Node/stmts.h"
-#include "DST/Ast/Node/stmt.h"
-#include "DST/Ast/Node/variable_insertion.h"
-#include "DST/Ast/Node/other_symbols.h"
+#include "DST/Ast/Node/deamerreserved_star__ANY__.h"
 #include "Bison/DST_parser.tab.h"
 void showError();
 extern int DSTlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
 #define yyval yytext
 #endif //yyval
-#line 771 "lex.DST.c"
-#line 772 "lex.DST.c"
+#line 753 "lex.DST.c"
+#line 754 "lex.DST.c"
 
 #define INITIAL 0
 
@@ -985,10 +967,10 @@ YY_DECL
 		}
 
 	{
-#line 52 "./DST_lexer.l"
+#line 35 "./DST_lexer.l"
 
 
-#line 992 "lex.DST.c"
+#line 974 "lex.DST.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1015,13 +997,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 19 )
+				if ( yy_current_state >= 7 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 18 );
+		while ( yy_current_state != 6 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -1052,57 +1034,17 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
+/* rule 1 can match eol */
 YY_RULE_SETUP
-#line 54 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKETS_ESCAPED);;}
+#line 37 "./DST_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (ANY);;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 55 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKETS_ESCAPED);;}
-	YY_BREAK
-case 3:
-YY_RULE_SETUP
-#line 56 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKETS);;}
-	YY_BREAK
-case 4:
-YY_RULE_SETUP
-#line 57 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKETS);;}
-	YY_BREAK
-case 5:
-YY_RULE_SETUP
-#line 58 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKET);;}
-	YY_BREAK
-case 6:
-YY_RULE_SETUP
-#line 59 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKET);;}
-	YY_BREAK
-case 7:
-YY_RULE_SETUP
-#line 60 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (VARNAME);;}
-	YY_BREAK
-case 8:
-YY_RULE_SETUP
-#line 61 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (BACKSLASH);;}
-	YY_BREAK
-case 9:
-/* rule 9 can match eol */
-YY_RULE_SETUP
-#line 62 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (OTHER);;}
-	YY_BREAK
-case 10:
-YY_RULE_SETUP
-#line 64 "./DST_lexer.l"
+#line 39 "./DST_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1106 "lex.DST.c"
+#line 1048 "lex.DST.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1400,7 +1342,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 19 )
+			if ( yy_current_state >= 7 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1428,11 +1370,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 19 )
+		if ( yy_current_state >= 7 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 18);
+	yy_is_jam = (yy_current_state == 6);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2120,7 +2062,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 64 "./DST_lexer.l"
+#line 39 "./DST_lexer.l"
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {
@@ -2132,9 +2074,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DST::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

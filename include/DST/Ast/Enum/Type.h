@@ -5,23 +5,15 @@ namespace DST { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
-		LEFT_BRACKETS_ESCAPED,
-		RIGHT_BRACKETS_ESCAPED,
-		LEFT_BRACKETS,
-		RIGHT_BRACKETS,
-		LEFT_BRACKET,
-		RIGHT_BRACKET,
-		VARNAME,
-		BACKSLASH,
-		OTHER,
+		ANY,
 
 		// Non-Terminals
 		program,
-		stmts,
-		stmt,
-		variable_insertion,
-		other_symbols,
+		deamerreserved_star__ANY__,
 	};
 
 }}

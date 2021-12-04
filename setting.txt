@@ -1,1 +1,0 @@
-{{header_guard}} = <{{language_name.Upper}}_AST_NODE_{{class_name.Upper}}_H>

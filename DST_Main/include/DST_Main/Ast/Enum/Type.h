@@ -5,6 +5,9 @@ namespace DST_Main { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		DOT,
 		LEFT_BRACKETS_ESCAPED,

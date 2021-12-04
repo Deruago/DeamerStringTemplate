@@ -100,6 +100,8 @@ int main()
     
     std::cout << output << std::endl;
     
+    delete generator;
+    
     return 0;
 }
 ```

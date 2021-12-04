@@ -763,13 +763,15 @@ void showError();
 extern int DST_Mainlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
 #define yyval yytext
 #endif //yyval
-#line 772 "lex.DST_Main.c"
-#line 773 "lex.DST_Main.c"
+#line 774 "lex.DST_Main.c"
+#line 775 "lex.DST_Main.c"
 
 #define INITIAL 0
 
@@ -986,10 +988,10 @@ YY_DECL
 		}
 
 	{
-#line 56 "./DST_Main_lexer.l"
+#line 58 "./DST_Main_lexer.l"
 
 
-#line 993 "lex.DST_Main.c"
+#line 995 "lex.DST_Main.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1054,61 +1056,61 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 58 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (DOT);;}
+#line 60 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (DOT);;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 59 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKETS_ESCAPED);;}
+#line 61 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKETS_ESCAPED);;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 60 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKETS_ESCAPED);;}
+#line 62 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKETS_ESCAPED);;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 61 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKETS);;}
+#line 63 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKETS);;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 62 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKETS);;}
+#line 64 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKETS);;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 63 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (LEFT_BRACKET);;}
+#line 65 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKET);;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 64 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (RIGHT_BRACKET);;}
+#line 66 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKET);;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 65 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (VARNAME);;}
+#line 67 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (VARNAME);;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 66 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (BACKSLASH);;}
+#line 68 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (BACKSLASH);;}
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 67 "./DST_Main_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (OTHER);;}
+#line 69 "./DST_Main_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DST_Mainlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (OTHER);;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 69 "./DST_Main_lexer.l"
+#line 71 "./DST_Main_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1112 "lex.DST_Main.c"
+#line 1114 "lex.DST_Main.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2126,7 +2128,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 69 "./DST_Main_lexer.l"
+#line 71 "./DST_Main_lexer.l"
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {
@@ -2138,9 +2140,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DST_Main::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

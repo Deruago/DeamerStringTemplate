@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -46,10 +46,10 @@
    USER NAME SPACE" below.  */
 
 /* Identify Bison output, and Bison version.  */
-#define YYBISON 30705
+#define YYBISON 30802
 
 /* Bison version string.  */
-#define YYBISON_VERSION "3.7.5"
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -87,21 +87,10 @@
 #include "Flex/DST_lexer.h"
 #undef YY_NO_UNISTD_H
 #include "DST/Ast/Enum/Type.h"
-#include "DST/Ast/Node/LEFT_BRACKETS_ESCAPED.h"
-#include "DST/Ast/Node/RIGHT_BRACKETS_ESCAPED.h"
-#include "DST/Ast/Node/LEFT_BRACKETS.h"
-#include "DST/Ast/Node/RIGHT_BRACKETS.h"
-#include "DST/Ast/Node/LEFT_BRACKET.h"
-#include "DST/Ast/Node/RIGHT_BRACKET.h"
-#include "DST/Ast/Node/VARNAME.h"
-#include "DST/Ast/Node/BACKSLASH.h"
-#include "DST/Ast/Node/OTHER.h"
+#include "DST/Ast/Node/ANY.h"
 
 #include "DST/Ast/Node/program.h"
-#include "DST/Ast/Node/stmts.h"
-#include "DST/Ast/Node/stmt.h"
-#include "DST/Ast/Node/variable_insertion.h"
-#include "DST/Ast/Node/other_symbols.h"
+#include "DST/Ast/Node/deamerreserved_star__ANY__.h"
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DSTnerrs
@@ -115,7 +104,7 @@ void DSTerror(const char* s);
 int DSTlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
-#line 119 "DST_parser.tab.c"
+#line 108 "DST_parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -146,21 +135,10 @@ enum yysymbol_kind_t
   YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_LEFT_BRACKETS_ESCAPED = 3,      /* LEFT_BRACKETS_ESCAPED  */
-  YYSYMBOL_RIGHT_BRACKETS_ESCAPED = 4,     /* RIGHT_BRACKETS_ESCAPED  */
-  YYSYMBOL_LEFT_BRACKETS = 5,              /* LEFT_BRACKETS  */
-  YYSYMBOL_RIGHT_BRACKETS = 6,             /* RIGHT_BRACKETS  */
-  YYSYMBOL_LEFT_BRACKET = 7,               /* LEFT_BRACKET  */
-  YYSYMBOL_RIGHT_BRACKET = 8,              /* RIGHT_BRACKET  */
-  YYSYMBOL_VARNAME = 9,                    /* VARNAME  */
-  YYSYMBOL_BACKSLASH = 10,                 /* BACKSLASH  */
-  YYSYMBOL_OTHER = 11,                     /* OTHER  */
-  YYSYMBOL_YYACCEPT = 12,                  /* $accept  */
-  YYSYMBOL_program = 13,                   /* program  */
-  YYSYMBOL_stmts = 14,                     /* stmts  */
-  YYSYMBOL_stmt = 15,                      /* stmt  */
-  YYSYMBOL_variable_insertion = 16,        /* variable_insertion  */
-  YYSYMBOL_other_symbols = 17              /* other_symbols  */
+  YYSYMBOL_ANY = 3,                        /* ANY  */
+  YYSYMBOL_YYACCEPT = 4,                   /* $accept  */
+  YYSYMBOL_program = 5,                    /* program  */
+  YYSYMBOL_deamerreserved_star__ANY__ = 6  /* deamerreserved_star__ANY__  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -318,12 +296,18 @@ typedef int yy_state_fast_t;
 # define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -480,21 +464,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  16
+#define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   13
+#define YYLAST   3
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  12
+#define YYNTOKENS  4
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  6
+#define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  16
+#define YYNRULES  4
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  19
+#define YYNSTATES  6
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   266
+#define YYMAXUTOK   258
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -533,16 +517,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11
+       2,     2,     2,     2,     2,     2,     1,     2,     3
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+static const yytype_int8 yyrline[] =
 {
-       0,    81,    81,    89,    93,   100,   104,   111,   118,   122,
-     126,   130,   134,   138,   142,   146,   150
+       0,    48,    48,    56,    60
 };
 #endif
 
@@ -558,11 +540,8 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"",
-  "LEFT_BRACKETS_ESCAPED", "RIGHT_BRACKETS_ESCAPED", "LEFT_BRACKETS",
-  "RIGHT_BRACKETS", "LEFT_BRACKET", "RIGHT_BRACKET", "VARNAME",
-  "BACKSLASH", "OTHER", "$accept", "program", "stmts", "stmt",
-  "variable_insertion", "other_symbols", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "ANY", "$accept",
+  "program", "deamerreserved_star__ANY__", YY_NULLPTR
 };
 
 static const char *
@@ -570,16 +549,6 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 {
   return yytname[yysymbol];
 }
-#endif
-
-#ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266
-};
 #endif
 
 #define YYPACT_NINF (-4)
@@ -592,70 +561,63 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -3,    -4,    -4,     0,    -4,    -4,    -4,    -4,    -4,    -4,
-      10,    -4,    -3,    -4,    -4,     5,    -4,    -4,    -4
+      -3,    -3,     1,    -4,    -4,    -4
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       4,     8,     9,    10,    11,    12,    13,    16,    15,    14,
-       0,     2,     4,     5,     6,     0,     1,     3,     7
+       4,     4,     0,     2,     3,     1
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    -4,     1,    -4,    -4,    -4
+      -4,    -4,     2
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,    10,    11,    12,    13,    14
+       0,     2,     3
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     2,     3,     4,     5,     6,     7,     8,     9,    15,
-      16,    18,     0,    17
+       1,     5,     0,     4
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     4,     5,     6,     7,     8,     9,    10,    11,     9,
-       0,     6,    -1,    12
+       3,     0,    -1,     1
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,     4,     5,     6,     7,     8,     9,    10,    11,
-      13,    14,    15,    16,    17,     9,     0,    14,     6
+       0,     3,     5,     6,     6,     0
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    12,    13,    14,    14,    15,    15,    16,    17,    17,
-      17,    17,    17,    17,    17,    17,    17
+       0,     4,     5,     6,     6
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     0,     1,     1,     3,     1,     1,
-       1,     1,     1,     1,     1,     1,     1
+       0,     2,     1,     2,     0
 };
 
 
@@ -667,6 +629,7 @@ enum { YYENOMEM = -2 };
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -707,10 +670,7 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -737,10 +697,6 @@ yy_symbol_value_print (FILE *yyo,
   YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
@@ -925,6 +881,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -950,7 +907,7 @@ yysetstate:
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -978,7 +935,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -989,7 +946,7 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
@@ -1010,6 +967,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1122,144 +1080,36 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* program: stmts  */
-#line 81 "./DST_parser.y"
-              {
-		auto* const newNode = new DST::ast::node::program({::DST::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_stmts) });
+  case 2: /* program: deamerreserved_star__ANY__  */
+#line 48 "./DST_parser.y"
+                                   {
+		auto* const newNode = new DST::ast::node::program({::DST::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_deamerreserved_star__ANY__) });
 		(yyval.DST_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1133 "DST_parser.tab.c"
+#line 1091 "DST_parser.tab.c"
     break;
 
-  case 3: /* stmts: stmt stmts  */
-#line 89 "./DST_parser.y"
-                   {
-		auto* const newNode = new DST::ast::node::stmts({::DST::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DST_stmt), (yyvsp[0].DST_stmts) });
-		(yyval.DST_stmts) = newNode;
+  case 3: /* deamerreserved_star__ANY__: ANY deamerreserved_star__ANY__  */
+#line 56 "./DST_parser.y"
+                                       {
+		auto* const newNode = new DST::ast::node::deamerreserved_star__ANY__({::DST::ast::Type::deamerreserved_star__ANY__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::ANY({::DST::ast::Type::ANY, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DST_deamerreserved_star__ANY__) });
+		(yyval.DST_deamerreserved_star__ANY__) = newNode;
 	}
-#line 1142 "DST_parser.tab.c"
+#line 1100 "DST_parser.tab.c"
     break;
 
-  case 4: /* stmts: %empty  */
-#line 93 "./DST_parser.y"
+  case 4: /* deamerreserved_star__ANY__: %empty  */
+#line 60 "./DST_parser.y"
           {
-		auto* const newNode = new DST::ast::node::stmts({::DST::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
-		(yyval.DST_stmts) = newNode;
+		auto* const newNode = new DST::ast::node::deamerreserved_star__ANY__({::DST::ast::Type::deamerreserved_star__ANY__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		(yyval.DST_deamerreserved_star__ANY__) = newNode;
 	}
-#line 1151 "DST_parser.tab.c"
-    break;
-
-  case 5: /* stmt: variable_insertion  */
-#line 100 "./DST_parser.y"
-                           {
-		auto* const newNode = new DST::ast::node::stmt({::DST::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_variable_insertion) });
-		(yyval.DST_stmt) = newNode;
-	}
-#line 1160 "DST_parser.tab.c"
-    break;
-
-  case 6: /* stmt: other_symbols  */
-#line 104 "./DST_parser.y"
-                        {
-		auto* const newNode = new DST::ast::node::stmt({::DST::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_other_symbols) });
-		(yyval.DST_stmt) = newNode;
-	}
-#line 1169 "DST_parser.tab.c"
-    break;
-
-  case 7: /* variable_insertion: LEFT_BRACKETS VARNAME RIGHT_BRACKETS  */
-#line 111 "./DST_parser.y"
-                                             {
-		auto* const newNode = new DST::ast::node::variable_insertion({::DST::ast::Type::variable_insertion, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::LEFT_BRACKETS({::DST::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DST::ast::node::VARNAME({::DST::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DST::ast::node::RIGHT_BRACKETS({::DST::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_variable_insertion) = newNode;
-	}
-#line 1178 "DST_parser.tab.c"
-    break;
-
-  case 8: /* other_symbols: LEFT_BRACKETS_ESCAPED  */
-#line 118 "./DST_parser.y"
-                              {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::LEFT_BRACKETS_ESCAPED({::DST::ast::Type::LEFT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1187 "DST_parser.tab.c"
-    break;
-
-  case 9: /* other_symbols: RIGHT_BRACKETS_ESCAPED  */
-#line 122 "./DST_parser.y"
-                                 {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::RIGHT_BRACKETS_ESCAPED({::DST::ast::Type::RIGHT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1196 "DST_parser.tab.c"
-    break;
-
-  case 10: /* other_symbols: LEFT_BRACKETS  */
-#line 126 "./DST_parser.y"
-                        {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::LEFT_BRACKETS({::DST::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1205 "DST_parser.tab.c"
-    break;
-
-  case 11: /* other_symbols: RIGHT_BRACKETS  */
-#line 130 "./DST_parser.y"
-                         {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::RIGHT_BRACKETS({::DST::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1214 "DST_parser.tab.c"
-    break;
-
-  case 12: /* other_symbols: LEFT_BRACKET  */
-#line 134 "./DST_parser.y"
-                       {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::LEFT_BRACKET({::DST::ast::Type::LEFT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1223 "DST_parser.tab.c"
-    break;
-
-  case 13: /* other_symbols: RIGHT_BRACKET  */
-#line 138 "./DST_parser.y"
-                        {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::RIGHT_BRACKET({::DST::ast::Type::RIGHT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1232 "DST_parser.tab.c"
-    break;
-
-  case 14: /* other_symbols: OTHER  */
-#line 142 "./DST_parser.y"
-                {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {6, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::OTHER({::DST::ast::Type::OTHER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1241 "DST_parser.tab.c"
-    break;
-
-  case 15: /* other_symbols: BACKSLASH  */
-#line 146 "./DST_parser.y"
-                    {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {7, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::BACKSLASH({::DST::ast::Type::BACKSLASH, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1250 "DST_parser.tab.c"
-    break;
-
-  case 16: /* other_symbols: VARNAME  */
-#line 150 "./DST_parser.y"
-                  {
-		auto* const newNode = new DST::ast::node::other_symbols({::DST::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {8, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST::ast::node::VARNAME({::DST::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
-		(yyval.DST_other_symbols) = newNode;
-	}
-#line 1259 "DST_parser.tab.c"
+#line 1109 "DST_parser.tab.c"
     break;
 
 
-#line 1263 "DST_parser.tab.c"
+#line 1113 "DST_parser.tab.c"
 
       default: break;
     }
@@ -1341,6 +1191,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -1401,7 +1252,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -1409,24 +1260,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
-#endif
+  goto yyreturnlab;
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -1453,7 +1302,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 156 "./DST_parser.y"
+#line 66 "./DST_parser.y"
 
 
 void DSTerror(const char* s)

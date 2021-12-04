@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -54,15 +54,7 @@ extern int DSTdebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    LEFT_BRACKETS_ESCAPED = 258,   /* LEFT_BRACKETS_ESCAPED  */
-    RIGHT_BRACKETS_ESCAPED = 259,  /* RIGHT_BRACKETS_ESCAPED  */
-    LEFT_BRACKETS = 260,           /* LEFT_BRACKETS  */
-    RIGHT_BRACKETS = 261,          /* RIGHT_BRACKETS  */
-    LEFT_BRACKET = 262,            /* LEFT_BRACKET  */
-    RIGHT_BRACKET = 263,           /* RIGHT_BRACKET  */
-    VARNAME = 264,                 /* VARNAME  */
-    BACKSLASH = 265,               /* BACKSLASH  */
-    OTHER = 266                    /* OTHER  */
+    ANY = 258                      /* ANY  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -71,25 +63,14 @@ extern int DSTdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 60 "./DST_parser.y"
+#line 38 "./DST_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
-	::DST::ast::node::LEFT_BRACKETS_ESCAPED* DST_LEFT_BRACKETS_ESCAPED;
-	::DST::ast::node::RIGHT_BRACKETS_ESCAPED* DST_RIGHT_BRACKETS_ESCAPED;
-	::DST::ast::node::LEFT_BRACKETS* DST_LEFT_BRACKETS;
-	::DST::ast::node::RIGHT_BRACKETS* DST_RIGHT_BRACKETS;
-	::DST::ast::node::LEFT_BRACKET* DST_LEFT_BRACKET;
-	::DST::ast::node::RIGHT_BRACKET* DST_RIGHT_BRACKET;
-	::DST::ast::node::VARNAME* DST_VARNAME;
-	::DST::ast::node::BACKSLASH* DST_BACKSLASH;
-	::DST::ast::node::OTHER* DST_OTHER;
+	::DST::ast::node::ANY* DST_ANY;
 	::DST::ast::node::program* DST_program;
-	::DST::ast::node::stmts* DST_stmts;
-	::DST::ast::node::stmt* DST_stmt;
-	::DST::ast::node::variable_insertion* DST_variable_insertion;
-	::DST::ast::node::other_symbols* DST_other_symbols;
+	::DST::ast::node::deamerreserved_star__ANY__* DST_deamerreserved_star__ANY__;
 
-#line 93 "DST_parser.tab.h"
+#line 74 "DST_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -100,6 +81,8 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE DSTlval;
 
+
 int DSTparse (void);
+
 
 #endif /* !YY_DST_DST_PARSER_TAB_H_INCLUDED  */

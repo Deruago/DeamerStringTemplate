@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -46,10 +46,10 @@
    USER NAME SPACE" below.  */
 
 /* Identify Bison output, and Bison version.  */
-#define YYBISON 30705
+#define YYBISON 30802
 
 /* Bison version string.  */
-#define YYBISON_VERSION "3.7.5"
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -324,12 +324,18 @@ typedef int yy_state_fast_t;
 # define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -544,7 +550,7 @@ static const yytype_int8 yytranslate[] =
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
        0,    90,    90,    98,   102,   109,   113,   120,   127,   131,
@@ -579,16 +585,6 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267
-};
-#endif
-
 #define YYPACT_NINF (-8)
 
 #define yypact_value_is_default(Yyn) \
@@ -599,8 +595,8 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
       -3,    -8,    -8,    -8,     0,    -8,    -8,    -8,    -8,    -8,
@@ -608,9 +604,9 @@ static const yytype_int8 yypact[] =
        4,    -8,    -8,     9,    -8
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
        4,    17,     8,     9,    10,    11,    12,    13,    16,    15,
@@ -618,21 +614,21 @@ static const yytype_int8 yydefact[] =
        0,    18,     7,    21,    20
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
       -8,    -8,     2,    -8,    -8,    -8,    -8,    -7
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
        0,    11,    12,    13,    14,    15,    17,    21
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
        1,     2,     3,     4,     5,     6,     7,     8,     9,    10,
@@ -645,8 +641,8 @@ static const yytype_int8 yycheck[] =
       10,     0,     3,     7,    10,    13,    23
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
        0,     3,     4,     5,     6,     7,     8,     9,    10,    11,
@@ -654,7 +650,7 @@ static const yytype_int8 yystos[] =
        3,    20,     7,    10,    20
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,    13,    14,    15,    15,    16,    16,    17,    18,    18,
@@ -662,7 +658,7 @@ static const yytype_int8 yyr1[] =
       20,    20
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     0,     1,     1,     3,     1,     1,
@@ -679,6 +675,7 @@ enum { YYENOMEM = -2 };
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -719,10 +716,7 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -749,10 +743,6 @@ yy_symbol_value_print (FILE *yyo,
   YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
@@ -937,6 +927,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -962,7 +953,7 @@ yysetstate:
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -990,7 +981,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1001,7 +992,7 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
@@ -1022,6 +1013,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1141,7 +1133,7 @@ yyreduce:
 		(yyval.DST_Main_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1145 "DST_Main_parser.tab.c"
+#line 1137 "DST_Main_parser.tab.c"
     break;
 
   case 3: /* stmts: stmt stmts  */
@@ -1150,7 +1142,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::stmts({::DST_Main::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DST_Main_stmt), (yyvsp[0].DST_Main_stmts) });
 		(yyval.DST_Main_stmts) = newNode;
 	}
-#line 1154 "DST_Main_parser.tab.c"
+#line 1146 "DST_Main_parser.tab.c"
     break;
 
   case 4: /* stmts: %empty  */
@@ -1159,7 +1151,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::stmts({::DST_Main::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		(yyval.DST_Main_stmts) = newNode;
 	}
-#line 1163 "DST_Main_parser.tab.c"
+#line 1155 "DST_Main_parser.tab.c"
     break;
 
   case 5: /* stmt: variable_insertion  */
@@ -1168,7 +1160,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::stmt({::DST_Main::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Main_variable_insertion) });
 		(yyval.DST_Main_stmt) = newNode;
 	}
-#line 1172 "DST_Main_parser.tab.c"
+#line 1164 "DST_Main_parser.tab.c"
     break;
 
   case 6: /* stmt: other_symbols  */
@@ -1177,7 +1169,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::stmt({::DST_Main::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DST_Main_other_symbols) });
 		(yyval.DST_Main_stmt) = newNode;
 	}
-#line 1181 "DST_Main_parser.tab.c"
+#line 1173 "DST_Main_parser.tab.c"
     break;
 
   case 7: /* variable_insertion: LEFT_BRACKETS variable RIGHT_BRACKETS  */
@@ -1186,7 +1178,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::variable_insertion({::DST_Main::ast::Type::variable_insertion, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKETS({::DST_Main::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), (yyvsp[-1].DST_Main_variable), new DST_Main::ast::node::RIGHT_BRACKETS({::DST_Main::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_variable_insertion) = newNode;
 	}
-#line 1190 "DST_Main_parser.tab.c"
+#line 1182 "DST_Main_parser.tab.c"
     break;
 
   case 8: /* other_symbols: LEFT_BRACKETS_ESCAPED  */
@@ -1195,7 +1187,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKETS_ESCAPED({::DST_Main::ast::Type::LEFT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1199 "DST_Main_parser.tab.c"
+#line 1191 "DST_Main_parser.tab.c"
     break;
 
   case 9: /* other_symbols: RIGHT_BRACKETS_ESCAPED  */
@@ -1204,7 +1196,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED({::DST_Main::ast::Type::RIGHT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1208 "DST_Main_parser.tab.c"
+#line 1200 "DST_Main_parser.tab.c"
     break;
 
   case 10: /* other_symbols: LEFT_BRACKETS  */
@@ -1213,7 +1205,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKETS({::DST_Main::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1217 "DST_Main_parser.tab.c"
+#line 1209 "DST_Main_parser.tab.c"
     break;
 
   case 11: /* other_symbols: RIGHT_BRACKETS  */
@@ -1222,7 +1214,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::RIGHT_BRACKETS({::DST_Main::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1226 "DST_Main_parser.tab.c"
+#line 1218 "DST_Main_parser.tab.c"
     break;
 
   case 12: /* other_symbols: LEFT_BRACKET  */
@@ -1231,7 +1223,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKET({::DST_Main::ast::Type::LEFT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1235 "DST_Main_parser.tab.c"
+#line 1227 "DST_Main_parser.tab.c"
     break;
 
   case 13: /* other_symbols: RIGHT_BRACKET  */
@@ -1240,7 +1232,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::RIGHT_BRACKET({::DST_Main::ast::Type::RIGHT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1244 "DST_Main_parser.tab.c"
+#line 1236 "DST_Main_parser.tab.c"
     break;
 
   case 14: /* other_symbols: OTHER  */
@@ -1249,7 +1241,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {6, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::OTHER({::DST_Main::ast::Type::OTHER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1253 "DST_Main_parser.tab.c"
+#line 1245 "DST_Main_parser.tab.c"
     break;
 
   case 15: /* other_symbols: BACKSLASH  */
@@ -1258,7 +1250,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {7, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::BACKSLASH({::DST_Main::ast::Type::BACKSLASH, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1262 "DST_Main_parser.tab.c"
+#line 1254 "DST_Main_parser.tab.c"
     break;
 
   case 16: /* other_symbols: VARNAME  */
@@ -1267,7 +1259,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {8, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1271 "DST_Main_parser.tab.c"
+#line 1263 "DST_Main_parser.tab.c"
     break;
 
   case 17: /* other_symbols: DOT  */
@@ -1276,7 +1268,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {9, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_other_symbols) = newNode;
 	}
-#line 1280 "DST_Main_parser.tab.c"
+#line 1272 "DST_Main_parser.tab.c"
     break;
 
   case 18: /* variable: VARNAME scope  */
@@ -1285,7 +1277,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::variable({::DST_Main::ast::Type::variable, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DST_Main_scope) });
 		(yyval.DST_Main_variable) = newNode;
 	}
-#line 1289 "DST_Main_parser.tab.c"
+#line 1281 "DST_Main_parser.tab.c"
     break;
 
   case 19: /* variable: VARNAME  */
@@ -1294,7 +1286,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::variable({::DST_Main::ast::Type::variable, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_variable) = newNode;
 	}
-#line 1298 "DST_Main_parser.tab.c"
+#line 1290 "DST_Main_parser.tab.c"
     break;
 
   case 20: /* scope: DOT VARNAME scope  */
@@ -1303,7 +1295,7 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::scope({::DST_Main::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DST_Main_scope) });
 		(yyval.DST_Main_scope) = newNode;
 	}
-#line 1307 "DST_Main_parser.tab.c"
+#line 1299 "DST_Main_parser.tab.c"
     break;
 
   case 21: /* scope: DOT VARNAME  */
@@ -1312,11 +1304,11 @@ yyreduce:
 		auto* const newNode = new DST_Main::ast::node::scope({::DST_Main::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DST_Main_scope) = newNode;
 	}
-#line 1316 "DST_Main_parser.tab.c"
+#line 1308 "DST_Main_parser.tab.c"
     break;
 
 
-#line 1320 "DST_Main_parser.tab.c"
+#line 1312 "DST_Main_parser.tab.c"
 
       default: break;
     }
@@ -1398,6 +1390,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -1458,7 +1451,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -1466,24 +1459,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
-#endif
+  goto yyreturnlab;
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
