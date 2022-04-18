@@ -25,7 +25,7 @@ namespace DST::user
 
 			if (!templateText.empty())
 			{
-				const auto main_parser = DST_Main::parser::Parser();
+				const auto main_parser = DST_Main::bison::parser::Parser();
 				auto main_listener = DST_Main::ast::listener::user::InsertVariable(construction);
 
 				auto* main_tree = main_parser.Parse(templateText);
@@ -37,7 +37,7 @@ namespace DST::user
 
 			if (!settingText.empty())
 			{
-				const auto setting_parser = DST_Setting::parser::Parser();
+				const auto setting_parser = DST_Setting::bison::parser::Parser();
 				auto setting_listener = DST_Setting::ast::listener::user::InsertVariable(construction);
 
 				auto* setting_tree = setting_parser.Parse(settingText);

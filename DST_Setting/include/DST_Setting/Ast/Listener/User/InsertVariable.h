@@ -43,7 +43,7 @@ namespace DST_Setting::ast::listener::user
 		
 		void ParseAbstraction(const std::string& value)
 		{
-			const auto DST_Main_parser = DST_Main::parser::Parser();
+			const auto DST_Main_parser = DST_Main::bison::parser::Parser();
 
 			auto tree = std::unique_ptr<::deamer::external::cpp::ast::Tree>(DST_Main_parser.Parse(value));
 
