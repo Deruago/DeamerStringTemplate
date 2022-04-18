@@ -35,7 +35,7 @@ int main(int argc, const char* argv[])
 		std::cout << text << "\n";
 		std::cout << "\n";
 
-		auto parser = DST_Setting::parser::Parser();
+		auto parser = DST_Setting::bison::parser::Parser();
 		auto* ast = parser.Parse(text);
 		if (ast == nullptr)
 		{

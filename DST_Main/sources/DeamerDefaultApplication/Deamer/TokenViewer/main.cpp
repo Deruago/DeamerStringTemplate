@@ -35,9 +35,9 @@ int main(int argc, const char* argv[])
 		std::cout << text << "\n";
 		std::cout << "\n";
 
-		auto lexer = DST_Main::lexer::Lexer();
+		auto lexer = DST_Main::flex::lexer::Lexer();
 		auto tokens = lexer.Tokenize(text);
-		DST_Main::parser::Parser();
+		DST_Main::bison::parser::Parser();
 
 		std::cout << "Tokens:\n";
 		for (auto token : tokens)
