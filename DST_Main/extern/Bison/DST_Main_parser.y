@@ -1,3 +1,7 @@
+%define parse.error verbose
+%define parse.lac full
+
+
 %{
 #include <iostream>
 #include <vector>
@@ -21,6 +25,7 @@
 #include "DST_Main/Ast/Node/BACKSLASH.h"
 #include "DST_Main/Ast/Node/OTHER.h"
 
+
 #include "DST_Main/Ast/Node/program.h"
 #include "DST_Main/Ast/Node/stmts.h"
 #include "DST_Main/Ast/Node/stmt.h"
@@ -28,6 +33,7 @@
 #include "DST_Main/Ast/Node/other_symbols.h"
 #include "DST_Main/Ast/Node/variable.h"
 #include "DST_Main/Ast/Node/scope.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DST_Mainnerrs
@@ -53,6 +59,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> BACKSLASH
 %token<Terminal> OTHER
 
+
 %nterm<DST_Main_program> program
 %nterm<DST_Main_stmts> stmts
 %nterm<DST_Main_stmt> stmt
@@ -60,7 +67,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DST_Main_other_symbols> other_symbols
 %nterm<DST_Main_variable> variable
 %nterm<DST_Main_scope> scope
-
 
 
 %union{
@@ -82,111 +88,161 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DST_Main::ast::node::other_symbols* DST_Main_other_symbols;
 	::DST_Main::ast::node::variable* DST_Main_variable;
 	::DST_Main::ast::node::scope* DST_Main_scope;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DST_Main::ast::node::program({::DST_Main::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DST_Main::ast::node::program({::DST_Main::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DST_Main::ast::node::stmts({::DST_Main::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DST_Main::ast::node::stmts({::DST_Main::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DST_Main::ast::node::stmts({::DST_Main::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DST_Main::ast::node::stmts({::DST_Main::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	variable_insertion {
-		auto* const newNode = new DST_Main::ast::node::stmt({::DST_Main::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	variable_insertion  {
+		auto* const newNode = new DST_Main::ast::node::stmt({::DST_Main::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| other_symbols {
-		auto* const newNode = new DST_Main::ast::node::stmt({::DST_Main::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| other_symbols  {
+		auto* const newNode = new DST_Main::ast::node::stmt({::DST_Main::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 variable_insertion:
-	LEFT_BRACKETS variable RIGHT_BRACKETS {
-		auto* const newNode = new DST_Main::ast::node::variable_insertion({::DST_Main::ast::Type::variable_insertion, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKETS({::DST_Main::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2, new DST_Main::ast::node::RIGHT_BRACKETS({::DST_Main::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $3}) });
+	LEFT_BRACKETS variable RIGHT_BRACKETS  {
+		auto* const newNode = new DST_Main::ast::node::variable_insertion({::DST_Main::ast::Type::variable_insertion, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::LEFT_BRACKETS({::DST_Main::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2, new DST_Main::ast::node::RIGHT_BRACKETS({::DST_Main::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $3 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 other_symbols:
-	LEFT_BRACKETS_ESCAPED {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKETS_ESCAPED({::DST_Main::ast::Type::LEFT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	LEFT_BRACKETS_ESCAPED  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::LEFT_BRACKETS_ESCAPED({::DST_Main::ast::Type::LEFT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| RIGHT_BRACKETS_ESCAPED {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED({::DST_Main::ast::Type::RIGHT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| RIGHT_BRACKETS_ESCAPED  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED({::DST_Main::ast::Type::RIGHT_BRACKETS_ESCAPED, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| LEFT_BRACKETS {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKETS({::DST_Main::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| LEFT_BRACKETS  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::LEFT_BRACKETS({::DST_Main::ast::Type::LEFT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| RIGHT_BRACKETS {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::RIGHT_BRACKETS({::DST_Main::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| RIGHT_BRACKETS  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::RIGHT_BRACKETS({::DST_Main::ast::Type::RIGHT_BRACKETS, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| LEFT_BRACKET {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::LEFT_BRACKET({::DST_Main::ast::Type::LEFT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| LEFT_BRACKET  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 4, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::LEFT_BRACKET({::DST_Main::ast::Type::LEFT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| RIGHT_BRACKET {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::RIGHT_BRACKET({::DST_Main::ast::Type::RIGHT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| RIGHT_BRACKET  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 5, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::RIGHT_BRACKET({::DST_Main::ast::Type::RIGHT_BRACKET, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| OTHER {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {6, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::OTHER({::DST_Main::ast::Type::OTHER, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| OTHER  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 6, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::OTHER({::DST_Main::ast::Type::OTHER, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| BACKSLASH {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {7, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::BACKSLASH({::DST_Main::ast::Type::BACKSLASH, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| BACKSLASH  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 7, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::BACKSLASH({::DST_Main::ast::Type::BACKSLASH, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| VARNAME {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {8, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| VARNAME  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 8, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| DOT {
-		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, {9, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| DOT  {
+		auto* const newNode = new DST_Main::ast::node::other_symbols({::DST_Main::ast::Type::other_symbols, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 9, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 variable:
-	VARNAME scope {
-		auto* const newNode = new DST_Main::ast::node::variable({::DST_Main::ast::Type::variable, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+	VARNAME scope  {
+		auto* const newNode = new DST_Main::ast::node::variable({::DST_Main::ast::Type::variable, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| VARNAME {
-		auto* const newNode = new DST_Main::ast::node::variable({::DST_Main::ast::Type::variable, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| VARNAME  {
+		auto* const newNode = new DST_Main::ast::node::variable({::DST_Main::ast::Type::variable, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 scope:
-	DOT VARNAME scope {
-		auto* const newNode = new DST_Main::ast::node::scope({::DST_Main::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $2}), $3 });
+	DOT VARNAME scope  {
+		auto* const newNode = new DST_Main::ast::node::scope({::DST_Main::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }), $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| DOT VARNAME {
-		auto* const newNode = new DST_Main::ast::node::scope({::DST_Main::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $2}) });
+	| DOT VARNAME  {
+		auto* const newNode = new DST_Main::ast::node::scope({::DST_Main::ast::Type::scope, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DST_Main::ast::node::DOT({::DST_Main::ast::Type::DOT, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), new DST_Main::ast::node::VARNAME({::DST_Main::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -195,7 +251,7 @@ void DST_Mainerror(const char* s)
 	std::cout << "Syntax error on line: " << s << '\n';
 }
 
-deamer::external::cpp::ast::Tree* DST_Main::parser::Parser::Parse(const std::string& text) const
+deamer::external::cpp::ast::Tree* DST_Main::bison::parser::Parser::Parse(const std::string& text) const
 {
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
@@ -206,4 +262,3 @@ deamer::external::cpp::ast::Tree* DST_Main::parser::Parser::Parse(const std::str
 
 	return outputTree;
 }
-

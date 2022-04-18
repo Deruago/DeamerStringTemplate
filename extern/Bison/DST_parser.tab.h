@@ -63,14 +63,15 @@ extern int DSTdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 38 "./DST_parser.y"
+#line 44 "./DST_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DST::ast::node::ANY* DST_ANY;
 	::DST::ast::node::program* DST_program;
 	::DST::ast::node::deamerreserved_star__ANY__* DST_deamerreserved_star__ANY__;
 
-#line 74 "DST_parser.tab.h"
+
+#line 75 "DST_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

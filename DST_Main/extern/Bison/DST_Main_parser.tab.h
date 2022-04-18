@@ -72,7 +72,7 @@ extern int DST_Maindebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 66 "./DST_Main_parser.y"
+#line 72 "./DST_Main_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DST_Main::ast::node::DOT* DST_Main_DOT;
@@ -93,7 +93,8 @@ union YYSTYPE
 	::DST_Main::ast::node::variable* DST_Main_variable;
 	::DST_Main::ast::node::scope* DST_Main_scope;
 
-#line 97 "DST_Main_parser.tab.h"
+
+#line 98 "DST_Main_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

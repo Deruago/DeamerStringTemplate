@@ -9,4 +9,3 @@
 
 set(source_files ./DST_Setting_parser.tab.cpp)
 DST_Setting_add_external_library(Bison ${source_files})
-target_link_libraries(DST_Setting_Bison_static_library PUBLIC DST_Setting_Flex_static_library)

@@ -105,7 +105,8 @@ extern int DST_Settingdebug;
     ALTERNATE_FIELD_2_5_2 = 306,   /* ALTERNATE_FIELD_2_5_2  */
     ALTERNATE_FIELD_2_5_3 = 307,   /* ALTERNATE_FIELD_2_5_3  */
     ALTERNATE_FIELD_2_5_4 = 308,   /* ALTERNATE_FIELD_2_5_4  */
-    ALTERNATE_FIELD_2_5_5 = 309    /* ALTERNATE_FIELD_2_5_5  */
+    ALTERNATE_FIELD_2_5_5 = 309,   /* ALTERNATE_FIELD_2_5_5  */
+    OTHER = 310                    /* OTHER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -114,7 +115,7 @@ extern int DST_Settingdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 163 "./DST_Setting_parser.y"
+#line 170 "./DST_Setting_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DST_Setting::ast::node::LEFT_BRACKETS* DST_Setting_LEFT_BRACKETS;
@@ -184,7 +185,8 @@ union YYSTYPE
 	::DST_Setting::ast::node::alternative_field_nt_1* DST_Setting_alternative_field_nt_1;
 	::DST_Setting::ast::node::alternative_field_nt_2* DST_Setting_alternative_field_nt_2;
 
-#line 188 "DST_Setting_parser.tab.h"
+
+#line 190 "DST_Setting_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

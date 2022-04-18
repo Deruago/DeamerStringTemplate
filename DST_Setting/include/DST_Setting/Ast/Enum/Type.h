@@ -1,14 +1,16 @@
-#ifndef DST_Setting_AST_ENUM_TYPE_H
-#define DST_Setting_AST_ENUM_TYPE_H
+#ifndef DST_SETTING_AST_ENUM_TYPE_H
+#define DST_SETTING_AST_ENUM_TYPE_H
 
-namespace DST_Setting { namespace ast {
+#include <cstddef>
 
-	enum class Type
+namespace DST_Setting { namespace ast { 
+
+	enum class Type : std::size_t
 	{
 		// Reserved
 		deamerreserved_unknown,
 
-		// Terminals
+		// Terminal
 		LEFT_BRACKETS,
 		RIGHT_BRACKETS,
 		DOT,
@@ -63,7 +65,8 @@ namespace DST_Setting { namespace ast {
 		ALTERNATE_FIELD_2_5_5,
 		OTHER,
 
-		// Non-Terminals
+
+		// NonTerminal
 		program,
 		stmts,
 		stmt,
@@ -77,8 +80,28 @@ namespace DST_Setting { namespace ast {
 		user_keyword,
 		alternative_field_nt_1,
 		alternative_field_nt_2,
+
 	};
 
+	static inline bool operator==(std::size_t lhs, ::DST_Setting::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DST_Setting::ast::Type lhs, std::size_t rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
+
+	static inline bool operator==(int lhs, ::DST_Setting::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DST_Setting::ast::Type lhs, int rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
 }}
 
-#endif // DST_Setting_AST_ENUM_TYPE_H
+#endif // DST_SETTING_AST_ENUM_TYPE_H

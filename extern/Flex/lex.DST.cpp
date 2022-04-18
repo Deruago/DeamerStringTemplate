@@ -632,8 +632,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 2
-#define YY_END_OF_BUFFER 3
+#define YY_NUM_RULES 3
+#define YY_END_OF_BUFFER 4
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -641,13 +641,14 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[7] =
+static const flex_int16_t yy_accept[8] =
     {   0,
-        0,    0,    3,    1,    1,    0
+        0,    0,    4,    1,    1,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -656,8 +657,7 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    3,    1,    1,    1,    1,    1,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -678,35 +678,35 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[3] =
+static const YY_CHAR yy_meta[4] =
     {   0,
-        1,    1
+        1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[7] =
+static const flex_int16_t yy_base[9] =
     {   0,
-        0,    0,    5,    2,    0,    6
+        0,    0,    5,    0,    0,    0,    6,    3
     } ;
 
-static const flex_int16_t yy_def[7] =
+static const flex_int16_t yy_def[9] =
     {   0,
-        6,    1,    6,    6,    4,    0
+        7,    1,    7,    8,    8,    8,    0,    7
     } ;
 
-static const flex_int16_t yy_nxt[9] =
+static const flex_int16_t yy_nxt[10] =
     {   0,
-        4,    4,    5,    5,    6,    3,    6,    6
+        4,    5,    4,    6,    7,    3,    7,    7,    7
     } ;
 
-static const flex_int16_t yy_chk[9] =
+static const flex_int16_t yy_chk[10] =
     {   0,
-        1,    1,    4,    4,    3,    6,    6,    6
+        1,    1,    1,    8,    3,    7,    7,    7,    7
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[3] =
+static const flex_int32_t yy_rule_can_match_eol[4] =
     {   0,
-1, 0,     };
+1, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -732,25 +732,32 @@ char *yytext;
 #include <vector>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
 #include "DST/Flex/Lexer.h"
-#include "DST/Ast/Enum/Type.h"
-#include "DST/Ast/Node/ANY.h"
 
+#include "DST/Ast/Enum/Type.h"
+
+#include "DST/Ast/Node/ANY.h"
 #include "DST/Ast/Node/program.h"
 #include "DST/Ast/Node/deamerreserved_star__ANY__.h"
+
+
 #include "Bison/DST_parser.tab.h"
 void showError();
 extern int DSTlex();
 
 static bool local_store = false;
+static bool include_deleted = false;
 static int column = 0;
-static int handleColumn(const std::string& text);
+static void handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
-static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
+static std::vector<const deamer::external::cpp::lexer::TerminalObject*> 
+local_objects;
+
+
 #ifndef yyval
 #define yyval yytext
-#endif //yyval
-#line 753 "lex.DST.c"
-#line 754 "lex.DST.c"
+#endif // yyval
+#line 760 "lex.DST.c"
+#line 761 "lex.DST.c"
 
 #define INITIAL 0
 
@@ -967,10 +974,10 @@ YY_DECL
 		}
 
 	{
-#line 35 "./DST_lexer.l"
+#line 44 "./DST_lexer.l"
 
 
-#line 974 "lex.DST.c"
+#line 981 "lex.DST.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -997,13 +1004,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 7 )
+				if ( yy_current_state >= 8 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 6 );
+		while ( yy_current_state != 7 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -1036,15 +1043,20 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 37 "./DST_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (ANY);;}
+#line 46 "./DST_lexer.l"
+{  if (local_store && !false || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(1))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(1))); else if (local_store && false); else if (!false || include_deleted) DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(1)); else DSTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(1)); handleColumn(yyval); if ((!local_store && true) || (!local_store && include_deleted)) return (ANY); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 39 "./DST_lexer.l"
+#line 48 "./DST_lexer.l"
+{ if (local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(0))); }
+	YY_BREAK
+case 3:
+YY_RULE_SETUP
+#line 50 "./DST_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1048 "lex.DST.c"
+#line 1061 "lex.DST.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1342,7 +1354,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 7 )
+			if ( yy_current_state >= 8 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1370,11 +1382,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 7 )
+		if ( yy_current_state >= 8 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 6);
+	yy_is_jam = (yy_current_state == 7);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2062,7 +2074,8 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 39 "./DST_lexer.l"
+#line 50 "./DST_lexer.l"
+
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {
@@ -2074,9 +2087,9 @@ static void clear()
 	local_objects.clear();
 }
 
-static int handleColumn(const std::string& text)
+static void handleColumn(const std::string& text)
 {
-	int currentColumn = column;
+	int& currentColumn = column;
 	currentColumn += text.size();
 	for (auto character : text)
 	{
@@ -2086,12 +2099,19 @@ static int handleColumn(const std::string& text)
 			break;
 		}
 	}
-	
-	return currentColumn;
 }
 
-std::vector<const deamer::external::cpp::lexer::TerminalObject*> DST::lexer::Lexer::Tokenize(const std::string& text) const
+std::vector<const ::deamer::external::cpp::lexer::TerminalObject*> DST::flex::lexer::Lexer::Tokenize(const std::string& text, ::deamer::external::cpp::lexer::TerminalConstructionPolicy constructionPolicy) const
 {
+	if (constructionPolicy == ::deamer::external::cpp::lexer::TerminalConstructionPolicy::include_deleted_terminals)
+	{
+		include_deleted = true;
+	}
+	else
+	{
+		include_deleted = false;
+	}
+
 	local_store = true;
 	column = 0;
 
@@ -2102,12 +2122,10 @@ std::vector<const deamer::external::cpp::lexer::TerminalObject*> DST::lexer::Lex
 	yylex_destroy();
 
 	local_store = false;
+	include_deleted = false;
 
 	auto local_objects_copy = local_objects;
 	clear();
 
 	return local_objects_copy;
 }
-
-
-

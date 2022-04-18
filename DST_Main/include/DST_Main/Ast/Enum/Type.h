@@ -1,14 +1,16 @@
-#ifndef DST_Main_AST_ENUM_TYPE_H
-#define DST_Main_AST_ENUM_TYPE_H
+#ifndef DST_MAIN_AST_ENUM_TYPE_H
+#define DST_MAIN_AST_ENUM_TYPE_H
 
-namespace DST_Main { namespace ast {
+#include <cstddef>
 
-	enum class Type
+namespace DST_Main { namespace ast { 
+
+	enum class Type : std::size_t
 	{
 		// Reserved
 		deamerreserved_unknown,
 
-		// Terminals
+		// Terminal
 		DOT,
 		LEFT_BRACKETS_ESCAPED,
 		RIGHT_BRACKETS_ESCAPED,
@@ -20,7 +22,8 @@ namespace DST_Main { namespace ast {
 		BACKSLASH,
 		OTHER,
 
-		// Non-Terminals
+
+		// NonTerminal
 		program,
 		stmts,
 		stmt,
@@ -28,8 +31,28 @@ namespace DST_Main { namespace ast {
 		other_symbols,
 		variable,
 		scope,
+
 	};
 
+	static inline bool operator==(std::size_t lhs, ::DST_Main::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DST_Main::ast::Type lhs, std::size_t rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
+
+	static inline bool operator==(int lhs, ::DST_Main::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DST_Main::ast::Type lhs, int rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
 }}
 
-#endif // DST_Main_AST_ENUM_TYPE_H
+#endif // DST_MAIN_AST_ENUM_TYPE_H

@@ -1,5 +1,5 @@
-#ifndef DST_AST_REFERENCE_ACCESS_H
-#define DST_AST_REFERENCE_ACCESS_H
+#ifndef DST_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DST_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DST/Ast/Relation/NodeEnumToType.h"
 #include "DST/Ast/Relation/NodeTypeToEnum.h"
@@ -52,49 +52,86 @@ namespace DST { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DST::ast::node::program>;
+	struct AccessTemplateBase<::DST::ast::node::program>;
 	template<>
-	struct Access<::DST::ast::node::deamerreserved_star__ANY__>;
+	struct AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>;
 	template<>
-	struct Access<::DST::ast::node::ANY>;
+	struct AccessTemplateBase<::DST::ast::node::ANY>;
 
 
 	
 	template<>
-	struct Access<::DST::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DST::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DST::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DST::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DST::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -110,7 +147,7 @@ namespace DST { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DST::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -144,12 +181,12 @@ namespace DST { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DST::ast::node::deamerreserved_star__ANY__> deamerreserved_star__ANY__();
-Access<::DST::ast::node::ANY> ANY();
+		AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__> deamerreserved_star__ANY__();
+AccessTemplateBase<::DST::ast::node::ANY> ANY();
 
 
 		template<typename FunctionType>
-		Access<::DST::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DST::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -158,31 +195,51 @@ Access<::DST::ast::node::ANY> ANY();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST::ast::node::deamerreserved_star__ANY__> : public AccessBase
+	struct AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST::ast::node::deamerreserved_star__ANY__*> ts;
 
 	public:
-		Access(std::vector<const ::DST::ast::node::deamerreserved_star__ANY__*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST::ast::node::deamerreserved_star__ANY__*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST::ast::node::deamerreserved_star__ANY__& t) : ts({&t})
+		AccessTemplateBase(const ::DST::ast::node::deamerreserved_star__ANY__& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST::ast::node::deamerreserved_star__ANY__* t) : ts({t})
+		AccessTemplateBase(const ::DST::ast::node::deamerreserved_star__ANY__* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST::ast::node::deamerreserved_star__ANY__>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -198,7 +255,7 @@ Access<::DST::ast::node::ANY> ANY();
 			return *this;
 		}
 
-		Access<::DST::ast::node::deamerreserved_star__ANY__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -232,12 +289,12 @@ Access<::DST::ast::node::ANY> ANY();
 		}
 
 	public:
-		Access<::DST::ast::node::deamerreserved_star__ANY__> deamerreserved_star__ANY__();
-Access<::DST::ast::node::ANY> ANY();
+		AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__> deamerreserved_star__ANY__();
+AccessTemplateBase<::DST::ast::node::ANY> ANY();
 
 
 		template<typename FunctionType>
-		Access<::DST::ast::node::deamerreserved_star__ANY__>& for_all(FunctionType function)
+		AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -246,31 +303,51 @@ Access<::DST::ast::node::ANY> ANY();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST::ast::node::ANY> : public AccessBase
+	struct AccessTemplateBase<::DST::ast::node::ANY> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST::ast::node::ANY*> ts;
 
 	public:
-		Access(std::vector<const ::DST::ast::node::ANY*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST::ast::node::ANY*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST::ast::node::ANY& t) : ts({&t})
+		AccessTemplateBase(const ::DST::ast::node::ANY& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST::ast::node::ANY* t) : ts({t})
+		AccessTemplateBase(const ::DST::ast::node::ANY* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST::ast::node::ANY>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST::ast::node::ANY>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -286,7 +363,7 @@ Access<::DST::ast::node::ANY> ANY();
 			return *this;
 		}
 
-		Access<::DST::ast::node::ANY>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST::ast::node::ANY>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -323,7 +400,7 @@ Access<::DST::ast::node::ANY> ANY();
 		
 
 		template<typename FunctionType>
-		Access<::DST::ast::node::ANY>& for_all(FunctionType function)
+		AccessTemplateBase<::DST::ast::node::ANY>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -332,40 +409,60 @@ Access<::DST::ast::node::ANY> ANY();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DST::ast::node::deamerreserved_star__ANY__> Access<::DST::ast::node::program>::deamerreserved_star__ANY__()
+		inline AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__> AccessTemplateBase<::DST::ast::node::program>::deamerreserved_star__ANY__()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST::ast::node::deamerreserved_star__ANY__>(Get<::DST::ast::Type::deamerreserved_star__ANY__>(ts));
+			return AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>(Get<::DST::ast::Type::deamerreserved_star__ANY__>(ts));
 		}
 
-		inline Access<::DST::ast::node::ANY> Access<::DST::ast::node::program>::ANY()
+		inline AccessTemplateBase<::DST::ast::node::ANY> AccessTemplateBase<::DST::ast::node::program>::ANY()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST::ast::node::ANY>(Get<::DST::ast::Type::ANY>(ts));
+			return AccessTemplateBase<::DST::ast::node::ANY>(Get<::DST::ast::Type::ANY>(ts));
 		}
 
-		inline Access<::DST::ast::node::deamerreserved_star__ANY__> Access<::DST::ast::node::deamerreserved_star__ANY__>::deamerreserved_star__ANY__()
+		inline AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__> AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>::deamerreserved_star__ANY__()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST::ast::node::deamerreserved_star__ANY__>(Get<::DST::ast::Type::deamerreserved_star__ANY__>(ts));
+			return AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>(Get<::DST::ast::Type::deamerreserved_star__ANY__>(ts));
 		}
 
-		inline Access<::DST::ast::node::ANY> Access<::DST::ast::node::deamerreserved_star__ANY__>::ANY()
+		inline AccessTemplateBase<::DST::ast::node::ANY> AccessTemplateBase<::DST::ast::node::deamerreserved_star__ANY__>::ANY()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST::ast::node::ANY>(Get<::DST::ast::Type::ANY>(ts));
+			return AccessTemplateBase<::DST::ast::node::ANY>(Get<::DST::ast::Type::ANY>(ts));
 		}
 
 
@@ -392,4 +489,4 @@ Access<::DST::ast::node::ANY> ANY();
 
 }}}
 
-#endif // DST_AST_REFERENCE_ACCESS_H
+#endif // DST_AST_REFERENCE_ACCESSTEMPLATEBASE_H

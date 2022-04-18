@@ -1,5 +1,5 @@
-#ifndef DST_MAIN_AST_REFERENCE_ACCESS_H
-#define DST_MAIN_AST_REFERENCE_ACCESS_H
+#ifndef DST_MAIN_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DST_MAIN_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DST_Main/Ast/Relation/NodeEnumToType.h"
 #include "DST_Main/Ast/Relation/NodeTypeToEnum.h"
@@ -66,77 +66,114 @@ namespace DST_Main { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::program>;
+	struct AccessTemplateBase<::DST_Main::ast::node::program>;
 	template<>
-	struct Access<::DST_Main::ast::node::stmts>;
+	struct AccessTemplateBase<::DST_Main::ast::node::stmts>;
 	template<>
-	struct Access<::DST_Main::ast::node::stmt>;
+	struct AccessTemplateBase<::DST_Main::ast::node::stmt>;
 	template<>
-	struct Access<::DST_Main::ast::node::variable_insertion>;
+	struct AccessTemplateBase<::DST_Main::ast::node::variable_insertion>;
 	template<>
-	struct Access<::DST_Main::ast::node::other_symbols>;
+	struct AccessTemplateBase<::DST_Main::ast::node::other_symbols>;
 	template<>
-	struct Access<::DST_Main::ast::node::variable>;
+	struct AccessTemplateBase<::DST_Main::ast::node::variable>;
 	template<>
-	struct Access<::DST_Main::ast::node::scope>;
+	struct AccessTemplateBase<::DST_Main::ast::node::scope>;
 	template<>
-	struct Access<::DST_Main::ast::node::DOT>;
+	struct AccessTemplateBase<::DST_Main::ast::node::DOT>;
 	template<>
-	struct Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>;
+	struct AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>;
 	template<>
-	struct Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>;
+	struct AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>;
 	template<>
-	struct Access<::DST_Main::ast::node::LEFT_BRACKETS>;
+	struct AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS>;
 	template<>
-	struct Access<::DST_Main::ast::node::RIGHT_BRACKETS>;
+	struct AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS>;
 	template<>
-	struct Access<::DST_Main::ast::node::LEFT_BRACKET>;
+	struct AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET>;
 	template<>
-	struct Access<::DST_Main::ast::node::RIGHT_BRACKET>;
+	struct AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET>;
 	template<>
-	struct Access<::DST_Main::ast::node::VARNAME>;
+	struct AccessTemplateBase<::DST_Main::ast::node::VARNAME>;
 	template<>
-	struct Access<::DST_Main::ast::node::BACKSLASH>;
+	struct AccessTemplateBase<::DST_Main::ast::node::BACKSLASH>;
 	template<>
-	struct Access<::DST_Main::ast::node::OTHER>;
+	struct AccessTemplateBase<::DST_Main::ast::node::OTHER>;
 
 
 	
 	template<>
-	struct Access<::DST_Main::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -152,7 +189,7 @@ namespace DST_Main { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -186,11 +223,11 @@ namespace DST_Main { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DST_Main::ast::node::stmts> stmts();
+		AccessTemplateBase<::DST_Main::ast::node::stmts> stmts();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -199,31 +236,51 @@ namespace DST_Main { namespace ast { namespace reference {
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::stmts> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::stmts> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::stmts*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::stmts*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::stmts*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::stmts& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::stmts& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::stmts* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::stmts* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::stmts>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::stmts>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -239,7 +296,7 @@ namespace DST_Main { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -273,12 +330,12 @@ namespace DST_Main { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DST_Main::ast::node::stmts> stmts();
-Access<::DST_Main::ast::node::stmt> stmt();
+		AccessTemplateBase<::DST_Main::ast::node::stmts> stmts();
+AccessTemplateBase<::DST_Main::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::stmts>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::stmts>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -287,31 +344,51 @@ Access<::DST_Main::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::stmt> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::stmt> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::stmt*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::stmt*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::stmt*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::stmt& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::stmt& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::stmt* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::stmt* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::stmt>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::stmt>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -327,7 +404,7 @@ Access<::DST_Main::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -361,12 +438,12 @@ Access<::DST_Main::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DST_Main::ast::node::variable_insertion> variable_insertion();
-Access<::DST_Main::ast::node::other_symbols> other_symbols();
+		AccessTemplateBase<::DST_Main::ast::node::variable_insertion> variable_insertion();
+AccessTemplateBase<::DST_Main::ast::node::other_symbols> other_symbols();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::stmt>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -375,31 +452,51 @@ Access<::DST_Main::ast::node::other_symbols> other_symbols();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::variable_insertion> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::variable_insertion> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::variable_insertion*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::variable_insertion*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::variable_insertion*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::variable_insertion& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::variable_insertion& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::variable_insertion* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::variable_insertion* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::variable_insertion>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::variable_insertion>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -415,7 +512,7 @@ Access<::DST_Main::ast::node::other_symbols> other_symbols();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::variable_insertion>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::variable_insertion>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -449,13 +546,13 @@ Access<::DST_Main::ast::node::other_symbols> other_symbols();
 		}
 
 	public:
-		Access<::DST_Main::ast::node::variable> variable();
-Access<::DST_Main::ast::node::LEFT_BRACKETS> LEFT_BRACKETS();
-Access<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
+		AccessTemplateBase<::DST_Main::ast::node::variable> variable();
+AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS> LEFT_BRACKETS();
+AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::variable_insertion>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::variable_insertion>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -464,31 +561,51 @@ Access<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::other_symbols> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::other_symbols> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::other_symbols*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::other_symbols*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::other_symbols*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::other_symbols& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::other_symbols& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::other_symbols* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::other_symbols* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::other_symbols>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::other_symbols>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -504,7 +621,7 @@ Access<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::other_symbols>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::other_symbols>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -538,20 +655,20 @@ Access<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
 		}
 
 	public:
-		Access<::DST_Main::ast::node::DOT> DOT();
-Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED> LEFT_BRACKETS_ESCAPED();
-Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED> RIGHT_BRACKETS_ESCAPED();
-Access<::DST_Main::ast::node::LEFT_BRACKETS> LEFT_BRACKETS();
-Access<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
-Access<::DST_Main::ast::node::LEFT_BRACKET> LEFT_BRACKET();
-Access<::DST_Main::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
-Access<::DST_Main::ast::node::VARNAME> VARNAME();
-Access<::DST_Main::ast::node::BACKSLASH> BACKSLASH();
-Access<::DST_Main::ast::node::OTHER> OTHER();
+		AccessTemplateBase<::DST_Main::ast::node::DOT> DOT();
+AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED> LEFT_BRACKETS_ESCAPED();
+AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED> RIGHT_BRACKETS_ESCAPED();
+AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS> LEFT_BRACKETS();
+AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS> RIGHT_BRACKETS();
+AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET> LEFT_BRACKET();
+AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
+AccessTemplateBase<::DST_Main::ast::node::VARNAME> VARNAME();
+AccessTemplateBase<::DST_Main::ast::node::BACKSLASH> BACKSLASH();
+AccessTemplateBase<::DST_Main::ast::node::OTHER> OTHER();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::other_symbols>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::other_symbols>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -560,31 +677,51 @@ Access<::DST_Main::ast::node::OTHER> OTHER();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::variable> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::variable> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::variable*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::variable*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::variable*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::variable& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::variable& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::variable* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::variable* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::variable>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::variable>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -600,7 +737,7 @@ Access<::DST_Main::ast::node::OTHER> OTHER();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::variable>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::variable>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -634,12 +771,12 @@ Access<::DST_Main::ast::node::OTHER> OTHER();
 		}
 
 	public:
-		Access<::DST_Main::ast::node::scope> scope();
-Access<::DST_Main::ast::node::VARNAME> VARNAME();
+		AccessTemplateBase<::DST_Main::ast::node::scope> scope();
+AccessTemplateBase<::DST_Main::ast::node::VARNAME> VARNAME();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::variable>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::variable>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -648,31 +785,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::scope> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::scope> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::scope*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::scope*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::scope*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::scope& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::scope& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::scope* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::scope* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::scope>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::scope>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -688,7 +845,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::scope>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::scope>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -722,13 +879,13 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		}
 
 	public:
-		Access<::DST_Main::ast::node::DOT> DOT();
-Access<::DST_Main::ast::node::scope> scope();
-Access<::DST_Main::ast::node::VARNAME> VARNAME();
+		AccessTemplateBase<::DST_Main::ast::node::DOT> DOT();
+AccessTemplateBase<::DST_Main::ast::node::scope> scope();
+AccessTemplateBase<::DST_Main::ast::node::VARNAME> VARNAME();
 
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::scope>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::scope>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -737,31 +894,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::DOT> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::DOT> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::DOT*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::DOT*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::DOT*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::DOT& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::DOT& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::DOT* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::DOT* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::DOT>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::DOT>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -777,7 +954,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::DOT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::DOT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -814,7 +991,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::DOT>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::DOT>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -823,31 +1000,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -863,7 +1060,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -900,7 +1097,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -909,31 +1106,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -949,7 +1166,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -986,7 +1203,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -995,31 +1212,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::LEFT_BRACKETS> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::LEFT_BRACKETS*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::LEFT_BRACKETS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::LEFT_BRACKETS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::LEFT_BRACKETS& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::LEFT_BRACKETS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::LEFT_BRACKETS* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::LEFT_BRACKETS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::LEFT_BRACKETS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1035,7 +1272,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::LEFT_BRACKETS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1072,7 +1309,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::LEFT_BRACKETS>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1081,31 +1318,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::RIGHT_BRACKETS> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::RIGHT_BRACKETS*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::RIGHT_BRACKETS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::RIGHT_BRACKETS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::RIGHT_BRACKETS& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::RIGHT_BRACKETS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::RIGHT_BRACKETS* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::RIGHT_BRACKETS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::RIGHT_BRACKETS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1121,7 +1378,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::RIGHT_BRACKETS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1158,7 +1415,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::RIGHT_BRACKETS>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1167,31 +1424,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::LEFT_BRACKET> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::LEFT_BRACKET*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::LEFT_BRACKET*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::LEFT_BRACKET*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::LEFT_BRACKET& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::LEFT_BRACKET& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::LEFT_BRACKET* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::LEFT_BRACKET* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::LEFT_BRACKET>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1207,7 +1484,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::LEFT_BRACKET>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1244,7 +1521,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::LEFT_BRACKET>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1253,31 +1530,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::RIGHT_BRACKET> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::RIGHT_BRACKET*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::RIGHT_BRACKET*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::RIGHT_BRACKET*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::RIGHT_BRACKET& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::RIGHT_BRACKET& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::RIGHT_BRACKET* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::RIGHT_BRACKET* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::RIGHT_BRACKET>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1293,7 +1590,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::RIGHT_BRACKET>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1330,7 +1627,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::RIGHT_BRACKET>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1339,31 +1636,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::VARNAME> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::VARNAME> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::VARNAME*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::VARNAME*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::VARNAME*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::VARNAME& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::VARNAME& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::VARNAME* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::VARNAME* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::VARNAME>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::VARNAME>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1379,7 +1696,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::VARNAME>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::VARNAME>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1416,7 +1733,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::VARNAME>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::VARNAME>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1425,31 +1742,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::BACKSLASH> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::BACKSLASH> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::BACKSLASH*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::BACKSLASH*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::BACKSLASH*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::BACKSLASH& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::BACKSLASH& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::BACKSLASH* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::BACKSLASH* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::BACKSLASH>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::BACKSLASH>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1465,7 +1802,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::BACKSLASH>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::BACKSLASH>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1502,7 +1839,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::BACKSLASH>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::BACKSLASH>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1511,31 +1848,51 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DST_Main::ast::node::OTHER> : public AccessBase
+	struct AccessTemplateBase<::DST_Main::ast::node::OTHER> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DST_Main::ast::node::OTHER*> ts;
 
 	public:
-		Access(std::vector<const ::DST_Main::ast::node::OTHER*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DST_Main::ast::node::OTHER*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::OTHER& t) : ts({&t})
+		AccessTemplateBase(const ::DST_Main::ast::node::OTHER& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DST_Main::ast::node::OTHER* t) : ts({t})
+		AccessTemplateBase(const ::DST_Main::ast::node::OTHER* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DST_Main::ast::node::OTHER>& operator[](::std::size_t index)
+		AccessTemplateBase<::DST_Main::ast::node::OTHER>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1551,7 +1908,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 			return *this;
 		}
 
-		Access<::DST_Main::ast::node::OTHER>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DST_Main::ast::node::OTHER>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1588,7 +1945,7 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 		
 
 		template<typename FunctionType>
-		Access<::DST_Main::ast::node::OTHER>& for_all(FunctionType function)
+		AccessTemplateBase<::DST_Main::ast::node::OTHER>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1597,192 +1954,212 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DST_Main::ast::node::stmts> Access<::DST_Main::ast::node::program>::stmts()
+		inline AccessTemplateBase<::DST_Main::ast::node::stmts> AccessTemplateBase<::DST_Main::ast::node::program>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::stmts>(Get<::DST_Main::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::stmts>(Get<::DST_Main::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::stmts> Access<::DST_Main::ast::node::stmts>::stmts()
+		inline AccessTemplateBase<::DST_Main::ast::node::stmts> AccessTemplateBase<::DST_Main::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::stmts>(Get<::DST_Main::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::stmts>(Get<::DST_Main::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::stmt> Access<::DST_Main::ast::node::stmts>::stmt()
+		inline AccessTemplateBase<::DST_Main::ast::node::stmt> AccessTemplateBase<::DST_Main::ast::node::stmts>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::stmt>(Get<::DST_Main::ast::Type::stmt>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::stmt>(Get<::DST_Main::ast::Type::stmt>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::variable_insertion> Access<::DST_Main::ast::node::stmt>::variable_insertion()
+		inline AccessTemplateBase<::DST_Main::ast::node::variable_insertion> AccessTemplateBase<::DST_Main::ast::node::stmt>::variable_insertion()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::variable_insertion>(Get<::DST_Main::ast::Type::variable_insertion>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::variable_insertion>(Get<::DST_Main::ast::Type::variable_insertion>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::other_symbols> Access<::DST_Main::ast::node::stmt>::other_symbols()
+		inline AccessTemplateBase<::DST_Main::ast::node::other_symbols> AccessTemplateBase<::DST_Main::ast::node::stmt>::other_symbols()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::other_symbols>(Get<::DST_Main::ast::Type::other_symbols>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::other_symbols>(Get<::DST_Main::ast::Type::other_symbols>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::variable> Access<::DST_Main::ast::node::variable_insertion>::variable()
+		inline AccessTemplateBase<::DST_Main::ast::node::variable> AccessTemplateBase<::DST_Main::ast::node::variable_insertion>::variable()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::variable>(Get<::DST_Main::ast::Type::variable>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::variable>(Get<::DST_Main::ast::Type::variable>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::LEFT_BRACKETS> Access<::DST_Main::ast::node::variable_insertion>::LEFT_BRACKETS()
+		inline AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS> AccessTemplateBase<::DST_Main::ast::node::variable_insertion>::LEFT_BRACKETS()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::LEFT_BRACKETS>(Get<::DST_Main::ast::Type::LEFT_BRACKETS>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS>(Get<::DST_Main::ast::Type::LEFT_BRACKETS>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::RIGHT_BRACKETS> Access<::DST_Main::ast::node::variable_insertion>::RIGHT_BRACKETS()
+		inline AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS> AccessTemplateBase<::DST_Main::ast::node::variable_insertion>::RIGHT_BRACKETS()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::RIGHT_BRACKETS>(Get<::DST_Main::ast::Type::RIGHT_BRACKETS>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS>(Get<::DST_Main::ast::Type::RIGHT_BRACKETS>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::DOT> Access<::DST_Main::ast::node::other_symbols>::DOT()
+		inline AccessTemplateBase<::DST_Main::ast::node::DOT> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::DOT()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::DOT>(Get<::DST_Main::ast::Type::DOT>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::DOT>(Get<::DST_Main::ast::Type::DOT>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED> Access<::DST_Main::ast::node::other_symbols>::LEFT_BRACKETS_ESCAPED()
+		inline AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::LEFT_BRACKETS_ESCAPED()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>(Get<::DST_Main::ast::Type::LEFT_BRACKETS_ESCAPED>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS_ESCAPED>(Get<::DST_Main::ast::Type::LEFT_BRACKETS_ESCAPED>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED> Access<::DST_Main::ast::node::other_symbols>::RIGHT_BRACKETS_ESCAPED()
+		inline AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::RIGHT_BRACKETS_ESCAPED()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>(Get<::DST_Main::ast::Type::RIGHT_BRACKETS_ESCAPED>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS_ESCAPED>(Get<::DST_Main::ast::Type::RIGHT_BRACKETS_ESCAPED>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::LEFT_BRACKETS> Access<::DST_Main::ast::node::other_symbols>::LEFT_BRACKETS()
+		inline AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::LEFT_BRACKETS()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::LEFT_BRACKETS>(Get<::DST_Main::ast::Type::LEFT_BRACKETS>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKETS>(Get<::DST_Main::ast::Type::LEFT_BRACKETS>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::RIGHT_BRACKETS> Access<::DST_Main::ast::node::other_symbols>::RIGHT_BRACKETS()
+		inline AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::RIGHT_BRACKETS()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::RIGHT_BRACKETS>(Get<::DST_Main::ast::Type::RIGHT_BRACKETS>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKETS>(Get<::DST_Main::ast::Type::RIGHT_BRACKETS>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::LEFT_BRACKET> Access<::DST_Main::ast::node::other_symbols>::LEFT_BRACKET()
+		inline AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::LEFT_BRACKET()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::LEFT_BRACKET>(Get<::DST_Main::ast::Type::LEFT_BRACKET>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::LEFT_BRACKET>(Get<::DST_Main::ast::Type::LEFT_BRACKET>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::RIGHT_BRACKET> Access<::DST_Main::ast::node::other_symbols>::RIGHT_BRACKET()
+		inline AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::RIGHT_BRACKET()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::RIGHT_BRACKET>(Get<::DST_Main::ast::Type::RIGHT_BRACKET>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::RIGHT_BRACKET>(Get<::DST_Main::ast::Type::RIGHT_BRACKET>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::VARNAME> Access<::DST_Main::ast::node::other_symbols>::VARNAME()
+		inline AccessTemplateBase<::DST_Main::ast::node::VARNAME> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::VARNAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::VARNAME>(Get<::DST_Main::ast::Type::VARNAME>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::VARNAME>(Get<::DST_Main::ast::Type::VARNAME>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::BACKSLASH> Access<::DST_Main::ast::node::other_symbols>::BACKSLASH()
+		inline AccessTemplateBase<::DST_Main::ast::node::BACKSLASH> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::BACKSLASH()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::BACKSLASH>(Get<::DST_Main::ast::Type::BACKSLASH>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::BACKSLASH>(Get<::DST_Main::ast::Type::BACKSLASH>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::OTHER> Access<::DST_Main::ast::node::other_symbols>::OTHER()
+		inline AccessTemplateBase<::DST_Main::ast::node::OTHER> AccessTemplateBase<::DST_Main::ast::node::other_symbols>::OTHER()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::OTHER>(Get<::DST_Main::ast::Type::OTHER>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::OTHER>(Get<::DST_Main::ast::Type::OTHER>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::scope> Access<::DST_Main::ast::node::variable>::scope()
+		inline AccessTemplateBase<::DST_Main::ast::node::scope> AccessTemplateBase<::DST_Main::ast::node::variable>::scope()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::scope>(Get<::DST_Main::ast::Type::scope>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::scope>(Get<::DST_Main::ast::Type::scope>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::VARNAME> Access<::DST_Main::ast::node::variable>::VARNAME()
+		inline AccessTemplateBase<::DST_Main::ast::node::VARNAME> AccessTemplateBase<::DST_Main::ast::node::variable>::VARNAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::VARNAME>(Get<::DST_Main::ast::Type::VARNAME>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::VARNAME>(Get<::DST_Main::ast::Type::VARNAME>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::DOT> Access<::DST_Main::ast::node::scope>::DOT()
+		inline AccessTemplateBase<::DST_Main::ast::node::DOT> AccessTemplateBase<::DST_Main::ast::node::scope>::DOT()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::DOT>(Get<::DST_Main::ast::Type::DOT>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::DOT>(Get<::DST_Main::ast::Type::DOT>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::scope> Access<::DST_Main::ast::node::scope>::scope()
+		inline AccessTemplateBase<::DST_Main::ast::node::scope> AccessTemplateBase<::DST_Main::ast::node::scope>::scope()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::scope>(Get<::DST_Main::ast::Type::scope>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::scope>(Get<::DST_Main::ast::Type::scope>(ts));
 		}
 
-		inline Access<::DST_Main::ast::node::VARNAME> Access<::DST_Main::ast::node::scope>::VARNAME()
+		inline AccessTemplateBase<::DST_Main::ast::node::VARNAME> AccessTemplateBase<::DST_Main::ast::node::scope>::VARNAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DST_Main::ast::node::VARNAME>(Get<::DST_Main::ast::Type::VARNAME>(ts));
+			return AccessTemplateBase<::DST_Main::ast::node::VARNAME>(Get<::DST_Main::ast::Type::VARNAME>(ts));
 		}
 
 
@@ -1809,4 +2186,4 @@ Access<::DST_Main::ast::node::VARNAME> VARNAME();
 
 }}}
 
-#endif // DST_MAIN_AST_REFERENCE_ACCESS_H
+#endif // DST_MAIN_AST_REFERENCE_ACCESSTEMPLATEBASE_H
