@@ -23,6 +23,7 @@ if(APPLICATIONS)
 endif()
 
 add_executable(DST "main.cpp")
+target_compile_features(DST PUBLIC cxx_std_17)
 target_link_libraries(DST DST_static_library)
 
 install(TARGETS DST)

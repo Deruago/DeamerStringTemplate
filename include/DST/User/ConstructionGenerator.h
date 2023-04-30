@@ -2,14 +2,14 @@
 #define DST_USER_CONSTRUCTIONGENERATOR_H
 
 #include "DST/Type/IR/Construction.h"
-#include "DST_Main/Bison/Parser.h"
 #include "DST_Main/Ast/Listener/User/InsertVariable.h"
-#include "DST_Setting/Bison/Parser.h"
+#include "DST_Main/Bison/Parser.h"
 #include "DST_Setting/Ast/Listener/User/InsertVariable.h"
-#include <sstream>
+#include "DST_Setting/Bison/Parser.h"
 #include <fstream>
-#include <string>
 #include <iostream>
+#include <sstream>
+#include <string>
 
 namespace DST::user
 {
@@ -18,8 +18,10 @@ namespace DST::user
 	public:
 		ConstructionGenerator() = default;
 		~ConstructionGenerator() = default;
+
 	public:
-		type::ir::Construction* GenerateConstructionFromText(const std::string& templateText, const std::string& settingText = "")
+		type::ir::Construction* GenerateConstructionFromText(const std::string& templateText,
+															 const std::string& settingText = "")
 		{
 			auto* const construction = new DST::type::ir::Construction();
 
@@ -38,14 +40,15 @@ namespace DST::user
 			if (!settingText.empty())
 			{
 				const auto setting_parser = DST_Setting::bison::parser::Parser();
-				auto setting_listener = DST_Setting::ast::listener::user::InsertVariable(construction);
+				auto setting_listener =
+					DST_Setting::ast::listener::user::InsertVariable(construction);
 
 				auto* setting_tree = setting_parser.Parse(settingText);
 				setting_listener.Dispatch(setting_tree->GetStartNode());
 
 				delete setting_tree;
 			}
-			
+
 			return construction;
 		}
 
@@ -56,23 +59,25 @@ namespace DST::user
 			return GenerateConstructionFromText(templateText);
 		}
 
-		type::ir::Construction* GenerateConstructionFromPath(const std::string& templatePath, const std::string& settingPath)
+		type::ir::Construction* GenerateConstructionFromPath(const std::string& templatePath,
+															 const std::string& settingPath)
 		{
 			const std::string templateText = ReadInFile(templatePath);
 			const std::string settingText = ReadInFile(settingPath);
 
 			return GenerateConstructionFromText(templateText, settingText);
 		}
-		
+
 	private:
 		std::string ReadInFile(const std::string& file)
 		{
+			std::cout << "Reading" << file << "\n";
 			const std::ifstream inputFile(file);
-
 			std::ostringstream sstr;
 			sstr << inputFile.rdbuf();
 
 			std::string input = sstr.str();
+			std::cout << "Done Reading\n";
 
 			return input;
 		}

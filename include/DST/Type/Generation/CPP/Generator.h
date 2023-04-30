@@ -12,10 +12,12 @@ namespace DST::type::generation::cpp
 	private:
 		DST::user::ConstructionGeneratorTemplate generator;
 		std::string file_name;
+
 	public:
 		Generator() = default;
 
 		~Generator() = default;
+
 	public:
 		void ExpandDeleteMemberField(type::ir::Construction* const cppgen)
 		{
@@ -164,11 +166,13 @@ namespace DST::type::generation::cpp
 						{
 							continue;
 						}
-						member_fields += "GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
+						member_fields +=
+							"GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
 					}
 					else
 					{
-						member_fields += "GenerateVariable(" + content->GetParent() + "_->" + ReworkScope(content->GetScope()) + "())";
+						member_fields += "GenerateVariable(" + content->GetParent() + "_->" +
+										 ReworkScope(content->GetScope()) + "())";
 					}
 					member_fields += ", ";
 				}
@@ -191,24 +195,14 @@ namespace DST::type::generation::cpp
 			{
 				loweredString += std::tolower(character);
 			}
-			
-			if (loweredString == "" ||
-				loweredString == "upper" ||
-				loweredString == "this" ||
-				loweredString == "name" ||
-				loweredString == "lower" ||
-				loweredString == "default" ||
-				loweredString == "pascal" ||
-				loweredString == "snake" ||
-				loweredString == "camel" ||
-				loweredString == "underscore" ||
-				loweredString == "slash" ||
-				loweredString == "backslash" ||
-				loweredString == "colon" ||
-				loweredString == "doublecolon" ||
-				loweredString == "variable_field" ||
-				loweredString == "variable_field_separator" ||
-				loweredString == "function_field" ||
+
+			if (loweredString == "" || loweredString == "upper" || loweredString == "this" ||
+				loweredString == "name" || loweredString == "lower" || loweredString == "default" ||
+				loweredString == "pascal" || loweredString == "snake" || loweredString == "camel" ||
+				loweredString == "underscore" || loweredString == "slash" ||
+				loweredString == "backslash" || loweredString == "colon" ||
+				loweredString == "doublecolon" || loweredString == "variable_field" ||
+				loweredString == "variable_field_separator" || loweredString == "function_field" ||
 				loweredString == "function_field_separator")
 			{
 				return true;
@@ -249,15 +243,18 @@ namespace DST::type::generation::cpp
 							{
 								continue;
 							}
-							scope_arguments += "GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
+							scope_arguments +=
+								"GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
 						}
 						else
 						{
-							scope_arguments += "GenerateVariable(" + generator.class_name_->Lower()->GetValue() + "_->" + content->GetParent() + "_->" + ReworkScope(content->GetScope()) + "())";
+							scope_arguments += "GenerateVariable(" +
+											   generator.class_name_->Lower()->GetValue() + "_->" +
+											   content->GetParent() + "_->" +
+											   ReworkScope(content->GetScope()) + "())";
 						}
 						scope_arguments += ", ";
 					}
-
 
 					if (!scope_arguments.empty())
 					{
@@ -288,7 +285,7 @@ namespace DST::type::generation::cpp
 		{
 			for (auto& [name, variable] : cppgen->GetVariableDefinitions())
 			{
-				cppgen->SetVariable("member", "", { name + "_" });
+				cppgen->SetVariable("member", "", {name + "_"});
 				cppgen->ExpandVariableField("delete_member");
 			}
 		}
@@ -297,7 +294,7 @@ namespace DST::type::generation::cpp
 		{
 			for (auto& [name, variable] : cppgen->GetVariableDefinitions())
 			{
-				cppgen->SetVariable("member", "", { name });
+				cppgen->SetVariable("member", "", {name});
 				cppgen->ExpandVariableField("enumeration");
 			}
 		}
@@ -306,7 +303,7 @@ namespace DST::type::generation::cpp
 		{
 			for (auto& [name, variable] : cppgen->GetVariableDefinitions())
 			{
-				cppgen->SetVariable("member", "", { name });
+				cppgen->SetVariable("member", "", {name});
 				cppgen->ExpandVariableField("register_member");
 			}
 		}
@@ -315,7 +312,7 @@ namespace DST::type::generation::cpp
 		{
 			for (auto& [name, variable] : cppgen->GetVariableDefinitions())
 			{
-				cppgen->SetVariable("member", "", { name });
+				cppgen->SetVariable("member", "", {name});
 				cppgen->ExpandVariableField("convert_enum_to_name_case");
 			}
 		}
@@ -327,7 +324,7 @@ namespace DST::type::generation::cpp
 				std::string namerework = name + "_";
 				std::cout << "member: " << name << '\n';
 				std::cout << "\tvalue: " << variable->GetScope("")->GetValue() << '\n';
-				cppgen->SetVariable("member", "", { namerework });
+				cppgen->SetVariable("member", "", {namerework});
 				std::string member_fields;
 				// the stuff this variable is made of (first class)
 				for (auto content : variable->GetScope("")->GetStringValues())
@@ -347,11 +344,13 @@ namespace DST::type::generation::cpp
 						{
 							continue;
 						}
-						member_fields += "GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
+						member_fields +=
+							"GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
 					}
 					else
 					{
-						member_fields += "GenerateVariable(" + content->GetParent() + "_->" + ReworkScope(content->GetScope()) + "())";
+						member_fields += "GenerateVariable(" + content->GetParent() + "_->" +
+										 ReworkScope(content->GetScope()) + "())";
 					}
 					member_fields += ", ";
 				}
@@ -361,7 +360,7 @@ namespace DST::type::generation::cpp
 					member_fields.pop_back();
 				}
 
-				cppgen->SetVariable("member_fields", "", { member_fields });
+				cppgen->SetVariable("member_fields", "", {member_fields});
 				cppgen->ExpandVariableField("member_initialization");
 			}
 		}
@@ -370,7 +369,7 @@ namespace DST::type::generation::cpp
 		{
 			for (auto& [name, variable] : cppgen->GetVariableDefinitions())
 			{
-				cppgen->SetVariable("member", "", { name + "_" });
+				cppgen->SetVariable("member", "", {name + "_"});
 				for (auto& [name, scope] : variable->GetScopes())
 				{
 					if (IsScopeReserved(ReworkScope(name)))
@@ -398,15 +397,19 @@ namespace DST::type::generation::cpp
 							{
 								continue;
 							}
-							scope_arguments += "GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
+							scope_arguments +=
+								"GenerateVariable(\"" + ReworkString(content->GetValue()) + "\")";
 						}
 						else
 						{
-							scope_arguments += "GenerateVariable(" + cppgen->GetVariableDefinition("class_name", ".Lower")->GetValue() + "_->" + content->GetParent() + "_->" + ReworkScope(content->GetScope()) + "())";
+							scope_arguments +=
+								"GenerateVariable(" +
+								cppgen->GetVariableDefinition("class_name", ".Lower")->GetValue() +
+								"_->" + content->GetParent() + "_->" +
+								ReworkScope(content->GetScope()) + "())";
 						}
 						scope_arguments += ", ";
 					}
-
 
 					if (!scope_arguments.empty())
 					{
@@ -414,8 +417,8 @@ namespace DST::type::generation::cpp
 						scope_arguments.pop_back();
 					}
 
-					cppgen->SetVariable("scope_arguments", "", { scope_arguments });
-					cppgen->SetVariable("scope", "", { ReworkScope(name) });
+					cppgen->SetVariable("scope_arguments", "", {scope_arguments});
+					cppgen->SetVariable("scope", "", {ReworkScope(name)});
 					cppgen->ExpandVariableField("scope_initialize");
 					cppgen->ExpandVariableField("scope_field");
 					cppgen->ExpandVariableField("scope_function");
@@ -431,10 +434,12 @@ namespace DST::type::generation::cpp
 			}
 		}
 
-		std::string GetCPPClassRepresentationOfConstructionRT(std::string template_ = "", std::string setting_ = "")
+		std::string GetCPPClassRepresentationOfConstructionRT(std::string template_ = "",
+															  std::string setting_ = "")
 		{
-			auto* const cppgen = user::ConstructionGenerator().GenerateConstructionFromPath(template_, setting_);
-			
+			auto* const cppgen =
+				user::ConstructionGenerator().GenerateConstructionFromPath(template_, setting_);
+
 			ExpandDeleteMemberFieldRT(cppgen);
 			ExpandEnumFieldRT(cppgen);
 			ExpandRegisterMemberFieldRT(cppgen);
@@ -446,48 +451,22 @@ namespace DST::type::generation::cpp
 			const auto output = cppgen->Output();
 
 			delete cppgen;
-			
+
 			return output;
 		}
 
-		std::string GetCPPClassRepresentationOfConstructionCT(std::string template_ = "", std::string setting_ = "")
+		std::string GetCPPClassRepresentationOfConstructionCT(std::string template_ = "",
+															  std::string setting_ = "")
 		{
-			auto* const cppgen = user::ConstructionGenerator().GenerateConstructionFromPath(template_, setting_);
+			auto* const cppgen =
+				user::ConstructionGenerator().GenerateConstructionFromPath(template_, setting_);
 
-			std::string file_name_;
-			std::string extension;
-			size_t dot_encounter = 0;
+			std::string templateCore = template_.substr(0, template_.size() - 4); // remove '.dst'
+			std::string file_name_ = templateCore.substr(0, templateCore.find('.'));
+			std::string extension = template_.substr(templateCore.find('.'));
 
-			if (template_.size() >= 2 && template_[0] == '.' && template_[1] == '/')
-			{
-				template_.erase(0, 2);
-			}
-			
-			for (auto character : template_)
-			{
-				if (dot_encounter == 2)
-				{
-					break;
-				}
-				
-				if (character == '.')
-				{
-					dot_encounter += 1;
-					continue;
-				}
-				if (dot_encounter == 0)
-				{
-					file_name_ += character;
-					continue;
-				}
-				if (dot_encounter == 1)
-				{
-					extension += character;
-					continue;
-				}
-			}
-			
-			auto ourTargetLanguage = cppgen->GetVariableDefinition("file", ".target_language")->GetValue();
+			auto ourTargetLanguage =
+				cppgen->GetVariableDefinition("file", ".target_language")->GetValue();
 			if (ourTargetLanguage.empty())
 			{
 				ourTargetLanguage = "C++";
@@ -504,7 +483,8 @@ namespace DST::type::generation::cpp
 					ourFileName = file_name_;
 				}
 			}
-			auto ourClassPostfix = cppgen->GetVariableDefinition("file", ".class_postfix")->GetValue();
+			auto ourClassPostfix =
+				cppgen->GetVariableDefinition("file", ".class_postfix")->GetValue();
 			if (ourClassPostfix.empty())
 			{
 				ourClassPostfix = "Template";
@@ -541,12 +521,12 @@ namespace DST::type::generation::cpp
 
 			ExpandMemberInitialization(cppgen);
 			ExpandMemberDeclaration(cppgen);
-			
-			std::cout << generator.class_name_->GetValue() + "." + generator.file_->Extension()->GetValue() << "\n";
-			file_name = generator.class_name_->GetValue() + "." + generator.file_->Extension()->GetValue();
+
+			std::cout << generator.class_name_->GetValue() + "." << ourExtension << "\n";
+			file_name = generator.class_name_->GetValue() + "." + ourExtension;
 
 			delete cppgen;
-			
+
 			return generator.GetOutput();
 		}
 
